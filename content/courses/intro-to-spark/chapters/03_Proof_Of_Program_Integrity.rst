@@ -10,7 +10,7 @@ performing proof of your program's integrity is to ensure the absence of
 runtime errors during its execution.
 
 The analysis steps discussed here are only sound if you've previously
-performed :ref:`Flow_Analysis`.  You shouldn't proceed further if there you
+performed :ref:`Flow_Analysis`.  You shouldn't proceed further if you
 still have unjustified flow analysis messages for your program.
 
 
@@ -317,7 +317,7 @@ testing easier.  Early failure detection also allows an easier recovery and
 facilitates debugging, so you may want to enable these checks at runtime to
 terminate execution before some damaging or hard-to-debug action occurs.
 
-GNATprove statically analyses preconditions and postcondition. It verifies
+GNATprove statically analyses preconditions and postconditions. It verifies
 preconditions every time a subprogram is called, which is the runtime
 semantics of contracts.  Postconditions, on the other hand, are verified
 once as part of the verification of the subprogram's body. For example,
@@ -555,6 +555,8 @@ Let's look at the case where the code and the specification are correct but
 there's some information missing. As an example, GNATprove finds the
 postcondition of :ada:`Increase` to be unprovable.
 
+..
+    TODO: The following code snippet attempts to analyze the previous example and needs to be fixed.
 .. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
     :class: ada-expect-prove-error
 
@@ -620,6 +622,8 @@ For example, the postcondition of our :ada:`GCD` function below |mdash| which
 calculates the value of the :ada:`GCD` of two positive numbers using Euclide's
 algorithm |mdash| can't be verified with GNATprove's default settings.
 
+..
+    TODO: The following code snippet attempts to analyze the previous example and needs to be fixed.
 .. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
     :class: ada-expect-prove-error
 
@@ -655,6 +659,8 @@ help. We can also specify an alternative automatic prover |mdash| if we have
 one |mdash| using the option ``--prover`` of GNATprove (or the dialog box). For
 our postcondition, we tried Alt-Ergo, CVC4, and Z3 without any luck.
 
+..
+    TODO: The following code snippet attempts to analyze the previous example and needs to be fixed.
 .. code:: ada prove_report_all_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
     :class: ada-expect-prove-error
 
