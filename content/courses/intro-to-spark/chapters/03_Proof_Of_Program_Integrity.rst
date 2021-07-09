@@ -555,8 +555,10 @@ Let's look at the case where the code and the specification are correct but
 there's some information missing. As an example, GNATprove finds the
 postcondition of :ada:`Increase` to be unprovable.
 
-..
-    TODO: The following code snippet attempts to analyze the previous example and needs to be fixed.
+.. todo::
+
+    The following code snippet attempts to analyze the previous example and needs to be fixed.
+    
 .. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
     :class: ada-expect-prove-error
 
@@ -622,8 +624,10 @@ For example, the postcondition of our :ada:`GCD` function below |mdash| which
 calculates the value of the :ada:`GCD` of two positive numbers using Euclide's
 algorithm |mdash| can't be verified with GNATprove's default settings.
 
-..
-    TODO: The following code snippet attempts to analyze the previous example and needs to be fixed.
+.. todo::
+
+    The following code snippet attempts to analyze the previous example and needs to be fixed.
+
 .. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
     :class: ada-expect-prove-error
 
@@ -659,8 +663,10 @@ help. We can also specify an alternative automatic prover |mdash| if we have
 one |mdash| using the option ``--prover`` of GNATprove (or the dialog box). For
 our postcondition, we tried Alt-Ergo, CVC4, and Z3 without any luck.
 
-..
-    TODO: The following code snippet attempts to analyze the previous example and needs to be fixed.
+.. todo::
+
+    The following code snippet attempts to analyze the previous example and needs to be fixed.
+
 .. code:: ada prove_report_all_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
     :class: ada-expect-prove-error
 
