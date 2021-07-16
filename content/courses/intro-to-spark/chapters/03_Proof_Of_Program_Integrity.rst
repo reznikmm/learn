@@ -453,7 +453,7 @@ the specification may be incorrect. As an example, there's an error in our
 procedure :ada:`Incr_Until` below which makes its :ada:`Contract_Cases`
 unprovable.
 
-.. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
+.. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt_1
     :class: ada-expect-prove-error
 
     package Show_Failed_Proof_Attempt is
@@ -487,7 +487,7 @@ sets of inputs. This allows you to find bugs in both the code and its
 contracts. In this case, testing :ada:`Incr_Until` with an input greater than
 1000 raises an exception at runtime.
 
-.. code:: ada run_button prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
+.. code:: ada run_button prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt_2
     :class: ada-run-expect-failure, ada-expect-prove-error
 
     package Show_Failed_Proof_Attempt is
@@ -558,8 +558,8 @@ postcondition of :ada:`Increase` to be unprovable.
 .. todo::
 
     The following code snippet attempts to analyze the previous example and needs to be fixed.
-    
-.. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
+
+.. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt_3
     :class: ada-expect-prove-error
 
     package Show_Failed_Proof_Attempt is
@@ -628,7 +628,7 @@ algorithm |mdash| can't be verified with GNATprove's default settings.
 
     The following code snippet attempts to analyze the previous example and needs to be fixed.
 
-.. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
+.. code:: ada prove_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt_4
     :class: ada-expect-prove-error
 
     package Show_Failed_Proof_Attempt is
@@ -667,7 +667,7 @@ our postcondition, we tried Alt-Ergo, CVC4, and Z3 without any luck.
 
     The following code snippet attempts to analyze the previous example and needs to be fixed.
 
-.. code:: ada prove_report_all_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt
+.. code:: ada prove_report_all_button project=Courses.Intro_To_Spark.Proof_of_Program_Integrity.Failed_Proof_Attempt_5
     :class: ada-expect-prove-error
 
     package Show_Failed_Proof_Attempt is
