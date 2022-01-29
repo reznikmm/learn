@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+      - ru
+      - topic/test
+name: Make GitHub Pages
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get sources
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Install sphinx
+        run: pip3 install -r frontend/requirements.txt
+      - name: Build docs
+        run: |
+          cd frontend
+          export SPHINX_LOCAL_BUILD=true
+          sphinx-build -M html $PWD/../content/courses/intro-to-ada-ru/ "$PWD/../dist" -v -c "sphinx"
+      - name: Upload to gh-pages branch
+        run: |
+          # Set up .netrc file with GitHub credentials
+          cat << EOF > $HOME/.netrc
+          machine github.com
+          login sync_bot
+          password $GITHUB_ACCESS_TOKEN
+          EOF
+          chmod 600 $HOME/.netrc
+          git config user.email `git log -1 --pretty=format:'%ae'`
+          git config user.name  `git log -1 --pretty=format:'%an'`
+          git checkout gh-pages
+          cp -frv dist/html/* .
+          rm -rf dist
+          git add .
+          if git commit --amend -m "" --allow-empty-message; then
+            git push -f
+          fi
+          git status
