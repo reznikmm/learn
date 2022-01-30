@@ -1,3 +1,29 @@
+# Перевод learn.adacore.com
+
+В этой ветке (`ru`) сделан [перевод нескольких глав](https://reznikmm.github.io/learn/)
+книги "Introduction to Ada" (спасибо Сергею за этот тяжелый труд!).
+
+Целью является улучшение перевода, в часности использование терминологии из
+стандрата Ада 83. Из-за способа преобразования перевода в `RST` формат
+появились некоторые несоответствия с оригиналом:
+
+* интерактивные виджеты с Ада кодом заменены на листинги:
+
+    sed -i -e 's/\.\. code:: ada.*$/.. code-block:: ada/g' *.rst
+
+* отсутствуют листинги с выводом отмеченые
+
+    .. only:: builder_html
+       ...
+
+Надеюсь их не сложно будет восстановить.
+
+Присылайте ваши изменения в виде
+[pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).
+
+Последняя редакция доступна на [GitHub Pages](https://reznikmm.github.io/learn/)
+в формате `HTML`.
+
 # learn.adacore.com
 
 Sources for AdaCore's learn.adacore.com website
