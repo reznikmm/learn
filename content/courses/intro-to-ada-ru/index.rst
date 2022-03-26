@@ -68,3 +68,4 @@
 
     Введение <chapters/introduction>
     Императивы языка <chapters/imperative_language>
+    Подпрограммы <chapters/subprograms>
