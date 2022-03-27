@@ -69,3 +69,4 @@
     Введение <chapters/introduction>
     Императивы языка <chapters/imperative_language>
     Подпрограммы <chapters/subprograms>
+    Модульное программирование <chapters/modular_programming>
