@@ -70,3 +70,4 @@
     Императивы языка <chapters/imperative_language>
     Подпрограммы <chapters/subprograms>
     Модульное программирование <chapters/modular_programming>
+    Сильно типизированный язык <chapters/strongly_typed_language>
