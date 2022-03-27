@@ -72,3 +72,4 @@
     Модульное программирование <chapters/modular_programming>
     Сильно типизированный язык <chapters/strongly_typed_language>
     Записи <chapters/records>
+    Массивы <chapters/arrays>
