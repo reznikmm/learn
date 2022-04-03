@@ -73,3 +73,4 @@
     Сильно типизированный язык <chapters/strongly_typed_language>
     Записи <chapters/records>
     Массивы <chapters/arrays>
+    Подробнее о типах <chapters/more_about_types>
