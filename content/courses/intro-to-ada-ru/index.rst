@@ -74,3 +74,4 @@
     Записи <chapters/records>
     Массивы <chapters/arrays>
     Подробнее о типах <chapters/more_about_types>
+    Конфиденциальность <chapters/privacy>
