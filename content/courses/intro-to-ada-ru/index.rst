@@ -77,3 +77,4 @@
     Конфиденциальность <chapters/privacy>
     Настраиваемые модули <chapters/generics>
     Исключения <chapters/exceptions>
+    Контрактное проектирование <chapters/contracts>
