@@ -78,3 +78,4 @@
     Настраиваемые модули <chapters/generics>
     Исключения <chapters/exceptions>
     Контрактное проектирование <chapters/contracts>
+    Взаимодействие с языком C <chapters/interfacing_with_c>
