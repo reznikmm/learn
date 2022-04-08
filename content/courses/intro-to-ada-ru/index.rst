@@ -75,3 +75,4 @@
     Массивы <chapters/arrays>
     Подробнее о типах <chapters/more_about_types>
     Конфиденциальность <chapters/privacy>
+    Настраиваемые модули <chapters/generics>
