@@ -23,14 +23,15 @@
 
         Copyright © 2018 |ndash| 2021, AdaCore
 
-        This book is published under a CC BY-SA license, which means that you
-        can copy, redistribute, remix, transform, and build upon the content
-        for any purpose, even commercially, as long as you give appropriate
-        credit, provide a link to the license, and indicate if changes were
-        made. If you remix, transform, or build upon the material, you must
-        distribute your contributions under the same license as the original.
-        You can find license details
-        `on this page <http://creativecommons.org/licenses/by-sa/4.0>`_
+        Эта книга опубликована под лицензией CC BY-SA, что означает, что вы 
+        можете копировать, распространять, переделывать, преобразовывать и
+        использовать контент для любых целей, даже коммерческих, при условии,
+        что вы предоставляете соответствующую информацию, предоставляете
+        ссылку на лицензию и указываете, были ли внесены изменения. Если вы
+        делаете ремикс, трансформируете или основываетесь на материале, вы
+        должны распространять свои материалы под той же лицензией, что и 
+        оригинал. Вы можете найти подробную информацию о лицензии
+        `на этой странице <http://creativecommons.org/licenses/by-sa/4.0>`_
 
         .. image:: ../../images/ccheart_black.png
             :width: 108pt
@@ -85,3 +86,4 @@
     Стандартная библиотека: Строки <chapters/standard_library_strings>
     Стандартная библиотека: Файлы и потоки <chapters/standard_library_files_streams>
     Стандартная библиотека: Numerics <chapters/standard_library_numerics>
+    Приложения <chapters/appendices>
