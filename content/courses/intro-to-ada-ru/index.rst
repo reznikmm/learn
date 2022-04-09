@@ -80,3 +80,4 @@
     Контрактное проектирование <chapters/contracts>
     Взаимодействие с языком C <chapters/interfacing_with_c>
     Объектно-ориентированное программирование <chapters/object_oriented_programming>
+    Стандартная библиотека: Контейнеры <chapters/standard_library_containers>
