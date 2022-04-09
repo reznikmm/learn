@@ -83,3 +83,4 @@
     Стандартная библиотека: Контейнеры <chapters/standard_library_containers>
     Стандартная библиотека: Дата и время <chapters/standard_library_dates_times>
     Стандартная библиотека: Строки <chapters/standard_library_strings>
+    Стандартная библиотека: Файлы и потоки <chapters/standard_library_files_streams>
