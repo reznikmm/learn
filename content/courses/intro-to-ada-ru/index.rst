@@ -78,6 +78,7 @@
     Конфиденциальность <chapters/privacy>
     Настраиваемые модули <chapters/generics>
     Исключения <chapters/exceptions>
+    Управление задачами <chapters/tasking>
     Контрактное проектирование <chapters/contracts>
     Взаимодействие с языком C <chapters/interfacing_with_c>
     Объектно-ориентированное программирование <chapters/object_oriented_programming>
