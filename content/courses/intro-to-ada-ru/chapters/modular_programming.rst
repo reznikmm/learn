@@ -21,7 +21,7 @@ Ada поощряет разделение программ на нескольк
 
 Вот пример объявления пакета в Ada:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Week
 
     package Week is
 
@@ -37,7 +37,7 @@ Ada поощряет разделение программ на нескольк
 
 И вот как вы его используете:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Week
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Week;
@@ -122,7 +122,7 @@ Ada поощряет разделение программ на нескольк
 Фактически, мы использовали предложение :ada:`use` почти с самого начала этого
 руководства.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Week
 
     with Ada.Text_IO; use Ada.Text_IO;
     --                ^ Make every entity of the
@@ -157,7 +157,7 @@ Ada поощряет разделение программ на нескольк
 которая проиллюстрирована выше, нельзя объявлять реализацию.
 Реализация должны быть в теле пакета.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Operations
 
     package Operations is
 
@@ -202,7 +202,7 @@ Ada поощряет разделение программ на нескольк
 
 В этом примере показано, как :ada:`Last_Increment` используется косвенно:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Operations
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Operations;
@@ -262,7 +262,7 @@ Ada поощряет разделение программ на нескольк
 Давайте начнем обсуждение дочерних пакетов с нашего предыдущего пакета
 :ada:`Week`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     package Week is
 
@@ -278,7 +278,7 @@ Ada поощряет разделение программ на нескольк
 
 Если мы хотим создать дочерний пакет для :ada:`Week`, мы можем написать:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
     :class: ada-syntax-only
 
     package Week.Child is
@@ -290,7 +290,7 @@ Ada поощряет разделение программ на нескольк
 Здесь :ada:`Week` ‑ это родительский пакет, а :ada:`Child` ‑ дочерний. Это соответствующее
 тело пакета :ada:`Week.Child`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     package body Week.Child is
 
@@ -311,7 +311,7 @@ Ada поощряет разделение программ на нескольк
 Точно так же, если мы хотим использовать эти элементы напрямую, мы
 дополнительно пишем :ada:`use Week.Child`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Week.Child;  use Week.Child;
@@ -331,7 +331,7 @@ Ada поощряет разделение программ на нескольк
 кода, объявив пакет :ada:`Week.Child.Grandchild`. В этом случае :ada:`Week.Child` будет родительским для пакета :ada:`Grandchild`.
 Рассмотрим эту реализацию:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     package Week.Child.Grandchild is
 
@@ -353,7 +353,7 @@ Ada поощряет разделение программ на нескольк
 тестовое приложение и адаптировать :ada:`with`, :ada:`use` и вызов функции. Это обновленный
 код:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     with Ada.Text_IO;           use Ada.Text_IO;
     with Week.Child.Grandchild; use Week.Child.Grandchild;
@@ -375,7 +375,8 @@ Ada поощряет разделение программ на нескольк
 могли бы расширить приведенный выше пример и реализовать пакет :ada:`Week.Child_2`.
 Например:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
+    :class: ada-syntax-only
 
     package Week.Child_2 is
 
@@ -389,7 +390,7 @@ Ada поощряет разделение программ на нескольк
 
 Это соответствующее тело пакета :ada:`Week.Child_2`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     package body Week.Child_2 is
 
@@ -403,7 +404,7 @@ Ada поощряет разделение программ на нескольк
 Теперь мы можем ссылаться на обоих потомков в нашем тестовом
 приложении:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Child_Packages
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Week.Child;   use Week.Child;
@@ -426,7 +427,8 @@ Ada поощряет разделение программ на нескольк
 
 Рассмотрим пакет :ada:`Book` и его дочерний элемент :ada:`Additional_Operations`:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Modular_Programming.Visibility
+    :class: ada-syntax-only
 
     package Book is
 
@@ -449,7 +451,7 @@ Ada поощряет разделение программ на нескольк
 
 Это тело обоих пакетов:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Visibility
 
     package body Book is
 
@@ -497,7 +499,7 @@ Ada поощряет разделение программ на нескольк
 получения этой строки. Точно так же мы можем использовать эту
 стратегию для реализации функции :ada:`Get_Extended_Title`. Это адаптированный код:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Modular_Programming.Visibility
 
     package body Book.Additional_Operations is
 
@@ -515,7 +517,7 @@ Ada поощряет разделение программ на нескольк
 
 Это простое тестовое приложение для указанных выше пакетов:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Visibility
 
     with Ada.Text_IO;                use Ada.Text_IO;
     with Book.Additional_Operations; use Book.Additional_Operations;
@@ -542,7 +544,7 @@ Ada. Эти элементы будут видны только в теле па
 ключевое слово :ada:`renames`. В следующем примере пакет :ada:`Ada.Text_IO`
 переименовывается как :ada:`T_IO`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Rename_Text_IO
 
     with Ada.Text_IO;
 
@@ -563,7 +565,7 @@ Ada. Эти элементы будут видны только в теле па
 объекты внутри пакетов. Например, мы могли бы просто переименовать
 процедуру :ada:`Put_Line` в приведенном выше примере исходного кода:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Modular_Programming.Rename_Put_Line
 
     with Ada.Text_IO;
 

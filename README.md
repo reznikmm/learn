@@ -4,14 +4,7 @@
 книги "Introduction to Ada" (спасибо Сергею за этот тяжелый труд!).
 
 Целью является улучшение перевода, в часности использование терминологии из
-стандрата Ада 83. Из-за способа преобразования перевода в `RST` формат
-появились некоторые несоответствия с оригиналом:
-
-* интерактивные виджеты с Ада кодом заменены на листинги:
-
-    sed -i -e 's/\.\. code:: ada.*$/.. code-block:: ada/g' *.rst
-
-Надеюсь их не сложно будет восстановить.
+стандрата Ада 83.
 
 Присылайте ваши изменения в виде
 [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).

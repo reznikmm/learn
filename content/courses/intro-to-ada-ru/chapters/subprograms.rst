@@ -19,7 +19,7 @@
 
 В этом примере показано объявление и определение функции:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Subprograms.Increment
 
     function Increment (I : Integer) return Integer;
     --  We declare (but don't define) a function with
@@ -43,7 +43,7 @@
 
 Вот еще один вариант предыдущего примера:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Subprograms.Increment_By
     :class: ada-syntax-only
 
     function Increment_By
@@ -58,7 +58,7 @@
 
 Это реализация функции, описанной выше:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Subprograms.Increment_By
 
     function Increment_By
       (I    : Integer := 0;
@@ -72,7 +72,7 @@
 
 Затем мы можем вызвать нашу подпрограмму таким образом:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Increment_By
     :class: ada-run
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -149,7 +149,7 @@ Ada позволяет вам выполнять передачу с испол�
 (вызов :ada:`Put_Line`) в отдельную процедуру. Это укороченная версия с вложенной
 процедурой :ada:`Display_Result`.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Increment_By
     :class: ada-run
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -185,7 +185,7 @@ Ada позволяет вам выполнять передачу с испол�
 Если вы хотите вызвать функцию и вам не нужен ее результат, вам все
 равно нужно будет явно сохранить его в локальной переменной.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Quadruple
     :class: ada-expect-compile-error
 
     function Quadruple (I : Integer) return Integer is
@@ -286,7 +286,7 @@ Ada позволяет вам выполнять передачу с испол�
 до сих пор. Параметры, переданные с использованием этого режима, не
 могут быть изменены, поэтому следующая программа вызовет ошибку:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Swap
     :class: ada-expect-compile-error
 
     procedure Swap (A, B : Integer) is
@@ -313,7 +313,7 @@ Ada позволяет вам выполнять передачу с испол�
 Для исправления кода, приведенного выше, можно использовать параметр «:ada:`in out`
 ».
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.In_Out_Params
     :class: ada-run
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -399,7 +399,7 @@ Ada позволяет вам выполнять передачу с испол�
     out. Например, компилятор выдаст предупреждение для следующей
     программы:
 
-    .. code-block:: ada
+    .. code:: ada compile_button project=Courses.Intro_To_Ada.Subprograms.Out_Params
 
         procedure Outp is
            procedure Foo (A : out Integer) is
@@ -421,7 +421,7 @@ Ada позволяет вам выполнять передачу с испол�
 нужно, чтобы подпрограммы были взаимно рекурсивными, как в примере
 ниже:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Mutually_Recursive_Subprograms
     :class: ada-run
 
     procedure Mutually_Recursive_Subprograms is
@@ -463,7 +463,7 @@ Ada позволяет вам выполнять передачу с испол�
 приложения, когда вы используете код из внешних источников, который
 нельзя изменить в вашей системе. Давайте посмотрим на пример:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Subprograms.Proc_Renaming
 
     procedure A_Procedure_With_Very_Long_Name_That_Cannot_Be_Changed
       (A_Message : String);
@@ -483,7 +483,7 @@ Ada позволяет вам выполнять передачу с испол�
 параметры исходной подпрограммы - мы также можем переименовать их в
 объявлении. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Proc_Renaming
 
     with A_Procedure_With_Very_Long_Name_That_Cannot_Be_Changed;
 
@@ -503,7 +503,7 @@ Ada позволяет вам выполнять передачу с испол�
 Можно также переименовать подпрограммы из стандартной библиотеки.
 Например, можно переименовать :ada:`Integer'Image` в :ada:`Img`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Subprograms.Integer_Image_Renaming
 
     with Ada.Text_IO; use Ada.Text_IO;
 

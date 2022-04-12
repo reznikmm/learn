@@ -38,7 +38,7 @@
 
 В следующем коде показан пример предварительных условий:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Contracts.Show_Simple_Precondition
     :class: ada-run-expect-failure
 
     procedure Show_Simple_Precondition is
@@ -100,7 +100,7 @@
 
 Проиллюстрируем постусловия на следующем примере:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Contracts.Show_Simple_Postcondition
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -157,7 +157,7 @@
 Мы можем использовать как предварительные, так и постусловия в
 объявлении одной подпрограммы. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Contracts.Show_Simple_Contract
     :class: ada-run-expect-failure
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -219,7 +219,7 @@
 Давайте воспользуемся следующим примером, чтобы проиллюстрировать
 динамические предикаты:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Contracts.Show_Dynamic_Predicate_Courses
     :class: ada-run-expect-failure
 
     with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
@@ -329,7 +329,7 @@
 
 Давайте посмотрим на полный пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Contracts.Show_Predicates
     :class: ada-run-expect-failure
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -453,7 +453,7 @@
 Мы могли бы переписать наш предыдущий пример и заменить динамические
 предикаты инвариантами типов. Это выглядело бы так:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Contracts.Show_Type_Invariant
     :class: ada-run-expect-failure
 
     with Ada.Text_IO;           use Ada.Text_IO;

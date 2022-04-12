@@ -40,7 +40,7 @@ Ada ‑ это строго типизированный язык. В этом �
 Никакого «магического» встроенного типа в этом отношении нет, что не
 похоже на большинство языков, и, возможно, очень элегантно.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Integer_Type_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -109,7 +109,7 @@ Ada не требует диапазона встроенного типа Integ
 В отличие от некоторых других языков, Ada требует, чтобы операции с
 целыми числами проверялись на переполнение.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Overflow_Check
     :class: ada-run-expect-failure
 
     procedure Main is
@@ -136,7 +136,7 @@ Ada не требует диапазона встроенного типа Integ
 типа будет проверяться только на определенных границах, таких как
 назначение:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Overflow_Check_2
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -172,7 +172,7 @@ Ada также поддерживает целочисленные типы бе
 имитирует наиболее распространенное поведение реализации беззнаковых
 типов. Однако преимущество Ada в том, что модуль более общий:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Unsigned_Types
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -213,7 +213,7 @@ Ada также поддерживает целочисленные типы бе
 которые мы опишем позже, но один контекст, который мы уже видели, ‑
 это оператор case.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Enumeration_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -257,7 +257,7 @@ Ada также поддерживает целочисленные типы бе
 Как и большинство языков, Ada поддерживает типы с плавающей запятой.
 Наиболее часто используемый тип с плавающей запятой ‑ :ada:`Float`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Floating_Point_Demo
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -278,7 +278,7 @@ Ada также поддерживает целочисленные типы бе
 для типов с плавающей запятой, включая абсолютное значение и
 возведение в степень. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Floating_Point_Operations
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -318,7 +318,7 @@ Ada позволяет пользователю задавать точност�
 Компилятор выберет представление с плавающей запятой, поддерживающее
 требуемую точность. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Custom_Floating_Types
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -346,7 +346,7 @@ Ada позволяет пользователю задавать точност�
 Количество цифр, указанное в типе данных, также используется в формате
 при отображении переменных с плавающей точкой. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Display_Custom_Floating_Types
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -377,7 +377,7 @@ Ada позволяет пользователю задавать точност�
 примере создается новый тип с плавающей запятой на основе типа :ada:`Float` для
 нормированного диапазона от :ada:`-1.0` до :ada:`1.0`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Floating_Point_Range
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -395,7 +395,7 @@ Ada позволяет пользователю задавать точност�
 исключение. В этом примере :ada:`Constraint_Error` исключения возникает при назначении :ada:`2.0`
 переменной :ada:`A`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Floating_Point_Range_Exception
     :class: ada-run-expect-failure
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -412,8 +412,7 @@ Ada позволяет пользователю задавать точност�
 Диапазоны также могут быть заданы для пользовательских типов с
 плавающей запятой. Например:
 
-.. code-block:: ada
-    :class: ada-expect-compile-error
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Custom_Range_Types
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Ada.Numerics; use Ada.Numerics;
@@ -436,7 +435,8 @@ Ada позволяет пользователю задавать точност�
 типы одного семейства несовместимы друг с другом; значение одного типа
 не может быть присвоено переменной другого типа. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Imperial_Metric_Error
+    :class: ada-expect-compile-error
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -461,7 +461,7 @@ Ada позволяет пользователю задавать точност�
 посредством неявных преобразований. В Ada такие преобразования должны
 быть явными:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Imperial_Metric
 
     with Ada.Text_IO; use Ada.Text_IO;
     procedure Conv is
@@ -482,7 +482,7 @@ Ada позволяет пользователю задавать точност�
 когда мы преобразуем метры в мили. Идиоматическим решением в этом
 случае было бы ввести функции преобразования вместе с типами.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Imperial_Metric_Func
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -549,7 +549,7 @@ Ada позволяет пользователю задавать точност�
     без явного преобразования. Следующий код Ada, основанный на ошибочном
     примере в C, не будет компилироваться:
 
-    .. code-block:: ada
+    .. code:: ada compile_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Implicit_Cast
         :class: ada-expect-compile-error
 
         procedure Main is
@@ -576,7 +576,7 @@ Ada позволяет пользователю задавать точност�
 некоторый существующий тип, но рассматривается как отдельный тип в
 интересах сильной типизации.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Derived_Types
     :class: ada-expect-compile-error
 
     procedure Main is
@@ -623,7 +623,7 @@ Ada позволяет пользователю задавать точност�
 
 Синтаксис перечислений использует синтаксис :ada:`range <диапазон>`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Days
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -649,7 +649,7 @@ Ada позволяет пользователю задавать точност�
 одного типа. Здесь вступают в действие подтипы. Подтип не вводит новый
 тип.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Days_Subtype
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -694,7 +694,7 @@ Ada позволяет пользователю задавать точност�
 применяются во время выполнения: если вы нарушите ограничение подтипа,
 возникнет исключение.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Days_Subtype_Error
     :class: ada-run-expect-failure
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -733,7 +733,7 @@ Ada позволяет пользователю задавать точност�
 Однако в этом случае мы не получаем всех преимуществ, а именно строгой
 проверки типов в Ada. Перепишем пример, используя псевдонимы типов:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Strongly_Typed_Language.Undetected_Imperial_Metric_Error
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -777,7 +777,7 @@ Ada позволяет пользователю задавать точност�
 
     Paid_Amount, Due_Amount : Float;
 
-
+Мы можем написать:
 
 .. code-block:: ada
 

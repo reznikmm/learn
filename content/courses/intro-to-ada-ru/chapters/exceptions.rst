@@ -14,7 +14,7 @@ Ada использует исключения для обработки ошиб
 специфическими для вас, если вы привыкли к тому, как Java или Python
 поддерживают исключения. Вот как вы объявляете исключение:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Exceptions.Show_Exception
 
     package Exceptions is
         My_Except : exception;
@@ -32,7 +32,7 @@ Ada не требует, чтобы подпрограмма объявляла 
 Чтобы вызвать (возбудить) исключение нашего недавно объявленного вида
 исключения, сделайте следующее:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Exceptions.Show_Exception
     :class: ada-run-expect-failure
 
     with Exceptions; use Exceptions;
@@ -60,7 +60,7 @@ Ada не требует, чтобы подпрограмма объявляла 
 заключается в том, что вы можете добавить обработчик исключений в
 любой блок операторов следующим образом:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Exceptions.Show_Exception_Handling
     :class: ada-run-expect-failure
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -88,7 +88,7 @@ Ada не требует, чтобы подпрограмма объявляла 
 Вам не нужно вводить блок только для обработки исключения: вы можете
 добавить его в блок инструкций вашей текущей подпрограммы:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Exceptions.Show_Exception_Message
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Ada.Exceptions;  use Ada.Exceptions;
@@ -110,7 +110,7 @@ Ada не требует, чтобы подпрограмма объявляла 
     перехватываются обработчиками этого блока. Так, например, в следующем
     коде исключение не будет поймано.
 
-    .. code-block:: ada
+    .. code:: ada run_button project=Courses.Intro_To_Ada.Exceptions.Be_Careful
         :class: ada-run-expect-failure
 
         with Ada.Text_IO; use Ada.Text_IO;

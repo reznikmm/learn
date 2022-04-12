@@ -18,7 +18,7 @@
 
 -  *Неограниченные строки*: подобно ограниченным строкам, неограниченные
    строки могут содержать строки различной длины. Однако, помимо этого, у
-   них нет максимальной длины. В этом смысле они очень гибкие. 
+   них нет максимальной длины. В этом смысле они очень гибкие.
 
 В следующих разделах представлен обзор различных типов строк и общих
 операций для типов строк.
@@ -36,7 +36,7 @@
 доступных в строке (:ada:`Count`), и поиск их соответствующих
 индексов (:ada:`Index`). Давайте посмотрим на пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Find_Substring
 
     with Ada.Strings.Fixed; use Ada.Strings.Fixed;
     with Ada.Text_IO;       use Ada.Text_IO;
@@ -80,7 +80,7 @@
 примере мы извлекаем все слова в строке. Мы делаем это с помощью
 :ada:`Find_Token` и определяем пробелы в качестве разделителей. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Find_Words
 
     with Ada.Strings;       use Ada.Strings;
     with Ada.Strings.Fixed; use Ada.Strings.Fixed;
@@ -162,7 +162,7 @@
 как функции, так и версии процедур :ada:`Insert`, :ada:`Overwrite` и
 :ada:`Delete`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Adapted_Strings
 
     with Ada.Strings;       use Ada.Strings;
     with Ada.Strings.Fixed; use Ada.Strings.Fixed;
@@ -261,7 +261,7 @@
 инициализация строк фиксированной длины, если она не выполняется в
 объявлении:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Char_Array
 
     with Ada.Text_IO;         use Ada.Text_IO;
 
@@ -312,7 +312,7 @@
 являются массивами, поэтому их инициализация во время выполнения
 намного проще. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Bounded_String
 
     with Ada.Strings;         use Ada.Strings;
     with Ada.Strings.Bounded;
@@ -373,7 +373,7 @@
 :ada:`Append` или конкатенации ограниченных строк с помощью оператора
 :ada:`&`. Вот так:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Bounded_String_Op
 
     with Ada.Strings;         use Ada.Strings;
     with Ada.Strings.Bounded;
@@ -428,7 +428,7 @@
 Инициализация неограниченных строк очень похожа на ограниченные
 строки. Рассмотрим пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Unbounded_String
 
     with Ada.Strings;           use Ada.Strings;
     with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
@@ -467,7 +467,7 @@
 Как и для ограниченных строк, можно использовать функцию :ada:`Append` и
 оператор :ada:`&` для неограниченных строк. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Unbounded_String_Op
 
     with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
     with Ada.Text_IO;           use Ada.Text_IO;

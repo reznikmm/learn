@@ -11,7 +11,7 @@
 
 Задачу можно рассматривать как приложение, которое выполняется
 одновременно (*concurrently*) с основным приложением. В других языках
-программирования задачу можно назвать 
+программирования задачу можно назвать
 `потоком <https://en.wikipedia.org/wiki/Thread_(computing)>`_,
 а постановку задач можно назвать
 `многопоточностью
@@ -27,7 +27,7 @@
 Задачи объявляются с использованием ключевого слова :ada:`task`. Реализация
 задачи определяется в блоке тела задачи (:ada:`task body`). Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Simple_Task
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -66,24 +66,24 @@
    -  Эта задача также запускается автоматически и выполняется *одновременно*
       как с задачей :ada:`T`, так и с основной задачей. Например:
 
-      .. code-block:: ada
-      
+    .. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Multiple_Simple_Task
+
           with Ada.Text_IO; use Ada.Text_IO;
-      
+
                 procedure Show_Simple_Tasks is
                    task T;
                    task T2;
-      
+
                    task body T is
                    begin
                       Put_Line ("In task T");
                    end T;
-      
+
                    task body T2 is
                    begin
                       Put_Line ("In task T2");
                    end T2;
-      
+
                 begin
                    Put_Line ("In main");
                 end Show_Simple_Tasks;
@@ -100,8 +100,7 @@
 между основной задачей и ее подзадачами. После этой синхронизации
 основная задача завершится. Например:
 
-.. code-block:: ada
-    :class: ada-syntax-only
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Simple_Sync
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -129,7 +128,8 @@
 пакет. В приведенном ниже примере мы объявляем задачу :ada:`T` в пакете
 :ada:`Simple_Sync_Pkg`.
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Tasking.Simple_Sync_Pkg
+    :class: ada-syntax-only
 
     package Simple_Sync_Pkg is
        task T;
@@ -137,7 +137,7 @@
 
 Это соответствующее тело пакета:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Tasking.Simple_Sync_Pkg
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -153,7 +153,7 @@
 Поскольку пакет обрабатывается (:ada:`with`) основной процедурой, задача
 :ada:`T`, определенная в пакете, является частью основной задачи. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Simple_Sync_Pkg
 
     with Simple_Sync_Pkg;
 
@@ -175,7 +175,7 @@
 задачу в спящий режим на время (в секундах), указанное в инструкции
 delay. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Delay
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -224,7 +224,7 @@ delay. Например:
 Эта синхронизация между задачами называется *рандеву*. Давайте
 посмотрим на пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Rendezvous
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -279,7 +279,7 @@ delay. Например:
 автоматически завершать выполнение подзадачи по завершении основной задачи.
 Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Rendezvous_Loop
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -385,7 +385,7 @@ delay. Например:
 фиктивную процедуру :ada:`Computational_Intensive_App`, которая
 моделируется с помощью простой задержки. Это полный пакет:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Tasking.Show_Time
 
     with Ada.Real_Time; use Ada.Real_Time;
 
@@ -430,7 +430,7 @@ delay. Например:
 Используя этот вспомогательный пакет, теперь мы готовы написать наше
 приложение с дрейфом во времени:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Time
 
     with Ada.Text_IO;   use Ada.Text_IO;
     with Ada.Real_Time; use Ada.Real_Time;
@@ -469,7 +469,7 @@ delay. Например:
 этого временного дрейфа и иметь регулярный интервал ровно в одну
 секунду:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Time
 
     with Ada.Text_IO;   use Ada.Text_IO;
     with Ada.Real_Time; use Ada.Real_Time;
@@ -549,7 +549,7 @@ delay. Например:
 данные - в закрытой части. Соответствующая реализация операций
 включена в защищенное тело (:ada:`protected body`) объекта. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Protected_Objects
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -615,7 +615,7 @@ delay. Например:
 содержит две параллельные подпрограммы (основная задача и задача :ada:`T`),
 которые пытаются получить доступ к защищаемому объекту.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Protected_Objects_Entries
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -703,7 +703,7 @@ delay. Например:
 
 Чтобы проиллюстрировать это, мы повторим наш первый пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Simple_Task
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -722,7 +722,7 @@ delay. Например:
 :ada:`task type TT`. Объявляем задачу (:ada:`A_Task`) на основе типа
 задачи :ada:`TT` после её определения:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Simple_Task_Type
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -746,7 +746,7 @@ delay. Например:
 можем передавать информацию отдельным задачам, определяя начальную
 запись :ada:`Start`. Вот обновленный пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Task_Type_Array
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -793,7 +793,7 @@ delay. Например:
 Мы можем повторно использовать предыдущий пример и переписать его,
 чтобы использовать защищенный тип:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Tasking.Show_Protected_Object_Type
 
     with Ada.Text_IO; use Ada.Text_IO;
 

@@ -23,7 +23,7 @@
 Пакет :ada:`Ada.Calendar` поддерживает обработку дат и времени. Рассмотрим
 простой пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Current_Time
 
     with Ada.Calendar;            use Ada.Calendar;
     with Ada.Calendar.Formatting; use Ada.Calendar.Formatting;
@@ -41,7 +41,7 @@
 строку (:ada:`String`) для текущей даты и времени. Вместо этого мы могли бы
 получить каждый компонент с помощью функции :ada:`Split`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Current_Year
 
     with Ada.Calendar;            use Ada.Calendar;
     with Ada.Text_IO;             use Ada.Text_IO;
@@ -77,7 +77,7 @@
 определенную дату и время. Мы видели нечто подобное в главе о задачах.
 Вы делаете это с помощью инструкции :ada:`delay until`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Delay_Next_Specific_Time
 
     with Ada.Calendar;            use Ada.Calendar;
     with Ada.Calendar.Formatting; use Ada.Calendar.Formatting;
@@ -129,7 +129,7 @@
 помощью :ada:`String`. Мы можем сделать это с помощью вызова :ada:`Value` из
 пакета :ada:`Ada.Calendar.Formatting`. Это модифицированный код:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Delay_Next_Specific_Time
 
     with Ada.Calendar;            use Ada.Calendar;
     with Ada.Calendar.Formatting; use Ada.Calendar.Formatting;
@@ -161,7 +161,7 @@
 указать задержку относительно текущего времени. Например, мы можем
 задержать на 5 секунд, используя текущее время:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Delay_Next
 
     with Ada.Calendar;            use Ada.Calendar;
     with Ada.Text_IO;             use Ada.Text_IO;
@@ -201,7 +201,7 @@
 этого мы могли бы использовать пакет :ada:`Ada.Real_Time`. Давайте изменим этот
 пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Delay_Next_Real_Time
 
     with Ada.Text_IO;   use Ada.Text_IO;
     with Ada.Real_Time; use Ada.Real_Time;
@@ -227,12 +227,12 @@
 Сравнительный анализ
 ~~~~~~~~~~~~~~~~~~~~
 
-Одним из интересных приложений, использующих пакет :ada:`Ada.Real_Time`, 
+Одним из интересных приложений, использующих пакет :ada:`Ada.Real_Time`,
 является сравнительный анализ. Мы уже использовали этот пакет в предыдущем
 разделе при обсуждении задач. Давайте рассмотрим пример сравнительного
 анализа:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Benchmarking
 
     with Ada.Text_IO;   use Ada.Text_IO;
     with Ada.Real_Time; use Ada.Real_Time;
@@ -271,7 +271,7 @@
 времени. Мы можем реализовать это с помощью пакета :ada:`Execution_Time`.
 Давайте изменим предыдущий пример, чтобы измерить процессорное время:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Benchmarking_CPU_Time
 
     with Ada.Text_IO;        use Ada.Text_IO;
     with Ada.Real_Time;      use Ada.Real_Time;
@@ -310,7 +310,7 @@
 :ada:`Computational_Intensive_App` для использования математических функций
 в длинном цикле. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Display_Benchmarking_Math
 
     with Ada.Text_IO;        use Ada.Text_IO;
     with Ada.Real_Time;      use Ada.Real_Time;
