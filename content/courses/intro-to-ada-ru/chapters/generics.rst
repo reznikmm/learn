@@ -12,7 +12,7 @@
 Подпрограмма или пакет могут быть универсальными. Универсальная версия
 объявляется с помощью ключевого слова :ada:`generic`. Например:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Generics.Show_Simple_Generic
 
     generic
        type T is private;
@@ -35,7 +35,7 @@
 тип или нет. В следующем примере объявляется формальный тип :ada:`T` для
 процедуры :ada:`Set`.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Generics.Show_Formal_Type_Declaration
 
     generic
        type T is private;
@@ -72,7 +72,7 @@
 ссылаться на формальные типы, объявленные в формальной спецификации.
 Например:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Generics.Show_Formal_Object_Declaration
 
     generic
        type T is private;
@@ -97,7 +97,7 @@
 объявления и используем объявленные нами generic типы и объекты.
 Например:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Generics.Show_Generic_Body_Definition
 
     generic
        type T is private;
@@ -118,7 +118,7 @@
 этого они должны быть созданы, что мы делаем с помощью ключевого слова
 :ada:`new`, как показано в следующем примере:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Generic_Instantiation
 
     generic
        type T is private;
@@ -175,7 +175,7 @@ generic и продолжаем формальными объявлениями.
 
 Вот пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Generic_Package
 
     generic
        type T is private;
@@ -269,7 +269,7 @@ generic и продолжаем формальными объявлениями.
 функцию (:ada:`Comparison`), которая будет использоваться общей
 процедурой :ada:`Check`.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Formal_Subprogram
 
     generic
        Description : String;
@@ -332,7 +332,7 @@ Ada предлагает универсальные пакеты ввода-вы
 Его можно использовать непосредственно с любым объектом типа с
 плавающей запятой. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Float_Text_IO
 
     with Ada.Float_Text_IO;
 
@@ -349,7 +349,7 @@ Ada предлагает универсальные пакеты ввода-вы
 который должен отображаться с двумя десятичными цифрами после точки и
 без экспоненты.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Float_IO_Inst
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -406,7 +406,7 @@ Ada предлагает универсальные пакеты ввода-вы
 Фактически, мы могли бы переписать пример выше, используя десятичные
 типы:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Decimal_IO_Inst
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -440,7 +440,7 @@ Ada предлагает универсальные пакеты ввода-вы
 
 Типичным примером АТД является стек:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Show_Stack
 
     generic
        Max : Positive;
@@ -535,7 +535,7 @@ Ada предлагает универсальные пакеты ввода-вы
 Давайте рассмотрим простую процедуру, которая меняет местами
 переменные типа :ada:`Color`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Test_Non_Generic_Swap_Colors
 
     package Colors is
        type Color is (Black, Red, Green,
@@ -599,7 +599,7 @@ Ada предлагает универсальные пакеты ввода-вы
 Эта универсальная версия может работать с любым типом благодаря
 объявлению формального типа :ada:`T`.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Test_Swap_Colors
 
     generic
        type T is private;
@@ -669,7 +669,7 @@ Ada предлагает универсальные пакеты ввода-вы
 начнем с не универсальной версии алгоритма, которая работает
 специально для типа :ada:`Color`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Test_Non_Generic_Reverse_Colors
 
     package Colors is
 
@@ -746,7 +746,7 @@ Ada предлагает универсальные пакеты ввода-вы
 
 Это общая версия алгоритма:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Test_Reverse_Colors
 
     generic
        type T is private;
@@ -850,7 +850,7 @@ Ada предлагает универсальные пакеты ввода-вы
 Вот версия тестового приложения, использующего общую процедуру
 :ada:`Perform_Test`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Generics.Test_Reverse_Colors_2
 
     generic
        type T is private;

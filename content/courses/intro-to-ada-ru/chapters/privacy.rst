@@ -21,7 +21,7 @@
 Базовая инкапсуляция
 --------------------
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Privacy.Encapsulate
     :class: ada-expect-compile-error
 
     package Encapsulate is
@@ -62,7 +62,7 @@
 С такой высокоуровневой детализацией может показаться неочевидным, как
 скрыть детали реализации типа. Вот как это можно сделать в Ada:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Privacy.Stacks
     :class: ada-syntax-only
 
     package Stacks is
@@ -164,7 +164,7 @@
 которого операции присваивания и сравнения не предоставляются
 автоматически.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Privacy.Limited_Stacks
     :class: ada-expect-compile-error
 
     package Stacks is
@@ -222,7 +222,7 @@ Ada позволяет вам перегрузить операторы срав
 типов).
 
 Ada также позволяет реализовать специальную семантику для присваивания
-через `контролируемые типы 
+через `контролируемые типы
 <https://www.adaic.org/resources/add_content/standards/12rm/html/RM-7-6.html>`_.
 Однако в некоторых случаях назначение
 просто неуместно; одним из примеров является :ada:`File_Type` из пакета
@@ -269,10 +269,10 @@ Ada также позволяет реализовать специальную 
 процедуре :ada:`Main`, так как он там не отображается. Однако это ограничение
 не распространяется на части дочерних пакетов пакета :ada:`Encapsulate`.
 Фактически, тело его дочернего пакета :ada:`Encapsulate.Child` имеет доступ
-к процедуре :ada:`Hello2` и может вызывать ее там, как вы можете видеть 
+к процедуре :ada:`Hello2` и может вызывать ее там, как вы можете видеть
 в реализации процедуры :ada:`Hello3` пакета :ada:`Child`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Privacy.Encapsulate_Child
 
     package Encapsulate is
        procedure Hello;
@@ -332,7 +332,7 @@ Ada также позволяет реализовать специальную 
 доступ к компонентам записи, объявленной в частной части его
 родительского пакета. Рассмотрим пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Privacy.Private_Type_Child
 
     package My_Types is
 

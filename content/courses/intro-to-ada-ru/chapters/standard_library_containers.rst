@@ -28,7 +28,7 @@
 
 Вот пример, показывающий создание и объявление вектора :ada:`V`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Inst
 
     with Ada.Containers.Vectors;
 
@@ -71,7 +71,7 @@
 Один из способов инициализации вектора - это объединение элементов. Мы
 используем оператор :ada:`&`, как показано в следующем примере:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Init
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -108,7 +108,7 @@
 :ada:`Append`. Как следует из названий, эти операции добавляют элементы
 в начало или конец вектора соответственно. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Append
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -160,7 +160,7 @@
 Мы получаем доступ к первому и последнему элементам вектора с помощью
 функций :ada:`First_Element` и :ada:`Last_Element`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_First_Last_Element
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -207,7 +207,7 @@
 С помощью этих операций мы можем написать код, чтобы поменять местами
 первый и последний элементы вектора:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_First_Last_Element
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -247,7 +247,7 @@
 Это дает нам ссылку (:ada:`E`) на элемент в текущей позиции. Затем мы можем
 напрямую использовать :ada:`E`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Iteration
 
     with Ada.Containers.Vectors;
 
@@ -294,10 +294,10 @@
 Формат аналогичен циклу по элементам массива: мы используем в цикле
 :ada:`for I in <range>`. Диапазон предоставляется :ada:`V.First_Index`
 и :ada:`V.Last_Index`. Мы можем получить доступ к
-текущему элементу, используя его как индекс массива: :ada:`V (I)`. 
+текущему элементу, используя его как индекс массива: :ada:`V (I)`.
 Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Index_Iteration
 
     with Ada.Containers.Vectors;
 
@@ -350,7 +350,7 @@
 использованием индексов, можно снова получить доступ к текущему элементу,
 используя курсор в качестве индекса массива :ada:`V (C)`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Cursor_Iteration
 
     with Ada.Containers.Vectors;
 
@@ -438,7 +438,7 @@
 некоторую обработку. Вы можете вызвать :ada:`Update_Element` и передать как
 курсор, так и доступ к процедуре процесса. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Update
 
     with Ada.Containers.Vectors;
 
@@ -477,7 +477,7 @@
 искомому значению. В качестве альтернативы вы можете использовать
 :ada:`Find`, чтобы получить курсор, ссылающийся на этот элемент. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Find_Vector_Element
 
     with Ada.Containers.Vectors;
 
@@ -548,7 +548,7 @@
 перед определенным элементом в векторе. Вы делаете это, вызывая
 :ada:`Insert`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Insert
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -612,7 +612,7 @@
 сможем написать программу, которая ищет определенный элемент и удаляет
 его, если он найден:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Remove_Vector_Element
 
     with Ada.Containers.Vectors;
 
@@ -657,7 +657,7 @@
 поиск элемента в цикле, пока мы не получим недопустимый индекс или
 курсор. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Remove_Vector_Elements
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -766,7 +766,7 @@
 (:ada:`V1`, :ada:`V2`, :ada:`V3`) с помощью операций конкатенации,
 сортировки и слияния:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Vector_Ops
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Vectors;
@@ -879,7 +879,7 @@
 
 Посмотрим на пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Set_Init
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Ordered_Sets;
@@ -961,7 +961,7 @@
 
 Давайте рассмотрим пример, в котором используются эти операции:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Set_Element_Ops
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Ordered_Sets;
@@ -1064,7 +1064,7 @@
 
 В следующем примере используются эти операторы:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Set_Ops
 
     with Ada.Containers; use Ada.Containers;
     with Ada.Containers.Ordered_Sets;
@@ -1207,7 +1207,7 @@
 
 Посмотрим на пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Hashed_Map
 
     with Ada.Containers.Indefinite_Hashed_Maps;
     with Ada.Strings.Hash;
@@ -1268,7 +1268,7 @@ differences are:
 
 Let's see an example:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Ordered_Map
 
     with Ada.Containers.Indefinite_Ordered_Maps;
 

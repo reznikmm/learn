@@ -82,7 +82,7 @@ Ada появилась еще до того, как объектно-ориен�
 Вы можете создать один или несколько новых типов из каждого типа в
 Ada. Вывод типов встроен в язык.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Newtypes
 
     package Newtypes is
        type Point is record
@@ -111,7 +111,7 @@ Ada. Вывод типов встроен в язык.
     1. Подпрограмма объявляется в той же области, что и тип и
     2. Тип и подпрограмма объявляются в пакете.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Primitives
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -195,7 +195,7 @@ Ada. Вывод типов встроен в язык.
 
 Давайте посмотрим на наши первые объявления тегированного типа:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
 
     package P is
        type My_Class is tagged null record;
@@ -248,7 +248,7 @@ Ada. Вывод типов встроен в язык.
 ООП, как только вам понадобится полиморфизм. Например, вы не можете
 выполнить следующие действия:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
     :class: ada-expect-compile-error
 
     with P; use P;
@@ -275,7 +275,7 @@ Ada. Вывод типов встроен в язык.
 типа :ada:`My_Class` или любого типа, нисходящего от :ada:`My_Class`.»
 Вот как вы это делаете:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
 
     with P; use P;
 
@@ -325,7 +325,7 @@ Ada. Вывод типов встроен в язык.
 любым типом, производным от этого конкретного типа, а именно объект
 классового типа.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
 
     with P; use P;
 
@@ -363,7 +363,7 @@ Ada. Вывод типов встроен в язык.
     для изменения состояния объекта: изменения в преобразованном объекте
     повлияют на оригинал.
 
-    .. code-block:: ada
+    .. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
 
         with P; use P;
 
@@ -392,7 +392,7 @@ Ada. Вывод типов встроен в язык.
 Учитывая приведенный выше примитив Foo, вы также можете написать
 указанную выше программу следующим образом:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
 
     with P; use P;
 
@@ -421,7 +421,7 @@ Ada. Вывод типов встроен в язык.
 в наших примерах, вы можете вызвать примитив, используя точечную
 нотацию. Любой оставшийся параметр передается нормально:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Types
 
     with P; use P;
 
@@ -458,7 +458,7 @@ Ada. Вывод типов встроен в язык.
 
 Это пример закрытого типа с тегами:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Private_Types
 
     package P is
        type T is tagged private;
@@ -470,7 +470,7 @@ Ada. Вывод типов встроен в язык.
 
 Это пример ограниченного типа с тегами:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Limited_Types
 
     package P is
        type T is tagged limited record
@@ -481,7 +481,7 @@ Ada. Вывод типов встроен в язык.
 Естественно, вы можете комбинировать как *ограниченные*, так и *частные*
 типы и объявить ограниченный частный тип с тегами:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Tagged_Limited_Private_Types
 
     package P is
        type T is tagged limited private;
@@ -540,7 +540,7 @@ Ada. Вывод типов встроен в язык.
 доступа. Начнем с примера, в котором мы объявляем тегированный тип :ada:`T` и
 производный тип :ada:`T_New`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Classwide_Error
 
     package P is
        type T is tagged null record;
@@ -581,7 +581,7 @@ Ada. Вывод типов встроен в язык.
 создания объектов, которые могут выполнять диспетчерские вызовы.
 Другими словами, будут отправляться объекты типа :ada:`T'Class`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Classwide_Error
 
     with P; use P;
 
@@ -608,7 +608,7 @@ Ada. Вывод типов встроен в язык.
 
 Однако напрямую объявить массив типа :ada:`T'Class` невозможно:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Classwide_Error
     :class: ada-expect-compile-error
 
     with P; use P;
@@ -640,7 +640,7 @@ Ada. Вывод типов встроен в язык.
 Также давайте представим процедуру :ada:`Init`, которая не будет
 переопределена для производного типа :ada:`T_New`. Это адаптированный код:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Object_Oriented_Programming.Classwide_Access
 
     package P is
        type T is tagged record

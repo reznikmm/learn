@@ -15,7 +15,7 @@
 для типов плавающих точек, таких как квадратный корень, логарифм и
 тригонометрические функции (например, sin, cos). Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Elem_Math
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Ada.Numerics; use Ada.Numerics;
@@ -83,7 +83,7 @@
 от 0,0 до 1,0. Чтобы использовать его, объявите генератор :ada:`G`, который вы
 передадите в :ada:`Random`. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Float_Random_Num
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Ada.Numerics.Float_Random; use Ada.Numerics.Float_Random;
@@ -112,7 +112,7 @@
 следующем примере создается приложение, отображающее случайные целые
 числа от 1 до 10:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Discrete_Random_Num
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Ada.Numerics.Discrete_Random;
@@ -159,7 +159,7 @@
 примере мы объявляем переменные типа :ada:`Complex` и инициализируем их с помощью
 агрегата:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Elem_Math
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Ada.Numerics; use Ada.Numerics;
@@ -270,7 +270,7 @@
 
 В следующем примере используются некоторые операции из пакета :ada:`Ada.Numerics.Real_Arrays`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Matrix
 
     with Ada.Text_IO;  use Ada.Text_IO;
 

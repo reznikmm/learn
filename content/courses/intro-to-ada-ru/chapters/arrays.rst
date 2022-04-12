@@ -12,7 +12,7 @@
 Массивы в Ada используются для определения непрерывных коллекций
 элементов, которые можно выбрать путем индексации.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Greet
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -84,7 +84,7 @@
     элемент.
 
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Array_Bounds_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -126,7 +126,7 @@
 Поскольку для индексации массива можно использовать любой дискретный
 тип, разрешены типы перечисления.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Month_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -184,7 +184,7 @@
 типизирована. Если для индексации массива используется значение
 неправильного типа, будет получена ошибка времени компиляции.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Greet_2
     :class: ada-expect-compile-error
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -210,7 +210,7 @@
 вы получите ошибку во время выполнения вместо доступа к случайной
 памяти, как в небезопасных языках.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Greet_3
     :class: ada-run-expect-failure
 
     with Ada.Text_IO; use Ada.Text_IO;
@@ -238,7 +238,7 @@
 иногда вам просто нужно выразить диапазон значений. Ada тоже позволяет
 вам это делать.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Simple_Array_Bounds
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -277,7 +277,7 @@
 диапазон. Ada решает эту проблему с помощью нескольких атрибутов
 объектов массива:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Range_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -296,7 +296,7 @@
 Если требуется более детализированное управление, можно использовать
 отдельные атрибуты «Первый» (:ada:`'First`) и «Последний» (:ada:`'Last`).
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Array_Attributes_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -341,7 +341,7 @@
 являются фиксированными: в этом случае границы необходимо будет
 указать при создании экземпляров типа.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Unconstrained_Array_Example
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -369,7 +369,7 @@
        end loop;
     end Unconstrained_Array_Example;
 
-Тот факт, что границы массива неизвестны, указывается синтаксисом 
+Тот факт, что границы массива неизвестны, указывается синтаксисом
 :ada:`Days range <>`. Учитывая дискретный тип :ada:`Discrete_Type`,
 если мы используем :ada:`Discrete_Type` для индекса в типе массива,
 тогда :ada:`Discrete_Type` служит типом индекса и включает диапазон
@@ -437,7 +437,7 @@
     Строковые литералы являются синтаксическим сахаром для агрегатов, так
     что в следующем примере :ada:`A` и :ada:`B` имеют одинаковое значение.
 
-    .. code-block:: ada
+    .. code:: ada no_button project=Courses.Intro_To_Ada.Arrays.String_Literals
 
         package String_Literals is
             --  Those two declarations are equivalent
@@ -447,7 +447,7 @@
                  'W', 'o', 'r', 'l', 'd');
         end String_Literals;
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Greet_4
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -471,7 +471,7 @@
 типа массива, если вы предоставляете инициализацию, поскольку границы
 могут быть выведены из выражения инициализации.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Greet_5
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -487,7 +487,7 @@
        New_Line;
     end Greet;
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Constant_Integer_Array
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -557,7 +557,7 @@
     означает, что размер подтипа неизвестен во время компиляции, но
     динамически вычисляется (во время выполнения).
 
-    .. code-block:: ada
+    .. code:: ada no_button project=Courses.Intro_To_Ada.Arrays.Indefinite_Subtypes
 
         with Ada.Text_IO; use Ada.Text_IO;
 
@@ -590,7 +590,7 @@
 
 Например, это функция, которая возвращает неограниченную строку:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Day_Name_1
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -654,7 +654,7 @@
 подтип :ada:`String`, используемый в качестве компонента, должен иметь
 фиксированный размер.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Day_Name_2
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -689,7 +689,7 @@
 (непрерывную последовательность элементов) в качестве имени или
 значения.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Slices
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -734,7 +734,7 @@
 позволяет создавать альтернативные имена для этих объектов. Давайте
 посмотрим на пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Variable_Renaming
 
     package Measurements is
 
@@ -788,7 +788,7 @@
 массива, мы можем создавать более короткие имена для этих позиций,
 переименовывая их. Давайте посмотрим на следующий пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Arrays.Reverse_Colors
 
     package Colors is
 

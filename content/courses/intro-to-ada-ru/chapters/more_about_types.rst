@@ -21,7 +21,7 @@
 
 Это означает, что следующий код неверен:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Incorrect_Aggregate
     :class: ada-expect-compile-error
 
     package Incorrect is
@@ -52,7 +52,7 @@
 связь, все последующие компоненты также должны быть указаны с
 ассоциациями имен.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Points
 
     package Points is
        type Point is record
@@ -83,7 +83,7 @@
 Давайте возьмем простой пример: в Ada возможно иметь функции с
 одинаковым именем, но разными типами для их параметров.
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.More_About_Types.Overloading
     :class: ada-syntax-only
 
     package Pkg is
@@ -98,7 +98,7 @@
 Одним из новых аспектов средства перегрузки Ada является возможность
 разрешить перегрузку на основе возвращаемого типа функции.
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.More_About_Types.Overloading
     :class: ada-syntax-only
 
     package Pkg is
@@ -130,7 +130,8 @@
 объявлению перегруженного имени относится данное вхождение имени.
 Именно здесь становится полезным квалифицированное выражение.
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.More_About_Types.Overloading_Error
+    :class: ada-syntax-only, ada-expect-compile-error
 
     package Pkg is
        type SSID is new Integer;
@@ -165,7 +166,7 @@
 Синтаксически целью квалифицированного выражения может быть любое
 выражение в круглых скобках или агрегат:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Qual_Expr
 
     package Qual_Expr is
        type Point is record
@@ -221,7 +222,7 @@
 
 Вот как в Ada объявляется простой тип указателя или тип доступа:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Access_Types
 
     package Dates is
        type Months is
@@ -263,7 +264,7 @@
 несовместимы друг с другом, и вам потребуется явное преобразование
 типа для преобразования из одного в другой:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Access_Types
     :class: ada-expect-compile-error
 
     with Dates; use Dates;
@@ -312,7 +313,7 @@
 переменным этих типов содержательное значение! Вы можете назначить
 значение типа доступа с помощью нового ключевого слова :ada:`new` в Ada.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Access_Types
 
     with Dates; use Dates;
 
@@ -326,7 +327,7 @@
 Если тип, который требуется назначить, требует ограничений, их можно
 поместить в указатель подтипа, как и в объявлении переменной:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Access_Types
 
     with Dates; use Dates;
 
@@ -347,7 +348,7 @@
 вместе с выделением. Это делается с помощью синтаксиса
 квалифицированного выражения:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Access_Types
 
     with Dates; use Dates;
 
@@ -368,7 +369,7 @@
 используется синтаксис :ada:`.all` в Ada, но часто в этом нет необходимости ‑ во
 многих случаях значение доступа будет неявно разыменовано для вас:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Access_Types
 
     with Dates; use Dates;
 
@@ -436,7 +437,7 @@
 доступа, которые являются взаимно зависимыми. Для объявления взаимно
 зависимых типов можно использовать неполное объявление типа:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Simple_List
 
     package Simple_List is
        type Node;
@@ -466,7 +467,7 @@
 должен быть известен во время компиляции. Это проиллюстрировано в
 приведенном ниже примере:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.More_About_Types.Var_Size_Record
     :class: ada-syntax-only
 
     package Runtime_Length is
@@ -509,7 +510,7 @@
 Можно также получить аналогичную функциональность для записей,
 используя специальный вид поля, который называется дискриминантом:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Var_Size_Record_2
 
     package Var_Size_Record_2 is
         type Items_Array is array (Positive range <>)
@@ -535,7 +536,7 @@
 дискриминантом будет неопределенным, если дискриминант не объявлен с
 инициализацией:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Test_Discriminants
     :class: ada-expect-compile-error
 
     package Test_Discriminants is
@@ -562,7 +563,7 @@
 объявлять значения :ada:`Point` без указания дискриминантов. В приведенном выше
 примере это будет выглядеть так:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Test_Discriminants
 
     package Test_Discriminants is
        type Point (X, Y : Natural := 0) is record
@@ -589,7 +590,7 @@
 вы должны указать их значения в агрегатах, как показано выше, и вы
 можете получить доступ к их значениям через точечную нотацию.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Var_Size_Record_2
 
     with Var_Size_Record_2; use Var_Size_Record_2;
     with Ada.Text_IO; use Ada.Text_IO;
@@ -629,7 +630,7 @@
 функциональных возможностей того, что иногда называют «вариантными
 записями»: записей, которые могут содержать различные наборы полей.
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Variant_Record
 
     package Variant_Record is
        --  Forward declaration of Expr
@@ -666,7 +667,7 @@
 Если вы попытаетесь получить доступ к полю, недопустимому для вашей
 записи, будет вызвана ошибка :ada:`Constraint_Error`.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Variant_Record
     :class: ada-run-expect-failure
 
     with Variant_Record; use Variant_Record;
@@ -680,7 +681,7 @@
 
 Вот как можно написать вычислитель для выражений:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Variant_Record
 
     with Variant_Record; use Variant_Record;
     with Ada.Text_IO; use Ada.Text_IO;
@@ -760,7 +761,7 @@
 В приведенном ниже примере мы объявляем два типа данных: :ada:`T3_D3` и :ada:`T6_D3`. Для
 обоих типов значение дельты одинаково: 0.001.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Decimal_Fixed_Point_Types
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -797,7 +798,7 @@
 типов с фиксированной запятой меньше, чем значение дельты, требуемое
 для контекста, фактический результат будет равен нулю. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Decimal_Fixed_Point_Smaller
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -836,7 +837,7 @@ C будет равно 0.000500.
 масштабированными целыми числами. Разница между ними заключается в
 коэффициенте масштабирования: для десятичного типа с фиксированной
 точкой масштабирование, явно заданное дельтой (:ada:`delta`) типа,
-всегда является степенью десяти. 
+всегда является степенью десяти.
 
 Напротив, для обычного типа с фиксированной точкой масштабирование
 определяется значением :ada:`small` для типа, которое получается из указанной
@@ -866,7 +867,7 @@ C будет равно 0.000500.
 Например, можно определить нормированный диапазон между -1.0 и 1.0
 следующим образом:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Normalized_Fixed_Point_Type
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -893,7 +894,7 @@ C будет равно 0.000500.
 `Q формата <https://en.wikipedia.org/wiki/Q_(number_format)>`_.
 Мы также можем переписать этот код с точным определением типа:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Normalized_Adapted_Fixed_Point_Type
 
     procedure Normalized_Adapted_Fixed_Point_Type is
        type TQ31 is
@@ -905,7 +906,7 @@ C будет равно 0.000500.
 
 Мы также можем использовать любой другой диапазон. Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Custom_Fixed_Point_Range
 
     with Ada.Text_IO;  use Ada.Text_IO;
     with Ada.Numerics; use Ada.Numerics;
@@ -932,7 +933,7 @@ C будет равно 0.000500.
 Для типов с фиксированной точкой доступны все стандартные операции.
 Например:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.More_About_Types.Fixed_Point_Op
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -978,7 +979,7 @@ C будет равно 0.000500.
 означает, что в дополнение к строго типизированным типам символов
 языка разрешены также определяемые пользователем типы символов:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.More_About_Types.Character_Example
     :class: ada-expect-compile-error
 
     with Ada.Text_IO; use Ada.Text_IO;
