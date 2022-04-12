@@ -37,6 +37,27 @@ Hello world
 
 Текс программы, как мы предполагаем, находится в исходном файле :file:`greet.adb`.
 
+.. only:: builder_html
+
+    Если мы соберем программу с помощью компилятора GNAT и запустим ее, то
+    получим ожидаемый результат.
+
+    .. code-block:: sh
+
+        $ gprbuild greet.adb
+        using project file [...]_default.gpr
+        Compile
+           [Ada]          greet.adb
+        Bind
+           [gprbind]      greet.bexch
+           [Ada]          greet.ali
+        Link
+           [link]         greet.adb
+    
+        $ ./greet
+        Hello, World!
+        $
+
 В вышеупомянутой программе есть несколько примечательных вещей:
 
 -  Подпрограмма в Ada может быть либо процедурой, либо функцией.
@@ -248,6 +269,18 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
        end loop;
     end Greet_5a;
 
+.. only:: builder_html
+
+    Исполнение этой процедуры дает следующий результат:
+
+    .. code-block:: sh
+
+       Hello, World! 1
+       Hello, World! 2
+       Hello, World! 3
+       Hello, World! 4
+       Hello, World! 5
+
 Несколько вещей, которые следует отметить:
 
 -  :ada:`1 .. 5` ‑ это дискретный диапазон, от :ada:`1` до :ada:`5` включительно.
@@ -286,6 +319,18 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
                     & Integer'Image (I));
        end loop;
     end Greet_5a_Reverse;
+
+.. only:: builder_html
+
+    Исполнение этой процедуры дает следующий результат:
+
+    .. code-block:: sh
+
+       Hello, World! 5
+       Hello, World! 4
+       Hello, World! 3
+       Hello, World! 2
+       Hello, World! 1
 
 Границы цикла :ada:`for` могут быть вычислены во время выполнения; они
 вычисляются один раз, перед выполнением тела цикла. Если значение
