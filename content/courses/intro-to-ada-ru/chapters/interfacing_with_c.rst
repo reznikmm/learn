@@ -34,7 +34,7 @@ C и C++. В этом разделе обсуждается, как взаимо
 типа Ada. В следующем примере выполняется интерфейс с перечислением
 :ada:`C_Enum`, объявленным в исходном файле C:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Enum
 
     procedure Show_C_Enum is
 
@@ -49,7 +49,7 @@ C и C++. В этом разделе обсуждается, как взаимо
 :ada:`Interfaces.C`, содержащий большинство необходимых определений
 типов. Например:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Struct
 
     with Interfaces.C; use Interfaces.C;
 
@@ -71,7 +71,7 @@ C и C++. В этом разделе обсуждается, как взаимо
 соответствующие типы данных в C (:c:`int`, :c:`long`, :c:`unsigned` и
 :c:`double`). Это объявление в C:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Struct
 
     !c_struct.h
     struct c_struct
@@ -92,14 +92,14 @@ C и C++. В этом разделе обсуждается, как взаимо
 написанными на C. Рассмотрим следующее объявление в заголовочном файле
 C:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func
 
     !my_func.h
     int my_func (int a);
 
 Вот соответствующее определение функции на C:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func
 
     !my_func.c
     #include "my_func.h"
@@ -112,7 +112,7 @@ C:
 Мы можем связать этот код с кодом на Аде, используя аспект :ada:`Import`.
 Например:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func
 
     with Interfaces.C; use Interfaces.C;
     with Ada.Text_IO;  use Ada.Text_IO;
@@ -136,7 +136,7 @@ C:
 При необходимости можно использовать другое имя подпрограммы в коде
 Ada. Например, можно вызвать функцию C :ada:`Get_Value`:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func
 
     with Interfaces.C; use Interfaces.C;
     with Ada.Text_IO;  use Ada.Text_IO;
@@ -164,7 +164,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 Вы также можете вызывать подпрограммы Ada из приложений C. Вы делаете
 это с аспектом :ada:`Export`. Например:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Func
 
     with Interfaces.C; use Interfaces.C;
 
@@ -180,7 +180,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Это соответствующее тело подпрограммы, реализующий эту функцию:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Func
 
     package body C_API is
 
@@ -195,7 +195,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 написана на C: просто объявляем ее с помощью ключевого слова :c:`extern`.
 Например:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Func
 
     !main.c
     #include <stdio.h>
@@ -225,7 +225,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 добавим глобальную переменную (:c:`func_cnt`) для подсчета количества вызовов
 функции (:c:`my_func`):
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Vars
 
     !test.h
     extern int func_cnt;
@@ -234,7 +234,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Переменная объявлена в файле C и увеличивается в :c:`my_func`:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Vars
 
     !test.c
     #include "test.h"
@@ -250,7 +250,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 В приложении Ada мы просто ссылаемся на внешнюю переменную:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Vars
 
     with Interfaces.C; use Interfaces.C;
     with Ada.Text_IO;  use Ada.Text_IO;
@@ -298,7 +298,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 Давайте повторно воспользуемся прошлым примером и добавим счетчик, как
 в предыдущем примере, но на этот раз увеличим счетчик в коде Ada:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Vars
 
     with Interfaces.C; use Interfaces.C;
 
@@ -319,7 +319,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Затем переменная увеличивается в :ada:`My_Func`:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Vars
 
     package body C_API is
 
@@ -333,7 +333,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 В приложении C нам просто нужно объявить переменную и использовать ее:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Vars
 
     !main.c
     #include <stdio.h>
@@ -372,7 +372,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Это был наш заголовочный файл C:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds
 
     !my_func.c
     extern int func_cnt;
@@ -387,7 +387,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Результатом является файл спецификации Ada с именем :file:`test_h.ads`:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds
 
     pragma Ada_2005;
     pragma Style_Checks (Off);
@@ -406,7 +406,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Теперь мы просто ссылаемся на этот пакет :file:`test_h` в нашем приложении Ada:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds
 
     with Interfaces.C; use Interfaces.C;
     with Ada.Text_IO;  use Ada.Text_IO;
@@ -434,7 +434,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Это создает файл :file:`ext_c_code-test_h.ads`:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_2
     :class: ada-syntax-only
 
     package Ext_C_Code.test_h is
@@ -458,7 +458,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Начнем с этого заголовочного файла C:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3
 
     !test.h
     struct test;
@@ -477,7 +477,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 И соответствующая реализация C:
 
-.. code-block:: c
+.. code:: c no_button manual_chop project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3
 
     !test.c
     #include <stdlib.h>
@@ -544,7 +544,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Это создает следующую спецификацию в :file:`test_h.ads`:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3
 
     pragma Ada_2005;
     pragma Style_Checks (Off);
@@ -582,7 +582,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 привязки достаточно хороши, чтобы позволить нам создать тестовое
 приложение на Ada:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3
 
     with Interfaces.C;         use Interfaces.C;
     with Interfaces.C.Strings; use Interfaces.C.Strings;
@@ -625,7 +625,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 Вот итоговая спецификация:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3
 
     with Interfaces.C; use Interfaces.C;
     with System;
@@ -659,7 +659,7 @@ Ada. Например, можно вызвать функцию C :ada:`Get_Valu
 
 И это соответствующее тело Ada:
 
-.. code-block:: ada
+.. code:: ada no_button project=Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3
 
     with Interfaces.C;         use Interfaces.C;
     with Interfaces.C.Strings; use Interfaces.C.Strings;

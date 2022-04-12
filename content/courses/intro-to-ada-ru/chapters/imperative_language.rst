@@ -25,7 +25,7 @@ Hello world
 
 Вот очень простая императивная программа Ada:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet
 
     with Ada.Text_IO;
 
@@ -53,7 +53,7 @@ Hello world
            [Ada]          greet.ali
         Link
            [link]         greet.adb
-    
+
         $ ./greet
         Hello, World!
         $
@@ -97,7 +97,7 @@ Hello world
 
 Вот минорный вариант примера «Hello, World»:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_2
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -122,7 +122,7 @@ Hello world
 
 Оператор :ada:`if` в Ada довольно неудивителен по форме и функциям:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Imperative_Language.Check_Positive
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -168,7 +168,7 @@ number). Если значение не является положительн�
 Вот небольшое изменение в примере, которое иллюстрирует оператор :ada:`if` с
 частью :ada:`else`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Imperative_Language.Check_Positive_2
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -198,7 +198,7 @@ number). Если значение не является положительн�
 
 Наш последний вариант иллюстрирует оператор :ada:`if` с разделами :ada:`elsif`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Imperative_Language.Check_Direction
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -256,7 +256,7 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
 Первый вид цикла ‑ это цикл :ada:`for`, который позволяет выполнять итерацию
 через дискретный диапазон.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_5a
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -308,7 +308,7 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
 выполнить итерацию в обратном направлении по диапазону, используйте
 ключевое слово :ada:`reverse`:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_5a_Reverse
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -338,7 +338,7 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
 выполняется. Это относится и к обратным циклам. Таким образом, в
 следующем примере вывод не производится:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_No_Op
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -359,7 +359,7 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
 Самый простой цикл в Ada ‑ это голый цикл, который образует основу
 других видов циклов Ada.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_5b
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -409,7 +409,7 @@ for в C / Java / Javascript. Цикл for-loop обладает более пр
 
 Последний вид цикла в Ada ‑ это цикл :ada:`while`.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_5c
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -450,7 +450,7 @@ false, то цикл завершается.
 Вот пример, вариация программы, которая была показана ранее с
 инструкцией :ada:`if`:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Imperative_Language.Check_Direction_2
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -542,7 +542,7 @@ false, то цикл завершается.
 переменную :ada:`X` в декларативной области и выполняем инициализацию и
 добавление к ней единицы:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Variable_Declaration
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -562,7 +562,7 @@ false, то цикл завершается.
 
 Давайте рассмотрим пример вложенной процедуры:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Nested_Procedure
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -580,7 +580,7 @@ false, то цикл завершается.
 локальную переменную среди операторов, вы можете ввести новую
 декларативную область с помощью блочного оператора:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Imperative_Language.Greet_6
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -627,7 +627,7 @@ false, то цикл завершается.
 Вот альтернативная версия примера приведённого выше; операторы :ada:`if`
 заменены на :ada:`if` выражения:
 
-.. code-block:: ada
+.. code:: ada compile_button project=Courses.Intro_To_Ada.Imperative_Language.Check_Positive
 
     with Ada.Text_IO; use Ada.Text_IO;
     with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
@@ -665,7 +665,7 @@ false, то цикл завершается.
 
 Вот еще один пример:
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Even_Odd
 
     with Ada.Text_IO; use Ada.Text_IO;
 
@@ -685,7 +685,7 @@ false, то цикл завершается.
 Аналогично выражениям :ada:`if`, в Ada также есть выражения :ada:`case`. Они работают
 именно так, как вы и ожидали.
 
-.. code-block:: ada
+.. code:: ada run_button project=Courses.Intro_To_Ada.Imperative_Language.Case_Expression
 
     with Ada.Text_IO; use Ada.Text_IO;
 
