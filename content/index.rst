@@ -8,33 +8,37 @@
 
 .. only:: builder_html
 
-    LEARN.ADACORE.COM
+    LEARN.ADACORE.COM на русском
     ===================
 
 .. only:: builder_latex or builder_epub
 
-    Learning Ada
-    ============
+    Изучая Аду
+    ==========
 
 .. only:: builder_html
 
     .. raw:: html
 
-        <a href="https://github.com/AdaCore/learn"><i class="fab fa-github"></i> Edit on GitHub</a><br><br>
+        <a href="https://github.com/reznikmm/learn"><i class="fab fa-github"></i> Править на GitHub</a><br><br>
 
-    What is Ada and SPARK?
-    -----------------------
+    Что такое Ада и SPARK?
+    ----------------------
 
-    Ada is a state-of-the art programming language that development teams worldwide
-    are using for critical software: from microkernels and small-footprint,
-    real-time embedded systems to large-scale enterprise applications, and
-    everything in between.
-
+    Ада |mdash| это современный язык программирования, который разработчики
+    по всему миру используют для создания критически важных программных
+    систем: от микроядер и небольших встроенных систем реального времени
+    до крупномасштабных корпоративных приложений.
+    
     SPARK is formally analyzable subset of Ada |mdash| and toolset that brings
     mathematics-based confidence to software verification.
 
-    Try Ada Now:
-    -------------
+    SPARK |mdash| это подмножество языка Ада поддающееся формальному анализу,
+    а также набор инструментов, проверяющий корректность программы с помощью
+    математических методов.
+
+    Попробовать Аду прямо сейчас:
+    -----------------------------
 
     .. code:: ada run_button project=Introduction main=learn.adb
 
@@ -50,8 +54,8 @@
 
         end Learn;
 
-    Check out the interactive courses and labs listed on the left side to learn
-    more about Ada and SPARK.
+    Просмотрите интерактивные курсы и лабораторные работы, перечисленные слева,
+    чтобы узнать больше про Аду и SPARK.
 
     -------------
 
@@ -62,45 +66,22 @@
         .. toctree::
             :maxdepth: 4
 
-            About <about>
+            Подробнее <about>
 
     .. toctree::
         :maxdepth: 1
-        :caption: Courses
+        :caption: Курсы
 
-        Introduction to Ada <courses/intro-to-ada/index>
-        Introduction to SPARK <courses/intro-to-spark/index>
-        Ada for the C++ or Java Developer <courses/Ada_For_The_CPP_Java_Developer/index>
-        Ada for the Embedded C Developer <courses/Ada_For_The_Embedded_C_Developer/index>
-        SPARK Ada for the MISRA C Developer <courses/SPARK_for_the_MISRA_C_Developer/index>
-        Introduction to GNAT Toolchain <courses/GNAT_Toolchain_Intro/index>
-
-    .. only:: no_hidden_books
-
-        .. toctree::
-            :maxdepth: 1
-            :caption: Upcoming Courses
-
-            Ada 2022: What's New <courses/ada_2022_whats_new/index>
-            Advanced Ada <courses/advanced-ada/index>
-            Advanced SPARK <courses/advanced-spark/index>
-            Introduction to Embedded Systems Programming <courses/intro-to-embedded-sys-prog/index>
-
-    .. toctree::
-        :maxdepth: 1
-        :caption: Labs
-
-        Introduction to Ada: Laboratories <labs/intro-to-ada/index>
-        Bug Free Coding <labs/bug-free-coding/index>
+        Введение в язык Ада <courses/intro-to-ada-ru/index>
 
 .. only:: builder_html
 
-    E-books
-    ------------------------------
+    Электронные книги
+    -----------------
 
-    Download the contents of the entire website as an e-book for offline
-    reading. You can select the following formats: PDF, EPUB and MOBI (for
-    Kindle devices).
+    Загрузите содержимое всего веб-сайта в виде электронной книги для чтения
+    в автономном режиме. Вы можете выбрать следующие форматы: PDF, EPUB и
+    MOBI (для устройств Kindle).
 
     .. container:: frontpage-ebooks
 
@@ -115,20 +96,20 @@
                 .. raw:: html
 
                         <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/learning-ada.pdf">
+                            <a class="ebook-download-button" href="pdf_books/learning-ada.pdf">
                                 PDF
                             </a>
 
-                            <a class="ebook-download-button" href="/epub_books/learning-ada.epub">
+                            <a class="ebook-download-button" href="epub_books/learning-ada.epub">
                                 EPUB
                             </a>
 
-                            <a class="ebook-download-button" href="/mobi_books/learning-ada.mobi">
+                            <a class="ebook-download-button" href="mobi_books/learning-ada.mobi">
                                 MOBI
                             </a>
                         </div>
 
-    Alternatively, download individual courses and laboratories as e-books:
+    Либо загрузите отдельные курсы и лабораторные работы в виде электронных книг:
 
     .. container:: frontpage-ebooks
 
@@ -137,176 +118,37 @@
             .. container:: frontpage-ebook-and-buttons-block
 
                 .. image:: images/page-1-of-intro-to-ada.jpeg
-                    :alt: Introduction to Ada (e-book)
+                    :alt: Введение в язык Ада
                     :width: 149pt
 
                 .. raw:: html
 
                         <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/courses/intro-to-ada.pdf">
+                            <a class="ebook-download-button" href="pdf_books/courses/intro-to-ada-ru.pdf">
                                 PDF
                             </a>
 
-                            <a class="ebook-download-button" href="/epub_books/courses/intro-to-ada.epub">
+                            <a class="ebook-download-button" href="epub_books/courses/intro-to-ada-ru.epub">
                                 EPUB
                             </a>
 
-                            <a class="ebook-download-button" href="/mobi_books/courses/intro-to-ada.mobi">
-                                MOBI
-                            </a>
-                        </div>
-
-            .. container:: frontpage-ebook-and-buttons-block
-
-                .. image:: images/page-1-of-intro-to-ada-labs.jpeg
-                    :alt: Introduction to Ada: Laboratories (e-book)
-                    :width: 149pt
-
-                .. raw:: html
-
-                        <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/labs/intro-to-ada.pdf">
-                                PDF
-                            </a>
-
-                            <a class="ebook-download-button" href="/epub_books/labs/intro-to-ada.epub">
-                                EPUB
-                            </a>
-
-                            <a class="ebook-download-button" href="/mobi_books/labs/intro-to-ada.mobi">
-                                MOBI
-                            </a>
-                        </div>
-
-
-        .. container:: frontpage-ebooks-row
-
-            .. container:: frontpage-ebook-and-buttons-block
-
-                .. image:: images/page-1-of-intro-to-spark.jpeg
-                    :alt: Introduction to SPARK (e-book)
-                    :width: 149pt
-
-                .. raw:: html
-
-                        <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/courses/intro-to-spark.pdf">
-                                PDF
-                            </a>
-
-                            <a class="ebook-download-button" href="/epub_books/courses/intro-to-spark.epub">
-                                EPUB
-                            </a>
-
-                            <a class="ebook-download-button" href="/mobi_books/courses/intro-to-spark.mobi">
-                                MOBI
-                            </a>
-                        </div>
-
-            .. container:: frontpage-ebook-and-buttons-block
-
-                .. image:: images/page-1-of-GNAT_Toolchain_Intro.jpeg
-                    :alt: Introduction to GNAT Toolchain (e-book)
-                    :width: 149pt
-
-                .. raw:: html
-
-                        <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/courses/GNAT_Toolchain_Intro.pdf">
-                                PDF
-                            </a>
-
-                            <a class="ebook-download-button" href="/epub_books/courses/GNAT_Toolchain_Intro.epub">
-                                EPUB
-                            </a>
-
-                            <a class="ebook-download-button" href="/mobi_books/courses/GNAT_Toolchain_Intro.mobi">
-                                MOBI
-                            </a>
-                        </div>
-
-        .. container:: frontpage-ebooks-row
-
-            .. container:: frontpage-ebook-and-buttons-block
-
-                .. image:: images/page-1-of-Ada_For_The_CPP_Java_Developer.jpeg
-                    :alt: Ada for the C++ and Java Developer (e-book)
-                    :width: 149pt
-
-                .. raw:: html
-
-                        <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/courses/Ada_For_The_CPP_Java_Developer.pdf">
-                                PDF
-                            </a>
-
-                            <a class="ebook-download-button" href="/epub_books/courses/Ada_For_The_CPP_Java_Developer.epub">
-                                EPUB
-                            </a>
-
-                            <a class="ebook-download-button" href="/mobi_books/courses/Ada_For_The_CPP_Java_Developer.mobi">
-                                MOBI
-                            </a>
-                        </div>
-
-            .. container:: frontpage-ebook-and-buttons-block
-
-                .. image:: images/page-1-of-Ada_For_The_Embedded_C_Developer.jpeg
-                    :alt: Ada for the Embedded C Developer (e-book)
-                    :width: 149pt
-
-                .. raw:: html
-
-                        <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/courses/Ada_For_The_Embedded_C_Developer.pdf">
-                                PDF
-                            </a>
-
-                            <a class="ebook-download-button" href="/epub_books/courses/Ada_For_The_Embedded_C_Developer.epub">
-                                EPUB
-                            </a>
-
-                            <a class="ebook-download-button" href="/mobi_books/courses/Ada_For_The_Embedded_C_Developer.mobi">
-                                MOBI
-                            </a>
-                        </div>
-
-        .. container:: frontpage-ebooks-row
-
-            .. container:: frontpage-ebook-and-buttons-block
-
-                .. image:: images/page-1-of-SPARK_for_the_MISRA_C_Developer.jpeg
-                    :alt: SPARK for the MISRA-C Developer (e-book)
-                    :width: 149pt
-
-                .. raw:: html
-
-                        <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="/pdf_books/courses/SPARK_for_the_MISRA_C_Developer.pdf">
-                                PDF
-                            </a>
-
-                            <a class="ebook-download-button" href="/epub_books/courses/SPARK_for_the_MISRA_C_Developer.epub">
-                                EPUB
-                            </a>
-
-                            <a class="ebook-download-button" href="/mobi_books/courses/SPARK_for_the_MISRA_C_Developer.mobi">
+                            <a class="ebook-download-button" href="mobi_books/courses/intro-to-ada-ru.mobi">
                                 MOBI
                             </a>
                         </div>
 
     -------------
 
-    Professional Ada Training
-    ---------------------------
+    Профессиональное обучение Аде
+    ------------------------------
 
-    **Get professional Ada training** from
+    **Пройдите профессиональное обучение по Аде** в
     `Adacore <https://www.adacore.com/training>`_.
 
     -------------
 
-    Download Ada and SPARK tools
-    ------------------------------
+    Скачать инструментарий для Ады и SPARK
+    --------------------------------------
 
     .. container:: download-button
 
@@ -315,14 +157,14 @@
             :alt: GNAT Community Download
             :width: 100pc
 
-    **Try Ada and SPARK now with GNAT Community edition.**
+    **Попробуйте Аду и SPARK используя GNAT Community edition.**
 
-    GNAT Community includes the Ada compiler and toolchain, the SPARK verifier and provers, and the GNAT Studio IDE.
+    GNAT Community содержит компилятор языка Ада, инструменты SPARK и GNAT Studio IDE.
 
     --------------
 
-    GNAT Academic Program
-    ------------------------
+    Академическая программа GNAT
+    ----------------------------
 
     **Teachers and graduate students** who are interested in teaching or using Ada or SPARK can take
     advantage of AdaCore's `GNAT Academic Program (GAP) <http://www.adacore.com/academia>`_.

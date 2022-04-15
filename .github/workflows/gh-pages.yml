@@ -2,23 +2,36 @@ on:
   push:
     branches:
       - ru
-      - topic/test
 name: Make GitHub Pages
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  vagrant-up:
+    runs-on: macos-10.15
+
     steps:
       - name: Get sources
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Install sphinx
-        run: pip3 install -r frontend/requirements.txt
-      - name: Build docs
+      - name: Cache Vagrant boxes
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
+      - name: Show Vagrant version
+        run: vagrant --version
+
+      - name: Run vagrant up
+        run: vagrant up epub
+
+      - name: ssh into box after boot
         run: |
-          cd frontend
-          export SPHINX_LOCAL_BUILD=true
-          sphinx-build -M html $PWD/../content/courses/intro-to-ada-ru/ "$PWD/../dist" -v -c "sphinx"
+          find content/courses/ -mindepth 1 -maxdepth 1 -type d -not -name *-ru -exec rm -rf {} \;
+          vagrant ssh --command 'export VIRTUAL_ENV=/vagrant/venv PATH="/gnat/bin:/vagrant/venv/bin:${PATH}";make -C /vagrant/frontend site' epub
+
       - name: Upload to gh-pages branch
         run: |
           # Set up .netrc file with GitHub credentials
@@ -31,10 +44,10 @@ jobs:
           git config user.email `git log -1 --pretty=format:'%ae'`
           git config user.name  `git log -1 --pretty=format:'%an'`
           git checkout gh-pages
-          cp -frv dist/html/* .
-          rm -rf dist
+          git reset --hard HEAD^
+          cp -frv frontend/dist/html/* frontend/dist/*_books .
           git add .
-          if git commit --amend -m "" --allow-empty-message; then
+          if git commit --amend -m "Push gh-pages content" --allow-empty-message; then
             git push -f
           fi
           git status

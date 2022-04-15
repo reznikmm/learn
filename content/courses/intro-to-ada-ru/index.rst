@@ -21,7 +21,7 @@
 
     .. container:: content-copyright
 
-        Copyright © 2018 |ndash| 2021, AdaCore
+        Copyright © 2018 |ndash| 2022, AdaCore
 
         Эта книга опубликована под лицензией CC BY-SA, что означает, что вы 
         можете копировать, распространять, переделывать, преобразовывать и
@@ -51,15 +51,15 @@
 
         .. raw:: html
 
-            <a class="ebook-download-button" href="/pdf_books/courses/intro-to-ada.pdf">
+            <a class="ebook-download-button" href="../../pdf_books/courses/intro-to-ada-ru.pdf">
                 Download PDF
             </a>
 
-            <a class="ebook-download-button" href="/epub_books/courses/intro-to-ada.epub">
+            <a class="ebook-download-button" href="../../epub_books/courses/intro-to-ada-ru.epub">
                 Download EPUB
             </a>
 
-            <a class="ebook-download-button" href="/mobi_books/courses/intro-to-ada.mobi">
+            <a class="ebook-download-button" href="../../mobi_books/courses/intro-to-ada-ru.mobi">
                 Download MOBI
             </a>
 
