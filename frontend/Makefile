@@ -35,7 +35,7 @@ test_engine: webpack-production
 
 test_ada_intro:
 	@echo "===== INTRO TO ADA ====="
-	@$(TEST_DRIVER) $(CONTENT_DIR)/courses/intro-to-ada/chapters/*.rst
+	@$(TEST_DRIVER) $(CONTENT_DIR)/courses/intro-to-ada-ru/chapters/*.rst
 	@echo ""
 
 test_spark_intro:
@@ -88,14 +88,7 @@ test_training_fundamentals:
 	@$(TEST_DRIVER) $(CONTENT_DIR)/training_examples/fundamentals_of_ada/*.rst
 	@echo ""
 
-test_content: test_ada_intro test_spark_intro test_intro_to_embedded_sys_prog \
-	test_advanced_ada test_advanced_spark \
-	test_whats_new_in_ada_2022 \
-	test_spark_for_the_misra_c_developer \
-	test_ada_for_the_cpp_java_developer \
-	test_ada_for_the_embedded_c_developer \
-	test_training_fundamentals \
-	test_gnat_toolchain_intro
+test_content: test_ada_intro
 
 test_parser:
 	@coverage run --source=widget -m unittest discover --start-directory sphinx
