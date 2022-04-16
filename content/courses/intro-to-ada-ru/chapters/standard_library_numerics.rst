@@ -67,7 +67,7 @@
 
 Пакет :ada:`Ada.Numerics.Elementary_Functions` предоставляет операции для типа :ada:`Float`. Подобные пакеты доступны для
 типов :ada:`Long_Float` и :ada:`Long_Long_Float`. Например, пакет :ada:`Ada.Numerics.Long_Elementary_Functions` предлагает тот же набор операций для типа :ada:`Long_Float`
-.Кроме того, пакет :ada:`Ada.Numerics.Generic_Elementary_Functions` ‑ это универсальная версия пакета, которую можно
+.Кроме того, пакет :ada:`Ada.Numerics.Generic_Elementary_Functions` - это универсальная версия пакета, которую можно
 создать для пользовательских типов с плавающей запятой. Фактически,
 пакет :ada:`Elementary_Functions` можно определить следующим образом:
 
@@ -359,7 +359,7 @@
                   (2.0, 2.0, 1.0));
 
 Пакет :ada:`Ada.Numerics.Real_Arrays` реализует операции для типа :ada:`Float`. Аналогичные пакеты доступны для
-типов :ada:`Long_Float` и :ada:`Long_Long_Float`. Кроме того, пакет :ada:`Ada.Numerics.Generic_Real_Arrays` ‑ это универсальная версия, которую
+типов :ada:`Long_Float` и :ada:`Long_Long_Float`. Кроме того, пакет :ada:`Ada.Numerics.Generic_Real_Arrays` - это универсальная версия, которую
 можно создать с помощью пользовательских типов с плавающей запятой.
 Например, пакет :ada:`Real_Arrays` может быть определен следующим образом:
 
