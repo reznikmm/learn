@@ -1255,18 +1255,20 @@
 Упорядоченные карты
 ~~~~~~~~~~~~~~~~~~~
 
-Ordered maps share many features with hashed maps. The main
-differences are:
+Упорядоченные карты имеют много общих черт с хэшированными
+картами. Основными отличиями являются:
 
--  A hash function isn't needed. Instead, you must provide an ordering
-   function (:ada:`<` operator), which the ordered map will use to order
-   elements and allow fast access, O(log N), using a binary search.
+-  Хэш-функция не нужна. Вместо этого вы должны предоставить
+   функцию упорядочения (:ada:`<` operator), которую упорядоченная
+   карта будет использовать для упорядочения элементов и
+   обеспечения быстрого доступа (сложность O(log N)), используя
+   двоичный поиск.
 
-   -  If the type specified in :ada:`Key_Type` has a standard :ada:`<`
-      operator, you can use it in a similar way as we did for
-      :ada:`Equivalent_Keys` above for hashed maps.
+   -  Если тип, указанный в :ada:`Key_Type`, имеет стандартный оператор
+      :ada:`<`, вы можете использовать его аналогично тому, как мы это
+      делали для :ada:`Equivalent_Keys` выше для хэшированных карт.
 
-Let's see an example:
+Давайте посмотрим на пример:
 
 .. code:: ada run_button project=Courses.Intro_To_Ada.Standard_Library.Show_Ordered_Map
 
