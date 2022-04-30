@@ -118,7 +118,7 @@
 
             .. container:: frontpage-ebook-and-buttons-block
 
-                .. image:: images/page-1-of-intro-to-ada.jpeg
+                .. image:: images/page-1-of-intro-to-ada-ru.jpeg
                     :alt: Введение в язык Ада
                     :width: 149pt
 
@@ -173,15 +173,15 @@
                 .. raw:: html
 
                         <div class="frontpage-ebook-download">
-                            <a class="ebook-download-button" href="pdf_books/courses/safe-secure-software--ru.pdf">
+                            <a class="ebook-download-button" href="pdf_books/courses/safe-secure-software-ru.pdf">
                                 PDF
                             </a>
 
-                            <a class="ebook-download-button" href="epub_books/courses/safe-secure-software--ru.epub">
+                            <a class="ebook-download-button" href="epub_books/courses/safe-secure-software-ru.epub">
                                 EPUB
                             </a>
 
-                            <a class="ebook-download-button" href="mobi_books/courses/safe-secure-software--ru.mobi">
+                            <a class="ebook-download-button" href="mobi_books/courses/safe-secure-software-ru.mobi">
                                 MOBI
                             </a>
                         </div>
