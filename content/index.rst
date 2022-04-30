@@ -9,7 +9,7 @@
 .. only:: builder_html
 
     LEARN.ADACORE.COM на русском
-    ===================
+    ============================
 
 .. only:: builder_latex or builder_epub
 
@@ -73,6 +73,7 @@
         :caption: Курсы
 
         Введение в язык Ада <courses/intro-to-ada-ru/index>
+        Безопасное и надежное программное обеспечение <courses/safe-secure-software-ru/index>
 
 .. only:: builder_html
 
@@ -155,6 +156,32 @@
                             </a>
 
                             <a class="ebook-download-button" href="/mobi_books/courses/GNAT_Toolchain_Intro.mobi">
+                                MOBI
+                            </a>
+                        </div>
+
+    .. container:: frontpage-ebooks
+
+        .. container:: frontpage-ebooks-row
+
+            .. container:: frontpage-ebook-and-buttons-block
+
+                .. image:: images/page-1-of-safe-secure-software-ru.jpeg
+                    :alt: Безопасное и надежное программное обеспечение
+                    :width: 149pt
+
+                .. raw:: html
+
+                        <div class="frontpage-ebook-download">
+                            <a class="ebook-download-button" href="pdf_books/courses/safe-secure-software--ru.pdf">
+                                PDF
+                            </a>
+
+                            <a class="ebook-download-button" href="epub_books/courses/safe-secure-software--ru.epub">
+                                EPUB
+                            </a>
+
+                            <a class="ebook-download-button" href="mobi_books/courses/safe-secure-software--ru.mobi">
                                 MOBI
                             </a>
                         </div>
