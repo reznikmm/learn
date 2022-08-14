@@ -75,7 +75,7 @@
     Записи <chapters/records>
     Массивы <chapters/arrays>
     Подробнее о типах <chapters/more_about_types>
-    Конфиденциальность <chapters/privacy>
+    Изоляция <chapters/privacy>
     Настраиваемые модули <chapters/generics>
     Исключения <chapters/exceptions>
     Управление задачами <chapters/tasking>
