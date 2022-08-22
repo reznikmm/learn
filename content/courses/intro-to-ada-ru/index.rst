@@ -75,6 +75,9 @@
     Записи <chapters/records>
     Массивы <chapters/arrays>
     Подробнее о типах <chapters/more_about_types>
+    Ссылочные типы <chapters/access_types>
+    Подробнее о записях <chapters/more_about_records>
+    Типы с фиксированной запятой <chapters/fixed_point_types>
     Изоляция <chapters/privacy>
     Настраиваемые модули <chapters/generics>
     Исключения <chapters/exceptions>

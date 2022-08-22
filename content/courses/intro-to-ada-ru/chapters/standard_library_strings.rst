@@ -406,7 +406,7 @@
 использовать процедуру :ada:`Append` и указать режим усечения,
 как в случае с функцией :ada:`To_Bounded_String`.
 
-.. _UnboundedStrings:
+.. _Intro_Ada_Ru_UnboundedStrings:
 
 Неограниченные строки
 ---------------------

@@ -1,7 +1,7 @@
 Подпрограммы
 ============
 
-.. _Subprograms:
+.. _Intro_Ada_Ru_Subprograms:
 
 .. include:: ../../global.txt
 
@@ -66,6 +66,36 @@
     begin
        return I + Incr;
     end Increment_By;
+
+.. admonition:: В наборе инструментов GNAT
+
+   Стандарт языка Ада не регламентирует в каких файлах следует расположить
+   спецификацию и тело подпрограммы. Другими словами, стандарт не навязывает
+   какую-либо структуру организации файлов или расширения имен файлов.
+   К примеру, мы могли бы сохранить и спецификацию и тело указаной выше функции
+   :ada:`Increment` в файле с названием :file:`increment.txt`.
+   (Мы даже могли бы поместить весь исходный код системы в один файл.)
+   С точки зрения стандарта это вполне допустимо.
+
+   С другой стороны, набор инструментов GNAT требует следующую схему
+   наименования файлов:
+
+   - файлы с расширением `.ads` содержат спецификацию, тогда, как
+
+   - файлы с расширением `.adb` содержат реализацию.
+
+   Таким образом, для инструментария GNAT, спецификация функции
+   :ada:`Increment` должна находиться в файле :file:`increment.ads`, а
+   ее реализация должна находиться в файле :file:`increment.adb`.
+   Это правило также применяется для пакетов, которые мы обсудим
+   :doc:`позже <./modular_programming>`.
+   (Отметим, однако, что это правило можно обойти.)
+   Дополнительные детали смотрите в курсе
+   `Introduction to GNAT Toolchain <https://learn.adacore.com/courses/GNAT_Toolchain_Intro/index.html>`_
+   или в
+   `GPRbuild User’s Guide <https://docs.adacore.com/gprbuild-docs/html/gprbuild_ug.html>`_.
+..
+   _Comment: :doc:`Introduction to GNAT Toolchain </courses/GNAT_Toolchain_Intro/index>`
 
 Вызовы подпрограмм
 ~~~~~~~~~~~~~~~~~~
@@ -450,7 +480,7 @@
        Compute_A (15);
     end Mutually_Recursive_Subprograms;
 
-.. _Subprogram_Renaming:
+.. _Intro_Ada_Ru_Subprogram_Renaming:
 
 Переименование
 --------------

@@ -1,16 +1,27 @@
 # Перевод learn.adacore.com
 
-В этой ветке (`ru`) сделан [перевод нескольких глав](https://reznikmm.github.io/learn/)
-книги "Introduction to Ada" (спасибо Сергею за этот тяжелый труд!).
+В этой ветке (`ru`)
+ * [перевод](https://reznikmm.github.io/learn/)
+   книги "Introduction to Ada" (спасибо Сергею за этот тяжелый труд!).
+   Я попытался привести терминологию к используемой в стандарте Ада 83
+   (хоть и не смог назвать record type именоваными типами, а arrays
+   индексированными) и сгладить стиль.
+ * перевод брошюры «Безопасное и надежное программное обеспечение на
+   примере языка Ада 2012, SPARK 2014» Джона Барнса. 
 
-Целью является улучшение перевода, в часности использование терминологии из
-стандрата Ада 83.
-
+Что можно улучшить:
+ * Хорошо бы перевести комментарии или подставить перевод комментариев
+   из текста Сергея. Они исчезли при восстановлении RST форматирования,
+   т.к. я взял все вставки кода из оригинала.
+ * Перевести еще один курс, например, еще не готовое продолжение
+   [Advanced Ada](https://learn-staging.adacore.com/courses/advanced-ada/index.html)
+ * Переделать в RST перевод Сергея "Ада для Java/C++ разработчиков"
+ 
 Присылайте ваши изменения в виде
 [pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).
 
 Последняя редакция доступна на [GitHub Pages](https://reznikmm.github.io/learn/)
-в формате `HTML`.
+в формате `HTML`, `PDF` и `MOBI`.
 
 # learn.adacore.com
 
