@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Безопасное объектно-ориентированное программирование &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Безопасное создание объектов" href="chapter_06.html" />
+    <link rel="prev" title="Безопасная архитектура" href="chapter_04.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro-to-ada-ru/index.html">Введение в язык Ада</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Безопасное и надежное программное обеспечение</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Безопасное объектно-ориентированное программирование<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>Появившись в первый раз в языке Simula в 1960-х,
+объектно-ориентированное программирование (ООП) распространилось затем в
+исследовательских и академических кругах с такими языками как Smalltalk
+в конце 1980-х и заняло существующее прочное положение с появлением C++
+и Java в начале 1990-х. Выдающимся свойством ООП считается его гибкость.
+Но гибкость в чем-то похожа на свободу, которую мы обсуждали во введении
+— злоупотребляя ею, можно допустить появление опасных ошибок.</p>
+<p>Ключевая идея ООП в том, что доминирующая роль достается объектам, в то
+время как процедуры (методы) управления объектом являются его
+свойствами. Старый же метод, называемый структурным программированием,
+заключается в декомпозиции подпрограмм, когда организация программы
+определяется структурой подпрограмм, при этом объекты остаются
+пассивными сущностями.</p>
+<p>Оба подхода имеют право на жизнь и своих сторонников. Существуют случаи,
+когда строгий ООП подход использовать неуместно.</p>
+<p>Язык Ада достигает поразительного баланса. Мы с уверенностью можем
+назвать его методологически нейтральным в сравнении с языком Java,
+например, который является «чистым» ООП. В самом деле, идеи ООП проникли
+в язык Ада еще при его создании, в 1980-х, проявившись в концепции
+пакетов и приватных типов, как механизма скрытия деталей реализации и
+задач, как механизма абстракции активных сущностей. Стандарт Ада 95
+включил главные свойства ООП, такие как наследование, полиморфизм,
+динамическое связывание и понятие «класса» как набора типов, связанных
+отношением наследования.</p>
+<section id="id2">
+<h2>ООП вместо структурного программирования<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Мы рассмотрим два примера для иллюстрации различных моментов. Мы выбрали
+их, исходя из легкости их понимания, что избавит нас от необходимости
+объяснять прикладную область. Примеры касаются геометрических объектов
+(коих существует великое множество) и людей (которых только две
+категории, мужчины и женщины).</p>
+<p>Сначала рассмотрим геометрические объекты. Для простоты остановимся на
+объектах на плоскости. У каждого объекта есть позиция. Мы можем
+определить базовый объект со свойствами, общими для всех видов объектов:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Object</span> <span class="kr">is</span> <span class="kr">tagged</span> <span class="kr">record</span>
+   <span class="n">X_Coord</span> <span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="n">Y_Coord</span> <span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+<span class="kr">end record</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Здесь ключевое слово tagged (тегированный, то есть каждому типу
+соответствует уникальный тег) отличает этот тип от обычных записей
+(таких как Date из главы 3) и означает, что тип можно в будущем
+расширить. Более того, объекты такого типа хранят в себе специальное
+поле-тег, и этот тег определяет тип объекта во время исполнения. Объявив
+типы для специфических геометрических объектов, таких как окружность,
+треугольник, квадрат и прочие, мы получим различные значения тегов для
+каждого из типов. Компоненты X_Coord, Y_Coord задают центр объекта.</p>
+<p>Мы можем объявить различные свойства объекта, такие как площадь и момент
+инерции. Каждый объект имеет эти свойства, но они зависят от формы
+объекта. Такие свойства можно определить при помощи функций и объявить
+их в том же пакете, что и тип. Таким образом, мы начнем с пакета:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Geometry</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Object</span> <span class="kr">is</span> <span class="kr">abstract</span> <span class="kr">tagged</span> <span class="kr">record</span>
+      <span class="n">X_Coord</span><span class="p">,</span> <span class="n">Y_Coord</span> <span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Moment</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Geometry</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Здесь мы объявили тип и его операции, как абстрактные. На самом деле нам
+не нужны объекты типа Object. Объявив тип абстрактным, мы предотвратим
+создания таких объектов по ошибке. Нам нужны реальные объекты, такие как
+окружности, у которых есть свойства, такие как площадь. Если нам
+потребуется объект точка, мы объявим отдельный тип Point для этого.
+Объявив функции Area и Moment абстрактными, мы гарантируем, что каждый
+конкретный тип, такой как окружность, предоставит свой код для
+вычисления этих свойств.</p>
+<p>Теперь мы готовы определить тип окружность. Лучше всего сделать это в
+дочернем пакете:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Geometry.Circles</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Circle</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">Object</span> <span class="kr">with</span> <span class="kr">record</span>
+      <span class="n">Radius</span> <span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Moment</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Geometry.Circles</span><span class="p">;</span>
+
+<span class="kn">with</span> <span class="n">Ada.Numerics</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Ada.Numerics</span><span class="p">;</span>  <span class="c1">-- для доступа к π</span>
+
+<span class="kd">package</span> <span class="kd">body</span> <span class="nc">Geometry.Circles</span> <span class="kr">is</span>
+
+   <span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="n">π</span> <span class="o">*</span> <span class="n">C</span><span class="p">.</span><span class="n">Radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Area</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Moment</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">C</span><span class="p">.</span><span class="n">Area</span> <span class="o">*</span> <span class="n">C</span><span class="p">.</span><span class="n">Radius</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Moment</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Geometry.Circles</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>В этом примере мы порождаем тип Circle от Object. Написав new Object, мы
+неявно наследуем все видимые операции типа Object пакета Geometry, если
+мы не переопределим их. Поскольку наши операции абстрактны, а сам тип
+Circle — нет, мы обязаны переопределить их явно. Определение типа
+расширяет тип Object новым компонентом Radius, добавляя его к
+определенным в Object компонентам (X_Coord и Y_Coord).</p>
+<p>Заметим, что код вычисления площади и момента располагается в теле
+пакета. Как было объяснено в главе «Безопасная архитектура», это значит,
+что код можно изменить и перекомпилировать без необходимости
+перекомпиляции описания самого типа и всех модулей, использующих его.</p>
+<p>Затем мы могли бы объявить тип для квадрата Square (с дополнительным
+компонентом длинны стороны квадрата), треугольника Triangle (три
+компоненты соответствующие его сторонам) и так далее. При этом код для
+Object и Circle не нарушается.</p>
+<p>Множество всевозможных типов из иерархии наследования от Object
+обозначаются как Object'Class и называются в терминологии Ады классом.
+Язык тщательно различает отдельные типы, такие как Circle от классов
+типа, таких как Object'Class. Это различие помогает избежать путаницы,
+которая может возникнуть в других языках. Если мы, в свою очередь,
+унаследуем тип от Circle, то будем иметь возможность говорить о классе
+Circle'Class.</p>
+<p>В теле функции Moment продемонстрировано использование точечной нотации.
+Мы можем воспользоваться одной из следующих форм записи:</p>
+<ul class="simple">
+<li><p>C.Area – точечная нотация</p></li>
+<li><p>Area (C) – функциональная нотация</p></li>
+</ul>
+<p>Точечная нотация появилась в стандарте Ада 2005 и смещает акцент в
+сторону ООП, указывая на то, что объект C доминирует над функцией Area.
+Теперь объявим несколько объектов, например:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">A_Circle</span><span class="p">:</span> <span class="n">Circle</span> <span class="p">:=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">Radius</span> <span class="p">=&gt;</span> <span class="mf">4.5</span><span class="p">);</span>
+<span class="n">My_Square</span><span class="p">:</span> <span class="n">Square</span> <span class="p">:=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">Side</span> <span class="p">=&gt;</span> <span class="mf">3.7</span><span class="p">);</span>
+<span class="n">The_Triangle</span><span class="p">:</span> <span class="n">Triangle</span> <span class="p">:=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">A</span><span class="p">=&gt;</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">B</span><span class="p">=&gt;</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">C</span><span class="p">=&gt;</span><span class="mf">5.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Процедура для печати свойств объекта может выглядеть так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Print</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">&#39;</span><span class="na">Class</span><span class="p">)</span> <span class="kr">is</span>  <span class="c1">-- Obj is polymorfic</span>
+<span class="kr">begin</span>
+   <span class="n">Put</span><span class="p">(</span><span class="s">&quot;Area is &quot;</span><span class="p">);</span> <span class="n">Put</span><span class="p">(</span><span class="n">Obj</span><span class="p">.</span><span class="n">Area</span><span class="p">);</span>  <span class="c1">-- dispatcing call of Area</span>
+   <span class="p">...</span>
+<span class="kr">end</span> <span class="nf">Print</span><span class="p">;</span>
+
+<span class="n">Print</span> <span class="p">(</span><span class="n">A_Circle</span><span class="p">);</span>
+<span class="n">Print</span> <span class="p">(</span><span class="n">My_Square</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Формальный параметр Obj — полиморфный, т. е. он может ссылаться на
+объекты различного типа (но только из иерархии растущей из Object) в
+различные моменты времени.</p>
+<p>Процедура Print может принимать любой объект из класса Object'Class.
+Внутри процедуры вызов Area динамически диспетчеризируется, чтобы
+вызвать функцию Area, соответствующую конкретному типу параметра Obj.
+Это всегда безопасно, поскольку правила языка таковы, что любой объект в
+классе Object'Class будет иметь функцию Area. В тоже время сам тип
+Object объявлен абстрактным, следовательно нет способа создать объекты
+этого типа, поэтому не важно, что для этого типа нет функции Area, ведь
+ее вызов невозможен.</p>
+<p>Аналогично мы могли бы объявить типы для людей. Например:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">People</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Person</span> <span class="kr">is</span> <span class="kr">abstract</span> <span class="kr">record</span>
+      <span class="n">Birthday</span><span class="p">:</span> <span class="n">Date</span><span class="p">;</span>
+      <span class="n">Height</span><span class="p">:</span> <span class="n">Inches</span><span class="p">;</span>
+      <span class="n">Weight</span><span class="p">:</span> <span class="n">Pounds</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+
+   <span class="kd">type</span> <span class="kt">Man</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">Person</span> <span class="kr">with</span> <span class="kr">record</span>
+      <span class="n">Bearded</span><span class="p">:</span> <span class="kt">Boolean</span><span class="p">;</span>  <span class="c1">-- Имеет бороду</span>
+   <span class="kr">end record</span><span class="p">;</span>
+
+   <span class="kd">type</span> <span class="kt">Woman</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">Person</span> <span class="kr">with</span> <span class="kr">record</span>
+      <span class="n">Births</span><span class="p">:</span> <span class="kt">Integer</span><span class="p">;</span>  <span class="c1">-- Кол-во рожденных детей</span>
+   <span class="kr">end record</span><span class="p">;</span>
+
+   <span class="p">...</span>  <span class="c1">-- Различные операции</span>
+<span class="kr">end</span> <span class="nf">People</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Поскольку все альтернативы заранее известны и новых типов не будет
+добавляться, мы могли бы использовать здесь запись с вариантами. Это
+будет в духе структурного программирования.</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Gender</span> <span class="kr">is</span> <span class="p">(</span><span class="nv">Male</span><span class="p">,</span> <span class="nv">Female</span><span class="p">);</span>
+
+<span class="kd">type</span> <span class="kt">Person</span> <span class="p">(</span><span class="nv">Sex</span><span class="p">: </span><span class="nv">Gender</span><span class="p">)</span> <span class="kr">is</span> <span class="kr">record</span>
+   <span class="n">Birthday</span><span class="p">:</span> <span class="n">Date</span><span class="p">;</span>
+   <span class="n">Height</span><span class="p">:</span> <span class="n">Inches</span><span class="p">;</span>
+   <span class="n">Weight</span><span class="p">:</span> <span class="n">Pounds</span><span class="p">;</span>
+   <span class="kr">case</span> <span class="n">Sex</span> <span class="kr">is</span>
+      <span class="kr">when</span> <span class="n">Male</span> <span class="p">=&gt;</span>
+         <span class="n">Bearded</span><span class="p">:</span> <span class="kt">Boolean</span><span class="p">;</span>
+      <span class="kr">when</span> <span class="n">Female</span> <span class="p">=&gt;</span>
+         <span class="n">Births</span><span class="p">:</span> <span class="kt">Integer</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="kr">case</span><span class="p">;</span>
+<span class="kr">end record</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Затем мы объявим различные необходимые операции для типа Person. Каждая
+операция может иметь в теле инструкцию case чтобы принять во внимание
+пол человека.</p>
+<p>Это может выглядеть довольно старомодно и не так элегантно, тем не менее
+этот подход имеет свои значительные преимущества.</p>
+<p>Если нам необходимо добавить еще одну операцию в ООП подходе, весь набор
+типов нужно будет исправить, т. к. в каждом типе нужно добавить
+реализацию новой операции. Если нужно добавить новый тип, то это не
+затронет уже существующие типы.</p>
+<p>В случае со структурным программированием все выглядит с точностью до
+наоборот.</p>
+<p>Если нам нужно добавить еще один тип в структурном подходе, весь код
+нужно будет исправить, т. к. в каждой операции нужно реализовать случай
+для нового типа. Если нужно добавить новую операцию, то это не затронет
+уже существующие операции.</p>
+<p>ООП подход считается более надежным ввиду отсутствия case инструкций,
+которые тяжело сопровождать. Хотя это действительно так, но иногда
+сопровождение ООП еще тяжелее, если приходится добавлять новые операции,
+что требует доработки каждого типа в иерархии.</p>
+<p>Ада поддерживает оба подхода и они оба безопасны в Аде.</p>
+</section>
+<section id="overriding">
+<h2>Индикатор overriding<a class="headerlink" href="#overriding" title="Permalink to this heading"></a></h2>
+<p>Одна из уязвимостей ООП проявляется в момент переопределения
+унаследованных операций. При добавлении нового типа, нам необходимо
+добавить новые версии соответствующих операций. Если мы не добавляем
+свою операцию, то будет использоваться унаследованная от родителя.</p>
+<p>Опасность в том, что, добавляя новую операцию, мы можем ошибиться в
+написании:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nf">Aera</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>либо в типе аргумента или результата:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Integer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>В любом случае, старая операция остается не переопределенной, а вместо
+этого создается совершенно новая операция. Когда надклассовая операция
+вызовет Area, будет выполнена унаследованная версия, а вновь добавленный
+код будет полностью проигнорирован. Подобные ошибки трудно
+диагностируются — компиляция проходит без ошибок, программа запускается
+и работает, но результат зачастую совершенно неожиданный.</p>
+<p>(Хотя Ада предлагает механизм абстрактных операций, как например Area у
+Object, это лишь дополнительная мера предосторожности. И этого
+недостаточно, если мы порождаем тип от не абстрактного типа, либо мы не
+слишком осторожны, чтобы объявить функцию Area абстрактной.)</p>
+<p>Чтобы предотвратить подобные ошибки, мы можем воспользоваться
+синтаксической конструкцией, появившейся в стандарте Ада 2005:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">overriding</span> <span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>В этом случае, если будет допущена ошибка, компилятор обнаружит ее. С
+другой стороны, если мы действительно добавляем новую операцию, мы
+укажем это так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="ow">not</span> <span class="kr">overriding</span> <span class="kd">function</span> <span class="nf">Aera</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>То, что данный индикатор не является обязательным, главным образом
+обусловлено необходимостью сохранения совместимости с предыдущими
+версиями языка.</p>
+<p>Возможно, синтаксис not overriding индикатора неоправдано тяжеловесен,
+учитывая необходимость частого его использования. Идеальным было бы
+требовать использования overriding для всех переопределенных операций и
+только для них. Другими словами, не использовать not overriding вообще.
+Это позволило бы находить оба типа ошибок:</p>
+<ul class="simple">
+<li><p>Ошибки в написании и другие ошибки, приводящие к отсутствию
+переопределения операций, фиксируются благодаря наличию overriding;</p></li>
+<li><p>Случайное переопределение операции (например, в случае появления
+новой операции в родительском типе) обнаруживается ввиду отсутствия
+overriding.</p></li>
+</ul>
+<p>Требование совместимости делает такой подход невозможным в общем случае.
+Однако такого эффекта можно достичь, используя опции компилятора GNAT
+фирмы AdaCore:</p>
+<ul class="simple">
+<li><p>-gnatyO включает появление предупреждений о переопределении операций
+без использования overriding;</p></li>
+<li><p>-gnatwe заставляет компилятор трактовать все предупреждения как
+ошибки.</p></li>
+</ul>
+<p>Другие языки, типа C++ и Java, предоставляют меньше содействия в этом
+аспекте, оставляя подобные ошибки не обнаруженными.</p>
+</section>
+<section id="id3">
+<h2>Запрет диспетчеризации вызова подпрограмм<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>В условиях, когда надежность критически важна, динамическое связывание
+часто запрещено. Надежность повышается, если мы можем доказать, что
+поток управления соответствует заданному шаблону, например, отсутствует
+недостижимые участки кода. Традиционно это означает, что нам приходится
+следовать методикам структурного программирования, вводя в явном виде
+такие инструкции, как if и case.</p>
+<p>Хотя диспетчеризация вызовов подпрограмм является ключевым свойством
+ООП, другие возможности (например повторное использование кода благодаря
+наследованию) также являются привлекательными. Таким образом,
+возможность расширять типы, но без использования диспетчеризации, все
+еще имеет значительную ценность. Использование точечной нотации вызова
+также имеет свои преимущества.</p>
+<p>Существует механизм, который позволяет отключать некоторые возможности
+языка Ада в текущей программе. Речь идет о директиве компилятору
+Restrictions. В данном случае мы напишем:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">pragma</span> <span class="cp">Restrictions</span><span class="p">(</span><span class="n">No_Dispatch</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Это гарантирует (в момент компиляции), что в программе отсутствует
+конструкции типа X'Class, а значит и диспетчеризация вызова невозможна.</p>
+<p>Заметим, что это ограничение соответствует требованиям языка SPARK, о
+котором мы упоминали во введении, часто используемого в критических
+областях. Язык SPARK позволяет использовать расширения типов, но
+запрещает надклассовые операции и типы.</p>
+<p>Когда используется ограничение No_Dispatch, реализация языка получает
+возможность избежать накладных расходов, связанных с ООП. Нет
+необходимости создания в каждом типе «виртуальных таблиц» для
+диспетчеризации вызовов. (Такие таблицы содержат адреса всех операций
+данного типа). Также нет необходимости в специальном поле тега в каждом
+объекте.</p>
+<p>Здесь существуют также менее очевидные преимущества. При полном ООП
+подходе некоторые предопределенные операции (например операция
+сравнения) также имеет возможность диспетчеризации, что приводит к
+дополнительным расходам. Итоговый результат применения ограничения
+минимизирует документирование неактивного кода (это код, который
+присутствует в программе и соответствует требованиям к ПО, но никогда не
+исполняется) в целях сертификации по стандартам DO-178B и DO-178C.</p>
+</section>
+<section id="id4">
+<h2>Интерфейсы и множественное наследование<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Иногда множественное наследование расценивается как Святой Грааль в
+индустрии ПО и как критерий оценки языков программирования. Здесь мы не
+будем отвлекаться на историю развития этого вопроса. Вместо этого мы
+остановимся на основных проблемах, связанных с этим механизмом.</p>
+<p>Допустим, у нас есть возможность унаследовать тип от двух произвольных
+родительских типов. Вспомним знаменитый роман «Флатландия» Эдвина
+Эбботта (вышедший в 1884г.). Это сатира на социальную иерархию, в
+которой люди - это плоские геометрические фигуры. Рабочий класс - это
+треугольники, средний класс - другие полигоны, аристократы - окружности.
+Удивительно, но женщины там - двуугольники, т. е. просто отрезки прямой
+линии.</p>
+<p>Используя объявленные ранее типы Object и Person, мы могли бы попытаться
+определить обитателей Флатландии как тип, унаследованный от обоих типов:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Flatlander</span> <span class="kr">is</span>
+  <span class="kr">new</span> <span class="n">Geometry</span><span class="p">.</span><span class="n">Object</span> <span class="kr">and</span> <span class="n">People</span><span class="p">.</span><span class="n">Person</span><span class="p">;</span> <span class="c1">-- illegal</span>
+</pre></div>
+</div>
+<p>Вопрос который теперь возникает: какие свойства унаследует новый тип? Мы
+ожидаем, что Flatlander унаследует компоненты X_Coord и Y_Coord от
+Object и Birthday от Person, хотя Heigh и Weight выглядит сомнительно
+для плоских персонажей. Конечно Area должен быть унаследован, потому,
+что Flatlander имеет площать, как и момент инерции.</p>
+<p>Теперь должно быть ясно, какие проблемы могут возникнуть. Допустим, оба
+родительских типа имеют операцию с одним именем. Это весьма вероятно для
+широко распространенных имен типа Print, Make, Copy и т. д. Какую из них
+нужно наследовать? Что делать, если оба родителя имеют компоненты с
+одинаковыми именами? Подобные вопросы объязательно возникнут, если оба
+родителя имеют общий родительский тип.</p>
+<p>Некоторые языки реализуют множественное наследование в такой форме,
+вводя сложные правила, чтобы урегулировать подобные вопросы. Примером
+могут служить C++ и Eiffel. Возможные решения включают переименование,
+явное указание имя родителя в неоднозначных случаях, либо выбор
+родительского типа согласно позиции в списке. Некоторые из предлагаемых
+решений имеют субъективный оттенок/характер, для кого-то они очевидны,
+хотя других приводят в замешательство. Правила C++ дают широкую свободу
+программисту наделать ошибок.</p>
+<p>Трудности возникают в основном двух видов: наследование компонент и
+наследование реализаций операций от более чем одного родителя. Но
+фактически проблем с наследованием спецификации (другими словами
+интерфейса) операции не бывает. Этим воспользовались в языке Java и этот
+путь оказался довольно успешным. Он также реализован и в языке Ада.</p>
+<p>Таким образом, в Аде, начиная со стандарта Ada 2005, мы можем
+наследовать от более чем одного типа:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">T</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">A</span> <span class="kr">and</span> <span class="n">B</span> <span class="kr">and</span> <span class="n">C</span> <span class="kr">with</span> <span class="kr">record</span>
+   <span class="p">...</span> <span class="c1">-- дополнительные компоненты</span>
+<span class="kr">end record</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>но только первый тип в списке (A) может иметь компоненты и реальные
+операции. Остальные типы должны быть так называемыми интерфейсами
+(термин позаимствован у Java умышленно), т. е. абстрактными типами без
+компонент, у которых все операции либо абстрактные, либо null-процедуры.
+(Первый тип может также быть интерфейсом.)</p>
+<p>Мы можем описать Object, как интерфейс:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Geometry</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Object</span> <span class="kr">is</span> <span class="kr">interface</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Move</span><span class="p">(</span>   <span class="nv">Obj</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Object</span><span class="p">;</span>
+            <span class="nv">New_X</span><span class="p">,</span> <span class="nv">New_Y</span><span class="p">: </span><span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">X_Coord</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Y_Coord</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Moment</span><span class="p">(</span><span class="nv">Obj</span><span class="p">: </span><span class="nv">Object</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span> <span class="kr">abstract</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Geometry</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Обратите внимание, что компоненты были удалены и заменены
+дополнительными операциями. Процедура Move позволяет передвигать объект,
+т. е. устанавливать новые координаты x и y. Функции X_Coord, Y_Coord
+возвращают текущую позицию.</p>
+<p>Также следует заметить, что точечная нотация позволяет по прежнему
+обращаться к координатам, написав A_Circle.X_Coord и
+The_Triangle.Y_Coord, как если бы это были компоненты.</p>
+<p>Теперь при определении конкретного типа мы должны предоставить
+реализацию всем этим операциям. Предположим:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Geometry.Circles</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Circle</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">Object</span> <span class="kr">with</span> <span class="kd">private</span><span class="p">;</span> <span class="c1">-- partial view</span>
+   <span class="kd">procedure</span> <span class="nf">Move</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Circle</span><span class="p">;</span> <span class="nv">New_X</span><span class="p">,</span> <span class="nv">New_Y</span><span class="p">: </span><span class="nv">Float</span><span class="p">);</span>
+   <span class="kd">function</span> <span class="nf">X_Coord</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Y_Coord</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Area</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Moment</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Radius</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Make_Circle</span><span class="p">(</span><span class="nv">X</span><span class="p">,</span> <span class="nv">Y</span><span class="p">,</span> <span class="nv">R</span><span class="p">: </span><span class="nv">Float</span><span class="p">)</span> <span class="kr">return</span> <span class="n">Circle</span><span class="p">;</span>
+<span class="kd">private</span>
+
+   <span class="kd">type</span> <span class="kt">Circle</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">Object</span> <span class="kr">with</span> <span class="kr">record</span>
+      <span class="n">X_Coord</span><span class="p">,</span> <span class="n">Y_Coord</span><span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+      <span class="n">Radius</span> <span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Geometry.Circles</span><span class="p">;</span>
+
+<span class="kd">package</span> <span class="kd">body</span> <span class="nc">Geometry.Circles</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Move</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Circle</span><span class="p">;</span> <span class="nv">New_X</span><span class="p">,</span> <span class="nv">New_Y</span><span class="p">: </span><span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">C</span><span class="p">.</span><span class="n">X_Coord</span> <span class="p">:=</span> <span class="n">New_X</span><span class="p">;</span>
+      <span class="n">C</span><span class="p">.</span><span class="n">Y_Coord</span> <span class="p">:=</span> <span class="n">New_Y</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Move</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">X_Coord</span><span class="p">(</span><span class="nv">C</span><span class="p">: </span><span class="nv">Circle</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="n">C</span><span class="p">.</span><span class="n">X_Coord</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">X_Coord</span><span class="p">;</span>
+
+   <span class="c1">-- Аналогично Y_Coord, а Area и Moment — как ранее</span>
+<span class="kr">end</span> <span class="nf">Geometry.Circles</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Мы определили тип Circle как приватный, чтобы спрятать все его
+компоненты. Тем не менее, поскольку приватный тип унаследован от Object,
+он наследует все свойства Object. Обратите внимание, что мы добавили
+функции для создания окружности и получения его радиуса.</p>
+<p>В основе программирования с использованием интерфейсов лежит идея, что
+мы обязаны предоставить реализацию операций, требуемых интерфейсом.
+Здесь множественное наследование не касается наследования существующих
+свойств, скорее это наследование контрактов, которым необходимо
+следовать. Таким образом, Ада позволяет множественное наследование
+интерфейсов, но только единичное наследование для реализаций.</p>
+<p>Возвращаясь к Флатландии, мы можем определить:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Flatland</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Flatlander</span> <span class="kr">is</span> <span class="kr">abstract</span> <span class="kr">new</span> <span class="n">Person</span> <span class="kr">and</span> <span class="n">Object</span>
+      <span class="kr">with</span> <span class="kd">private</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Move</span><span class="p">(</span><span class="nv">F</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Flatlander</span><span class="p">;</span> <span class="nv">New_X</span><span class="p">,</span><span class="nv">New_Y</span><span class="p">: </span><span class="nv">Float</span><span class="p">);</span>
+   <span class="kd">function</span> <span class="nf">X_Coord</span><span class="p">(</span><span class="nv">F</span><span class="p">: </span><span class="nv">Flatlander</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Y_Coord</span><span class="p">(</span><span class="nv">F</span><span class="p">: </span><span class="nv">Flatlander</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+<span class="kd">private</span>
+
+   <span class="kd">type</span> <span class="kt">Flatlander</span> <span class="kr">is</span> <span class="kr">abstract</span> <span class="kr">new</span> <span class="n">Person</span> <span class="kr">and</span> <span class="n">Object</span>
+      <span class="kr">with</span> <span class="kr">record</span>
+          <span class="n">X_Coord</span><span class="p">,</span>  <span class="n">Y_Coord</span> <span class="p">:</span> <span class="kt">Float</span> <span class="p">:=</span> <span class="mf">0.0</span><span class="p">;</span>
+         <span class="p">...</span> <span class="c1">-- остальные необходимые компоненты</span>
+      <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Flatland</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Теперь тип Flatlander будет наследовать компоненту Birthday и прочие от
+типа Person и все реализации операций типа Person (мы не показываем их
+тут) и абстрактные операции типа Object. Удобно определить координаты,
+как компоненты типа Flatlander, чтобы легко реализовать такие операции,
+как Move, X_Coord, Y_Coord. Обратите внимание, что мы задали начальное
+значение этих компонент, как ноль, чтобы задать положение Flatlander по
+умолчанию.</p>
+<p>Тело пакета будет следующим:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="kd">body</span> <span class="nc">Flatland</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Move</span><span class="p">(</span><span class="nv">F</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Flatlander</span><span class="p">;</span> <span class="nv">New_X</span><span class="p">,</span><span class="nv">New_Y</span><span class="p">: </span><span class="nv">Float</span><span class="p">)</span>
+   <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">F</span><span class="p">.</span><span class="n">X_Coord</span> <span class="p">:=</span> <span class="n">New_X</span><span class="p">;</span>
+      <span class="n">F</span><span class="p">.</span><span class="n">Y_Coord</span> <span class="p">:=</span> <span class="n">New_Y</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Move</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">X_Coord</span><span class="p">(</span><span class="nv">F</span><span class="p">: </span><span class="nv">Flatlander</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="n">F</span><span class="p">.</span><span class="n">X_Coord</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">X_Coord</span><span class="p">;</span>
+   <span class="c1">-- аналогично Y_Coord</span>
+<span class="kr">end</span> <span class="nf">Flatland</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Сделав тип Flatlander абстрактным, мы избегаем необходимости немедленно
+предоставить реализацию всем операциям, например Area. Теперь мы можем
+объявить тип Square пригодным для Флатландии (когда роман вышел в
+печать, автор подписался псевдонимом A Square):</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Flatland.Squares</span> <span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Square</span> <span class="kr">is</span> <span class="kr">new</span> <span class="n">Flatlander</span> <span class="kr">with</span> <span class="kr">record</span>
+      <span class="n">Size</span><span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Area</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Square</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Moment</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Square</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Flatland.Square</span><span class="p">;</span>
+
+<span class="kd">package</span> <span class="kd">body</span> <span class="nc">Flatland.Squares</span> <span class="kr">is</span>
+
+   <span class="kd">function</span> <span class="nf">Area</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Square</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="n">S</span><span class="p">.</span><span class="n">Size</span> <span class="o">**</span> <span class="mi">2</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Area</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Moment</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Square</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="n">S</span><span class="p">.</span><span class="n">Area</span> <span class="o">*</span> <span class="n">S</span><span class="p">.</span><span class="n">Side</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Moment</span><span class="p">;</span>
+
+<span class="kr">end</span> <span class="nf">Flatland.Square</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Таким образом, все операции в итоге получили реализацию. В
+демонстрационных целях мы сделали дополнительный компонент Size видимым,
+хотя тут можно использовать и приватный тип. Теперь мы можем определить
+Др. Эбботта как:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">A_Square</span> <span class="p">:</span> <span class="n">Square</span> <span class="p">:=</span> <span class="p">(</span><span class="n">Flatland</span> <span class="kn">with</span> <span class="n">Side</span> <span class="p">=&gt;</span> <span class="mf">3.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>и он будет иметь все свойства квадрата и человека. Обратите внимание на
+агрегат, который получает значения по умолчанию для приватных компонент,
+а дополнительные компоненты инициализирует явно.</p>
+<p>Существуют другие важные свойства интерфейсов, которых мы коснемся лишь
+вскользь. Интерфейс может иметь в качестве операции null-процедуру.
+Такая процедура ничего не делает при вызове. Если два родителя имеют
+одну и туже операцию, то null-процедура переопределяет абстрактную. Если
+два родителя имеют одну и ту же операцию (с совпадающими параметрами и
+результатом), они сливаются в одну операцию, для которой требуется
+реализация. Если параметры и/или результат отличаются, то необходимо
+реализовать обе операции, т. к. они перегружены. Таким образом, правила
+сформулированы так, чтобы минимизировать сюрпризы и максимизировать
+выигрыш от множественного наследования.</p>
+</section>
+<section id="id5">
+<h2>Взаимозаменяемость<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Этот раздел касается специализированной темы, которая может быть
+интересна при углубленном изучении.</p>
+<p>Наследование можно рассматривать с двух перспектив. С точки зрения
+возможностей языка, это способность породить тип от родительского и
+унаследовать состояние (компоненты) и операции, сохранив при этом
+возможность добавлять новые компоненты и операции и переопределять
+унаследованные операции. С точки зрения моделирования либо теории типов,
+наследование это отношение («это есть») между подклассом и
+супер-классом: если класс S - это подкласс T, то любой объект класса S
+также является объектом класса T. Это свойство — основа полиморфизма. В
+терминах языка Ада, для любого тегового типа T, переменная типа T'Class
+может ссылаться на объект типа T или любого типа, унаследованного (прямо
+или косвенно) от T. Это значит, что любая операция, возможная для T,
+будет работать (как унаследованная либо переопределенная) и для объекта
+любого подкласса T.</p>
+<p>Более формальная формулировка этого требования известна, как принцип
+подстановки Барбары Лисков, который выражен в терминах теории типов:</p>
+<p>Пусть q(x) свойство объектов x типа T истинно. Тогда q(y) истинно для
+объектов типа S, где S является подтипом T. (Здесь «подтип» означает
+«подкласс».)</p>
+<p>Хорошей практикой является проектирование иерархии классов так, чтобы
+выполнялся данный принцип. Если он нарушается, то становится возможным
+вызвать неподходящую операцию, используя динамическое связывание, что
+приведет к ошибке времени исполнения. Это возможно в том случае, когда
+наследование используется там, где два класса должны быть связаны менее
+строгим отношением.</p>
+<p>Хотя сам принцип Лисков может показаться очевидным, его связь с
+контрактным программированием таковой не является. Напомним, что в
+методе вы можете дополнить спецификацию подпрограмм пред- и/или
+пост-условиями. Встает вопрос, если вы переопределяете операцию,
+налагает ли принцип Лисков дополнительные ограничения на пред- и
+пост-условия для новой версии подпрограммы? Ответ - «да»: пред-условия
+не могут быть усилены (например, вы не можете сформулировать
+пред-условие, добавив условие к родительскому через and оператор).
+Аналогично, пост-условие не может быть ослаблено.</p>
+<p>На первый взгляд это противоречит тому, чего вы можете ожидать. Подкласс
+обычно ограничивает множество значений своего супер-класса. Поэтому
+накладывать более сильные пред-условия операции подкласса может
+показаться имеющим смысл. Но при ближайшем рассмотрении оказывается, что
+это нарушает принцип Лисков. С точки зрения вызывающего, для выполнения
+операции X.Op(...) полиморфной переменной X, имеющей тип T, необходимо
+обеспечить выполнение предусловия операции Op типа T. У автора этого
+кода нет возможности знать все возможные подклассы T. Если случится так,
+что X ссылается на объект типа T1, у которого предусловие Op сильнее,
+чем у T, то вызов не сможет состояться, поскольку проверка пред-условия
+не пройдет. Аналогичные рассуждения докажут, что пост-условие в
+подклассе не может быть слабее. Вызывающий ожидает выполнение
+пост-условия после вызова операции, если подкласс этого не гарантирует,
+это приведет к ошибке.</p>
+<p>Дополнение в области ООП и связанных технологий к стандарту DO-178C
+(DO-332) останавливается на этом вопросе. Оно не требует подчинения
+принципу Лисков, вместо этого предлагает проверять «локальную
+согласованность типов». «Согласованность типов» означает выполнение
+принципа Лисков: операции подкласса не могут иметь более сильные
+пред-условия и более слабые пост-условия. «Локальная» означает, что
+необходимо анализировать только реально встречающийся в программе
+контекст. Например, если существует операция, у которой пред-условие
+более сильное, но она никогда не вызывается при диспетчеризации вызова,
+то это не вредит.</p>
+<p>Стандарт DO-332 предлагает три подхода доказательства локальной
+согласованности типов, один на основе формальных методов и два на основе
+тестирования:</p>
+<ul class="simple">
+<li><p>формально проверить взаимозаменяемость;</p></li>
+<li><p>удостовериться, что каждый тип проходит все тесты всех своих
+родителей, которых он может замещать;</p></li>
+<li><p>для каждой точки динамического связывания протестировать, что каждый
+метод может быть вызван (пессимистическое тестирование).</p></li>
+</ul>
+<p>Первый подход предполагает непосредственную проверку принципа Лисков.
+Ада 2012 поддерживает явным образом пред- и пост-условия, что помогает
+провести автоматический формальный анализ, используя специальный
+инструментарий. Это рекомендуемый подход, если возможно использовать
+формальные методы, например при помощи инструмента SPARK Pro, поскольку
+он обеспечивает наивысший уровень доверия.</p>
+<p>Второй подход применим при использовании модульного тестирования. В этом
+контексте, каждая операция класса обладает набором тестов для проверки
+требований. Переопределенная операция обычно имеет расширенные
+требования по сравнению с изначальной, поэтому будет иметь больше
+тестов. Каждый класс тестируется отдельно при помощи всех тестов,
+принадлежащих ему методов. Идея в том, чтобы проверить принцип
+взаимозаменяемости для некоторого тегового типа, выполнив все тесты всех
+его родительских типов, используя объект данного тегового типа.
+Gnattest, инструмент для модульного тестирования из состава GNAT Pro,
+предоставляет необходимую поддержку для автоматизации процесса
+тестирования, в том числе и принципа Лисков.</p>
+<p>Третий подход может быть наименее сложным в случае, когда
+диспетчеризирумые вызовы редки и иерархия типов неглубокая. В составе
+GNAT Pro, есть инструмент GNATstack, способный найти все
+диспетчеризируемые вызовы с указанием всех возможных вызываемых
+подпрограмм.</p>
+<p>Более подробную информацию по этой теме можно найти в документации «ООП
+для надежных систем на языке Ада» от AdaCore.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="chapter_06.html" class="btn btn-neutral float-right" title="Безопасное создание объектов" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="chapter_04.html" class="btn btn-neutral" title="Безопасная архитектура" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

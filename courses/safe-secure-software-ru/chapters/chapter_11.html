@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сертификация с помощью SPARK &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Заключение" href="conclusion.html" />
+    <link rel="prev" title="Безопасный параллелизм" href="chapter_10.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro-to-ada-ru/index.html">Введение в язык Ада</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Безопасное и надежное программное обеспечение</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spark">
+<h1>Сертификация с помощью SPARK<a class="headerlink" href="#spark" title="Permalink to this heading"></a></h1>
+<p>В областях с повышенными требованиями к безопасности и надежности
+приложение обязанно быть корректным. Эта корректность обеспечивается
+специальными формальными процедурами. Когда дело касается безопасности,
+ошибка в приложении может стоить человеческой жизни или катастрофы (или
+просто быть очень дорогой, как, например, ошибки в управлении
+космическими аппаратами и ракетами). Ошибка в особо надежных приложениях
+может привести к компрометации национальной безопасности, утрате
+коммерческой репутации или просто к краже.</p>
+<p>Приложения можно классифицировать согласно последствий от сбоя
+программного обеспечения. Стандарты авиационной безопасности DO-178B [1]
+и DO-178C [2] предлагают следующую классификацию:</p>
+<ul class="simple">
+<li><p>Уровень E никакой: нет проблем. Пример — отказала развлекательная
+система? Это даже прикольно!</p></li>
+<li><p>Уровень D низкий: некоторое неудобство. Пример — отказала система
+автоматического туалета.</p></li>
+<li><p>Уровень C высокий: некоторые повреждения. Пример — жесткая посадка,
+порезы и ушибы.</p></li>
+<li><p>Уровень B опасный: есть жертвы. Пример — неудачная посадка с пожаром.</p></li>
+<li><p>Уровень A катастрофический: авиакатастрофа, все мертвы. Пример —
+поломка системы управления.</p></li>
+</ul>
+<p>Следует отметить, хотя отказ системы развлечений и относится к уровню E,
+но, если пилот не может выключить ее (например, чтобы сделать важное
+объявление), то эта ошибка повышает уровень системы развлечений до D.</p>
+<p>Для наиболее критичных приложений, где требуется сертификации в
+соответствующих органах, недостаточно иметь корректную программу.
+Необходимо также доказать, что программа корректна, что намного тяжелее.
+Это требует использования формальных математических методов. Эта и стало
+причиной возникновения языка SPARK.</p>
+<p>Эта глава является кратким введением в SPARK 2014. Это наиболее свежая
+на данный момент версия языка. В ней используется синтаксис Ада 2012 для
+указания контрактов, таких как пред- и пост-условия. Таким образом,
+SPARK 2014 - это подмножество языка Ада 2012 с некоторыми
+дополнительными возможностями, облегчающими формальный анализ (эти
+возможности используют механизм аспектов, рассмотренный в главе
+«Безопасные типы данных»). Программа на Аде 2012 может иметь компоненты,
+написанные с использованием всех возможностей Ады, и другие компоненты
+на языке SPARK (которые будут иметь явную отметку об этом). Компоненты
+на SPARK могут быть скомпилированы стандартным Ада компилятором и будут
+иметь стандартную Ада семантику во время исполнения, но они лучше
+поддаются методам формального анализа, чем остальные компоненты.</p>
+<p>Компоненты SPARK кроме компиляции стандартным Ада компилятором еще и
+анализируются с помощью инструментария SPARK. Этот инструментарий может
+статически удостовериться в исполнении контрактов (таких, как
+пред-условия и пост-условия), которые обычно проверяются во время
+исполнения. Как следствие, эти проверки времени исполнения могут быть
+выключены. Инструментарий SPARK, используемый в GNAT, называется
+GNATprove. Далее в этой главе мы предполагаем использование для анализа
+именно этого инструмента.</p>
+<p>Важно отметить, что SPARK можно использовать на разных уровнях. На самом
+простейшем Ада программа, удовлетворяющая подмножеству SPARK, может быть
+проанализирована без дополнительных усилий. Но мы можем укрепить
+описание программы, добавив различные аспекты относительно потока
+информации, что позволит инструментарию провести более скрупулезный
+анализ программы. В конце концов, пользователь сам выбирает, добавлять
+или нет данные аспекты, в зависимости от характера проекта, в том числе
+от требований к необходимому уровню безопасности ПО и политики
+верификации.</p>
+<p>Мы начнем с более подробного рассмотрения основных концепций
+корректности и контрактов.</p>
+<section id="id1">
+<h2>Контракты<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>Что мы подразумеваем под корректным ПО? Наверное, общим определением
+может быть такое — ПО, которое делает то, что предполагал его автор. Для
+простой одноразовой программы это может означать просто результат
+вычислений, в то время как для большого авиационного приложения это
+будет определиться текстом контракта между программистом и конечным
+пользователем.</p>
+<p>Идея контрактов в области ПО далеко не нова. Если мы посмотрим на
+библиотеки, разработанные в начале 1960-х, в частности, в математической
+области, написанные на Algol 60 (этот язык пользовался популярностью при
+публикации подобных материалов в уважаемых журналах, типа Communications
+of the ACM и Computer Journal), мы увидим подробные требования к
+параметрам, ограничения на диапазон их значений и прочее. Суть здесь в
+том, что вводится контракт между автором подпрограммы и ее
+пользователем. Пользователь обязуется предоставить подходящие параметры,
+а подпрограмма обязуется вернуть корректный результат.</p>
+<p>Деление программы на различные части - это хорошо известный подход, а
+сутью процесса программирования является определение этих составных
+частей и, таким образом, интерфейсов между ними. Это позволяет
+разрабатывать отдельные части независимо друг от друга. Если мы напишем
+каждую часть правильно (т. е. они будут выполнять каждая свою часть
+контракта, определяемого интерфейсом) и если мы правильно определили
+интерфейсы, то мы можем быть уверены, что, собрав все части вместе,
+получим функционирующую правильно систему.</p>
+<p>Горький опыт говорит нам, что в жизни все не совсем так. Две вещи могут
+пойти не так: с одной стороны, определения интерфейсов зачастую не
+являются доскональными (есть дыры в контрактах), с другой стороны,
+индивидуальные компоненты работают неправильно или используются
+неправильно (контракты нарушаются). И, конечно, контракты могут
+диктовать совсем не то, что мы имели ввиду.</p>
+<p>Любопытно, что есть несколько способов указать контракты на программные
+компоненты. В первую очередь, и исторически SPARK настоятельно
+рекомендует делать так, можно указывать контракты с самого начала.
+Обычно это называют «корректность с помощью построения», а также
+«декларативная верификация», когда каждый программный модуль содержит
+контракт в его спецификации. Контракт можно расценивать, как явно
+выраженные низкоуровневые требования к программному модулю. Если
+контракт противоречит коду модуля, то это будет обнаружено до начала
+исполнения программы. Годы использования SPARK в таких областях, как
+авиация, банковская сфера, управление железной дорогой, позволяют
+убедиться, что вероятность получить корректную программу повышается и,
+более того, общая стоимость разработки, включая фазы тестирования и
+интеграции, уменьшается.</p>
+<p>Хотя такой подход эффективен для новых проектов, его применение может
+быть затруднительно в случаях доработки существующего ПО. В связи с
+этим, SPARK поддерживает другой стиль разработки, называемый
+«порождающая верификация». Если код не содержит контрактов, GNATprove
+может синтезировать некоторые из них на основе тела модуля. Таким
+образом, проект может двигаться от порождающей верификации к
+декларативной по мере развития системы. Более того, как мы объясним
+далее, SPARK 2014 позволяет разработчикам комбинировать формальные
+методы с традиционными, основанными на тестировании.</p>
+<p>Давайте теперь рассмотрим более подробно два вопроса, касающихся, во
+первых, исчерпывающего определения интерфейса, во вторых, проверки кода
+реализации на соответствие интерфейсу. Проще подойти к этому в терминах
+декларативной верификации, хотя эти же концепции также применимы к
+методу порождающей верификации.</p>
+<p>В идеале, определение интерфейса должно скрывать все несущественные
+детали, но освещать все существенные. Другими словами, мы можем сказать,
+что определение интерфейса должно быть одновременно корректным и полным.</p>
+<p>В качестве простого интерфейса рассмотрим интерфейс подпрограммы. Как мы
+уже упоминали, интерфейс должен описывать целиком контракт между
+пользователем и автором. Детали реализации нам не интересны. Чтобы
+различать эти два аспекта, полезно использовать два различных языка
+программирования. Некоторые языки представляют подпрограмму как некий
+неделимый кусок кода, в котором реализация не отделима от интерфейса. В
+этом кроется проблема. Это не только затрудняет проверку интерфейса,
+поскольку компилятор сразу требует код вместе с реализацией, но и
+поощряет программиста писать код одновременно с формулированием
+интерфейса, что вносит путаницу в процесс разработки.</p>
+<p>Структура программы на Аде разделяет интерфейс (спецификацию) от
+реализации. Это верно как для отдельных подпрограмм, так и для их групп,
+объединенных в пакеты. Это главная причина того, почему Ада так хорошо
+подходит как основа для SPARK.</p>
+<p>Как упоминалось ранее, иногда очень удобно, когда только часть программы
+написана на SPARK, а другие части на Аде. Части SPARK отмечаются с
+помощью аспекта SPARK_Mode. Он может указываться для отдельных
+подпрограмм, но удобнее указывать его для всего пакета. Например:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">P</span>
+   <span class="nc">with</span> <span class="nc">SPARK_Mode</span> <span class="kr">is</span>
+   <span class="p">...</span>
+</pre></div>
+</div>
+<p>В добавок к этому, этот режим можно включить при помощи директивы
+компилятору. Это удобно, если необходимо указать режим для всей
+программы (используя файл конфигурации gnat.adc):</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">pragma</span> <span class="cp">SPARK_Mode</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Дополнительную информацию об интерфейсе в SPARK можно передать при
+помощи механизма аспектов Ада 2012. Главная цель использования этих
+аспектов — увеличить количество информации об интерфейсе без
+предоставления лишних деталей о реализации. На самом деле, SPARK
+позволяет использовать информацию разного уровня детализации в
+зависимости от потребностей приложения.</p>
+<p>Рассмотрим информацию предоставляемую следующей спецификацией:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Add</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Integer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Откровенно говоря, здесь ее совсем мало. Извесно только то, что
+процедура Add принимает единственный параметр типа Integer. Этого
+достаточно, чтобы компилятор имел возможность создать код для вызова
+процедуры. Но при этом совершенно ничего не известно о том, что
+процедура делает. Она может делать все, что угодно. Она вообще может не
+использовать значение X. Она может, к примеру, находить разность двух
+глобальных переменных и печатать результат в некоторый файл. Но теперь
+рассмотрим, что случиться, если если мы добавим SPARK-конструкцию,
+определяющую, как используются глобальные переменные. Мы предполагаем,
+что процедура определена в пакете, для которого включен режим
+SPARK_Mode. Спецификация могла бы быть такой:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Add</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Integer</span><span class="p">)</span>
+   <span class="kn">with</span> <span class="n">Global</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">In_Out</span> <span class="p">=&gt;</span> <span class="n">Total</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Аспект Global указывает, что единственной переменной, доступной в этой
+процедуре, является Total. Кроме того, идентификатор In_Out говорит, что
+мы будем использовать начальное значение Total и вычислим ее новое
+значение. В SPARK есть дополнительные правила для параметров
+подпрограмм. Хотя в Аде мы вправе не использовать параметр X вообще, в
+SPARK параметры с режимом in должны быть использованы в теле
+подпрограммы. В противном случае мы получим предупреждение.</p>
+<p>Теперь мы знаем намного больше. Вызов Add вычислит новое значение Total,
+использовав для этого начальное значение Total и значение X. Также
+известно, то Add не может изменить что-либо еще. Определенно, она не
+может ничего печатать или иметь другие побочные эффекты. (Анализатор
+обнаружит и отвергнет программу, если эти условия нарушаются.)</p>
+<p>Безусловно, такой контракт нельзя считать завершенным, поскольку из него
+не следует, что используется операция сложения, чтобы получить новое
+значение Total. Указать это можно с помощью пост-условия:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Add</span> <span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Integer</span><span class="p">)</span>
+   <span class="kn">with</span> <span class="n">Global</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">In_Out</span> <span class="p">=&gt;</span> <span class="n">Total</span><span class="p">),</span>
+      <span class="n">Post</span>   <span class="p">=&gt;</span> <span class="p">(</span><span class="n">Total</span> <span class="o">=</span> <span class="n">Total</span><span class="p">&#39;</span><span class="na">Old</span> <span class="o">+</span> <span class="n">X</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Пост-условие однозначно определяет, что новое значение Total равно сумме
+начального значения (обозначенного как 'Old) и значения X. Теперь
+спецификация завершена.</p>
+<p>Также есть возможность указать пред-условие. Мы можем потребовать, чтобы
+X было положительным и при сложении не возникло переполнение. Это можно
+сделать следующим образом:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">Pre</span> <span class="p">=&gt;</span> <span class="n">X</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and then</span> <span class="n">Total</span> <span class="o">&lt;=</span> <span class="kt">Integer</span><span class="p">&#39;</span><span class="na">Last</span> <span class="o">-</span> <span class="n">X</span>
+</pre></div>
+</div>
+<p>(Ограничение на положительные значения X лучше было бы выразить,
+использовав тип Positive в объявлении параметра X. Мы включили это в
+предусловие лишь в демонстрационных целях.)</p>
+<p>Пред- и пост-условия, как и все аспекты SPARK, не являются
+обязательными. Если они не указаны явно, предполагается значение True.</p>
+<p>Еще один аспект, который можно указать, это Depends. Он определяет
+зависимости между начальными значениями параметров и переменных и их
+конечными значениями. В случае с Add это выглядит так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">Depends</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">Total</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">Total</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Здесь просто сказано, что конечное значение Total зависит от его
+начального значения и значения X. Однако, в этом случае, это и так можно
+узнать из режима параметра и глобальной переменной, поэтому это не дает
+нам новой информации.</p>
+<p>Как мы уже говорили, все SPARK-аспекты являются необязательными. Но,
+если они указаны, то будут статически верифицированы при анализе тела
+подпрограммы.</p>
+<p>В случае с пред- и пост-условием будет сделана попытка доказать
+следующее:</p>
+<p>Если предусловие истинно, то (1) не произойдет ошибок времени исполнения
+и (2) если подпрограмма завершится, то постусловие будет выполнено.</p>
+<p>Если контракт не будет верифицирован (например, GNATProve не сможет
+доказать истинность пред- и пост-условий), то анализатор отвергнет
+модуль, но компилятор Ада все еще может скомпилировать его, превратив
+пред- и пост-условия в проверки времени исполнения (если
+Assertion_Policy равна Check). Таким образом, использование общего
+синтаксиса для Ада 2012 и SPARK 2014 предоставляет значительную
+гибкость. Например, разработчик сначала может применять проверки во
+время исполнения, а затем, когда код и контракт будут отлажены, перейти
+к статической верификации.</p>
+<p>Для критических систем данная статическая верификация очень важна. В
+этой области нарушение контракта во время исполнения недопустимо.
+Узнать, что условие не выполнено только в момент исполнения, это не то,
+что нам нужно. Допустим, у нас есть пред-условие для посадки самолета:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Touchdown</span><span class="p">(...)</span>
+   <span class="kn">with</span> <span class="n">Pre</span> <span class="p">=&gt;</span> <span class="n">Undercarriage_Down</span><span class="p">;</span> <span class="c1">-- шасси выпущено</span>
+</pre></div>
+</div>
+<p>Узнать о том, что шасси не выпущено только в момент посадки самолета
+будет слишком поздно. На самом деле, мы хотим быть уверены, что
+программа была проанализирована заранее и гарантируется, что такая
+ситуация не возникнет.</p>
+<p>Это подводит нас к следующему вопросу гарантий того, что реализация
+корректно исполняет интерфейсный контракт. Иногда это называют отладкой.
+Вообще есть четыре способа обнаружить ошибку:</p>
+<p>1. С помощью компилятора. Такие ошибки обычно исправить легко, потому
+что компилятор говорит нам, что не так. 1. Во время исполнения с помощью
+проверок, определенных языком. Например, язык гарантирует, что мы не
+обращаемся к элементу за пределами массива. Обычно мы получаем сообщение
+об ошибке и место в программе, где она произошла. 1. При помощи
+тестирования. В этом случае мы запускаем какие-то примеры и размышляем
+над неожиданными результатами, пытаясь понять, что пошло не так. 1. При
+крахе программы. Обычно после краха остается очень мало данных и поиск
+причины может быть очень утомительным.</p>
+<p>Первый тип, на самом деле, должен быть расширен, чтобы обозначать «до
+начала исполнения программы». Таким образом, он включает сквозной
+контроль программы и другие рецензирующие методы, в том числе
+статический анализ инструментарием типа GNATprove.</p>
+<p>Очевидно, что эти четыре способа указаны в порядке возрастания
+трудности. Ошибки тем легче локализовать и исправить, чем раньше они
+обнаружены. Хорошие средства программирования позволяют переместить
+ошибки из категории с большим номером в категорию с меньшим. Хороший
+язык программирования предоставляет средства, позволяющие оградить себя
+от ошибок, которые трудно найти. Язык Ада хорош благодаря строгой
+типизации и проверкам времени исполнения. Например, правильное
+использование перечислимых типов превращает сложные ошибки типа 3 в
+простые ошибки типа 1, как мы продемонстрировали в главе «Безопасные
+типы данных».</p>
+<p>Главная цель языка SPARK состоит в том, чтобы за счет усиления
+определения интерфейса (контрактов) переместить все ошибки из других
+категорий, в идеале, в категорию 1, для того, чтобы обнаружить их до
+момента запуска приложения. Например, аспект Globals предотвращает
+случайное изменение глобальных переменных. Аналогично, обнаружение
+потенциальных нарушений пред- и пост-условий выливается в ошибки 1-го
+типа. Однако, проверка, что такие нарушения невозможны, требует
+математических доказательств. Это не всегда просто, но GNATprove
+способен автоматизировать большую часть процесса доказательства.</p>
+</section>
+<section id="id2">
+<h2>SPARK — подмножество языка Ада<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Ада - это довольно сложный язык программирования и использование всех
+его возможностей затрудняет полный анализ программы. Соответственно,
+подмножество языка Ада, используемое в SPARK, ограничивает набор
+доступных средств. В основном, это касается поведения во время
+исполнения. Например, отсутствуют ссылочные типы (а следовательно и
+динамическое распределение памяти) и обработка исключений.</p>
+<p>Многозадачность, в ее полном варианте, имеет очень сложную семантику
+исполнения. Но при использовании Ravenscar-профиля она все же подлежит
+формальному анализу. Ravenscar вошел в версию SPARK 2005 и его
+планируется добавить в следующую версию SPARK 2014 (к моменту перевода
+брошуры уже добавлен).</p>
+<p>Вот список некоторых ограничений, вводимых SPARK 2014:</p>
+<ul class="simple">
+<li><p>Все выражения (в том числе вызовы функций) не производят побочных
+эффектов. Хотя функции в Ада 2012 могут иметь параметры с режимом in
+out и out, в SPARK это запрещено. Функции не могут изменять
+глобальные переменные. Эти ограничения помогают гарантировать, что
+компилятор волен выбирать любой порядок вычисления выражений и
+подчеркивают различие между процедурами, чья задача изменять
+состояние системы, и функциями, которые лишь анализируют это
+состояние.</p></li>
+<li><p>Совмещение имен (aliasing) запрещается. Например, нельзя передавать в
+процедуру глобальный объект при помощи out или in out параметр, если
+она обращается к нему напрямую. Это ограничение делает результат
+работы более прозрачным и позволяет убедиться, что компилятор волен
+выбрать любой способ передачи параметра (по значению или по ссылке).</p></li>
+<li><p>Инструкция goto запрещена. Это ограничение облегчает статический
+анализ.</p></li>
+<li><p>Использование контролируемых типов запрещено. Контролируемые типы
+приводят к неявным вызовам подпрограмм, генерируемых компилятором.
+Отсутствие исходного кода для этих конструкций затрудняет
+использование формальных методов.</p></li>
+</ul>
+<p>В дополнение к этим ограничениям, SPARK предписывает более строгую
+политику инициализации, чем Ада. Объект, передаваемый через in или in
+out параметр, должен быть полностью инициализирован до вызова процедуры,
+а out параметр — до возвращения из нее.</p>
+<p>Несмотря на эти ограничения, подмножество языка, поддерживаемое SPARK,
+все еще довольно велико. Оно включает типы с дискриминантами (но без
+ссылочных дискриминантов), теговые типы и диспетчеризацию, типы с
+динамическими границами, отрезки массивов и конкатенацию, статические
+предикаты, условные и кванторные выражения, функции-выражения,
+настраиваемые модули, дочерние модули и субмодули. Рекурсия допускается,
+а стандартная библиотека контейнеров может быть использована для
+создания сложных структур данных в условиях отсутствия ссылочных типов и
+динамического распределения памяти. SPARK также предлагает средства
+взаимодействия с внешним окружением при помощи аспектов, касающихся
+«изменчивых» (volatile) переменных (т. е. переменных, подверженных
+асинхронному чтению и записи).</p>
+<p>В критических областях, где использование таких средств, как
+динамическое распределение памяти нежелательно, ранние версии языка
+SPARK доказали свою исключительную полезность. Теперь же SPARK 2014
+существенно расширил набор разрешенных возможностей языка.</p>
+</section>
+<section id="id3">
+<h2>Формальные методы анализа<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>В этой главе мы мы коротко подытожим некоторые аспекты механизма
+формального анализа, используемого инструментарием SPARK.</p>
+<p>Во первых, есть две формы потокового анализа:</p>
+<ul class="simple">
+<li><p>Потоковый анализ зависимостей данных учитывает инициализацию
+переменных и зависимости между данными внутри подпрограмм.</p></li>
+<li><p>Потоковый анализ потоковых зависимостей учитывает взаимосвязи
+результатов подпрограмм и их входных данных.</p></li>
+</ul>
+<p>Потоковый анализ не требует от пользователя больших усилий, чем указания
+аспектов глобальных переменных и аспектов зависимостей, и, разумеется,
+учета правил языка SPARK. Добавления этих аспектов позволяет провести
+более подробный потоковый анализ и обнаружить больше ошибок на ранней
+стадии.</p>
+<p>Важной возможностью потокового анализа является обнаружение
+неинициализированных переменных. Чтобы воспользоваться этим, необходимо
+избегать задавать «мусорные» начальные значения по умолчанию, просто «на
+всякий случай», как мы уже оговаривали это в главе «Безопасный запуск»,
+поскольку это затруднит нахождение ошибок потоковым анализом.</p>
+<p>Далее, существуют формальные процессы верификации, касающиеся
+доказательств:</p>
+<ul class="simple">
+<li><p>Формальная верификация свойств надежности (т. е. гарантия отсутствия
+возбуждения предопределенных исключений);</p></li>
+<li><p>Формальная верификация функциональных свойств, основанных на
+контрактах, таких как пред-условия и пост-условия.</p></li>
+</ul>
+<p>В случае с функциональными свойствами, которые кроме пред- и
+пост-условий включают в себя инварианты циклов и утверждения, касающиеся
+типов, анализатор генерирует предположения, которые необходимо доказать
+для гарантирования корректности программы. Эти предположения известны,
+как условия верификации (verification conditions, VC). А доказательство
+их называют исполнением условий верификации. За последние годы произошел
+значительный прогресс в области автоматического доказательства теорем,
+благодаря чему GNATprove способен автоматически исполнять множество
+условий верификации. На момент написания этого текста используются
+технологии Alt-Ergo и CVC4, но можно использовать и другие системы
+доказательств теорем.</p>
+<p>Важно отметить, что даже в отсутствии пред- и пост-условий анализатор
+способен генерировать предположения, соответствующие проверкам времени
+исполнения языка, таким как проверка диапазона. Как мы демонстрировали в
+главе «Безопасные типы данных», подобные проверки автоматически
+вставляются, чтобы гарантировать, что переменная не получит значений вне
+диапазона значений согласно ее объявлению. Аналогичные проверки
+контролируют попытки чтения/записи элементов за границами массива.
+Доказательство этих предположений демонстрирует, что условия не
+нарушаются и программа не содержит ошибок, приводящих к возбуждению
+исключений в момент исполнения.</p>
+<p>Заметим, что использование доказательств не является обязательным. SPARK
+и соответствующий инструментарий можно использовать на разных уровнях.
+Для некоторых приложений достаточно использовать потоковый анализ. Но
+для других может быть экономически целесообразно также провести и
+доказательство корректности. На самом деле, различные уровни анализа
+могут быть использованы для различных частей программы. Этого можно
+добиться, используя различные варианты аспекта SPARK_Mode.</p>
+</section>
+<section id="id4">
+<h2>Гибридная верификация<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Проведение формальной верификации для всего кода программы может быть
+нецелесообразно по следующим причинам:</p>
+<ul class="simple">
+<li><p>Часть программы может использовать все возможности Ады (или вообще
+может быть написана на другом языке, например C), и, следовательно,
+не поддается формальному анализу. Например, спецификация пакета может
+иметь аспект SPARK_Mode, а тело пакета — нет. В этом случае
+информация о контрактах из спецификации пакета может быть
+использована инструментарием формального анализа, хотя анализ самого
+тела пакета будет невозможен. Для не-SPARK модулей необходимо
+использовать традиционные методы тестирования.</p></li>
+<li><p>Даже если при написании компонента используется SPARK подмножество
+языка, не всегда возможно выразить требуемые свойства формально или
+доказать их с учетом текущих возможностей применяемого
+инструментария. Аналогично, применение тестирования необходимо для
+демонстрации заданных свойств.</p></li>
+</ul>
+<p>Следующие инструменты для поддержки такого рода «гибридной верификации»
+входят в состав GNAT технологии.</p>
+<ul class="simple">
+<li><p>Порождающая верификация. GNATprove может быть использован для анализа
+Ада модулей вне зависимости от режима SPARK, чтобы определить неявные
+зависимости данных. Этот подход, который ранее мы назвали
+«порождающая верификация», позволяет применить формальные методы при
+для уже существующей кодовой базы.</p></li>
+<li><p>Результаты GNATprove. GNATprove может отобразить свойства
+подпрограммы, которые он не может установить, что означает, например,
+возможность появления ошибок во время исполнения. Это может помочь
+пользователю в написании тестов, либо указать, где необходим
+дальнейший анализ кода.</p></li>
+<li><p>Опции компилятора. Некоторые из ключей компилятора позволяют получить
+дополнительные проверки времени исполнения для таких ошибок, как
+пересекающиеся параметры или недействительные скалярные объекты, в
+модулях, для которых невозможен формальный анализ.</p></li>
+<li><p>Инструмент GNATtest. При помощи аспектов (или директив компилятору),
+специфичных для GNAT, можно определить для данной подпрограммы
+«формальные тестовые случаи». Это совокупность требуемых условий на
+входе в подпрограмму и ожидаемых условий при выходе из нее.
+Инструмент GNATtest использует эту информацию для автоматизации
+построения набора тестов.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>Примеры<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>В качестве примера, рассмотрим версию стека с указанием потоковых
+зависимостей (аспект Depends) без использования пред- и пост-условий:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Stacks</span>
+   <span class="nc">with</span> <span class="nc">Spark_Mode</span>
+<span class="kr">is</span>
+
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Is_Empty</span><span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Stack</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Boolean</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Is_Full</span><span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Stack</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Boolean</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span><span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Stack</span><span class="p">)</span>
+      <span class="kn">with</span> <span class="n">Depends</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">S</span> <span class="p">=&gt;</span> <span class="kc">null</span><span class="p">);</span>
+
+   <span class="kd">procedure</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">)</span>
+      <span class="kn">with</span> <span class="n">Depends</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">S</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">X</span><span class="p">));</span>
+
+   <span class="kd">procedure</span> <span class="nf">Pop</span><span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">)</span>
+      <span class="kn">with</span> <span class="n">Depends</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">S</span> <span class="p">=&gt;</span> <span class="n">S</span><span class="p">,</span>
+                <span class="n">X</span> <span class="p">=&gt;</span> <span class="n">S</span><span class="p">);</span>
+
+<span class="kd">private</span>
+   <span class="no">Max</span><span class="p">:</span> <span class="kr">constant</span> <span class="p">:=</span> <span class="mi">100</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Top_Range</span> <span class="kr">is</span> <span class="kr">range</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">Max</span><span class="p">;</span>
+   <span class="kd">subtype</span> <span class="kt">Index_Range</span> <span class="kr">is</span> <span class="n">Top_Range</span> <span class="kr">range</span> <span class="mi">1</span> <span class="p">..</span> <span class="n">Max</span><span class="p">;</span>
+
+   <span class="kd">type</span> <span class="kt">Vector</span> <span class="kr">is</span> <span class="kr">array</span> <span class="p">(</span><span class="n">Index_Range</span><span class="p">)</span> <span class="kr">of</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">A</span><span class="p">:</span> <span class="n">Vector</span><span class="p">;</span>
+      <span class="n">Top</span><span class="p">:</span> <span class="n">Top_Range</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Stacks</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Мы добавили функции Is_Full и Is_Empty, которые просто считывают
+состояние стека. Они не имеют аспектов.</p>
+<p>Для остальных подпрограмм мы добавили аспекты Depends. Они позволяют
+указать, от каких аргументов зависит данный результат. Например, для
+Push указано (S =&gt; (S, X)), что означает, что конечное значение S
+зависит от начального значения S и начального значения X, что, в данном
+примере, можно вывести из режимов параметров. Но избыточность — это один
+из ключей достижения надежности. Если аспекты и режимы параметров
+противоречат друг другу, то это будет обнаружено автоматически при
+анализе, что, возможно, позволит найти ошибку в спецификации.</p>
+<p>Объявления в приватной части были изменены, чтобы дать имена всем
+используемым подтипам, хотя это и не является обязательным в SPARK 2014.</p>
+<p>На этом уровне не нужно вносить каких-либо изменений в тело пакета,
+поскольку контракты не требуются. Это подчеркивает тот факт, что SPARK
+касается в основном улучшения качества описания интерфейса.</p>
+<p>Отличия появились также в том, что мы не присвоили начальное значение
+компоненте Top, а взамен требуем явного вызова Clear. При анализе
+клиентского SPARK-кода с помощью GNATprove будет проведен потоковый
+анализ, гарантирующий, что нет вызова процедур Push или Pop до вызова
+процедуры Clear. Этот анализ выполняется без исполнения программы. Если
+GNATprove не может доказать это, то в программе возможна ошибка. С
+другой стороны, если будет обнаружен вызов Push или Pop перед Clear, то
+это означает, что ошибка присутствует наверняка.</p>
+<p>В таком коротком обзоре, как этот, невозможно привести какой-либо
+сложный пример анализа. Но мы приведем тривиальный пример, чтобы
+продемонстрировать идею. Следующий код:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Exchange</span><span class="p">(</span><span class="nv">X</span><span class="p">,</span><span class="nv">Y</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Float</span><span class="p">)</span>
+   <span class="kn">with</span> <span class="n">Depends</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">X</span> <span class="p">=&gt;</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Y</span> <span class="p">=&gt;</span> <span class="n">X</span><span class="p">),</span>
+      <span class="n">Post</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="n">Y</span><span class="p">&#39;</span><span class="na">Old</span> <span class="ow">and</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">X</span><span class="p">&#39;</span><span class="na">Old</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>демонстрирует спецификацию процедуры, предназначенной для обмена
+значений двух параметров. Тело может выглядеть так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Exchange</span><span class="p">(</span><span class="nv">X</span><span class="p">,</span><span class="nv">Y</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="n">T</span><span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="n">T</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span> <span class="n">X</span> <span class="p">:=</span> <span class="n">Y</span><span class="p">;</span> <span class="n">Y</span> <span class="p">:=</span> <span class="n">T</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Exchange</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>При анализе GNATprove создает условия верификации, выполнение которых
+необходимо доказать. В данном примере доказательство тривиально и
+выполняется автоматически. (Читатель может заметить, что доказательство
+сводится к проверке условия (x=x and y=y), которое, очевидно, истинно).
+В более сложных ситуациях GNATprove может не справиться с
+доказательством, тогда пользователь может предложить промежуточные
+утверждения, либо воспользоваться другим инструментарием для дальнейшего
+анализа.</p>
+</section>
+<section id="id6">
+<h2>Сертификация<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Как было продемонстрировано в предыдущих главах, Ада - это превосходный
+язык для написания надежного ПО. Ада позволяет программисту обнаруживать
+ошибки на ранних стадиях процесса разработки. Еще больше ошибок можно
+выявить, используя SPARK даже без применения процедуры тестирования.
+Тестирование остается обязательным этапом разработки, несмотря на то,
+что это сложный и чреватый ошибками процесс.</p>
+<p>В областях, где действуют наивысшие требования к безопасности и
+надежности, недостаточно иметь правильно работающую программу.
+Необходимо еще доказать, что она является таковой. Этот процесс
+доказательства называется сертификацией и выполняется согласно
+процедурам соответствующего органа сертификации. Примерами таких органов
+на территории США являются FAA в области безопасности и NSA в области
+надежности. SPARK обладает огромной ценностью в процессе разработки
+программ, подлежащих сертификации.</p>
+<p>Может возникнуть впечатление, что использование SPARK увеличивает
+стоимость разработки. Однако, исследования систем, переданных в NSA,
+демонстрируют, что использование SPARK делает процесс разработки более
+дешевым по сравнению с обычными методами разработки. Несмотря на то, что
+необходимо потратить некоторые усилия на формулирование контрактов, это,
+в итоге, окупается за счет сокращения затрат на тестирование и
+исправление ошибок.</p>
+</section>
+<section id="id7">
+<h2>Дальнейший процесс<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>На момент написания этого текста две значительные разработки еще не
+завершены. Первая касается поддержки профиля Ravenscar в SPARK
+многозадачности. Вторая — это возможность указать уровни целостности
+различных компонент программы, которая позволит гарантировать, что поток
+информации удовлетворяет требованиям указанных уровней безопасности и
+надежности.</p>
+<p>Узнать текущее состояние дел и получить всестороннюю документацию SPARK
+2014 можно на сайте www.spark-2014.org/.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="conclusion.html" class="btn btn-neutral float-right" title="Заключение" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="chapter_10.html" class="btn btn-neutral" title="Безопасный параллелизм" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Безопасный параллелизм &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Сертификация с помощью SPARK" href="chapter_11.html" />
+    <link rel="prev" title="Безопасная коммуникация" href="chapter_09.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro-to-ada-ru/index.html">Введение в язык Ада</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Безопасное и надежное программное обеспечение</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Безопасный параллелизм<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>В реальной жизни многие процессы протекают одновременно. Люди делают
+несколько вещей одновременно с поразительной легкостью. Кажется, женщины
+преуспевают в этом лучше мужчин, возможно потому, что им нужно баюкать
+малыша, одновременно готовя еду и отгоняя тигра от пещеры. Мужчины же
+обычно концентрируются на одной проблеме за раз, ловят кролика на обед,
+либо ищут большую пещеру, либо, возможно, даже изобретают колесо.</p>
+<p>Традиционно компьютер делает одно действие в каждый конкретный момент
+времени, а операционная система затем делает вид, будто несколько
+процессов выполняются одновременно. Положение дел меняется в наши дни,
+поскольку многие машины сейчас имеют несколько процессоров или ядер, но
+это все еще так, когда речь идет о огромном числе небольших систем, в
+том числе используемых в управлении производством.</p>
+<section id="id2">
+<h2>Операционные системы и задачи<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Степень параллельности, доступная в разных операционных системах, может
+быть совершенно разная. Операционные системы с поддержкой POSIX
+позволяют программисту создать несколько потоков управления. Эти потоки
+исполняют программу довольно независимо друг от друга и, таким образом,
+реализуют параллельное программирование.</p>
+<p>На некоторых системах есть всего один процессор и он будет исполнять
+различные потоки в соответствии с некоторым алгоритмом планирования.
+Один из вариантов — просто выделять небольшой интервал времени каждому
+потоку по очереди. Более сложные алгоритмы (особенно для систем
+реального времени) используют приоритеты и предельные сроки, чтобы
+гарантировать, что процессор используется эффективно.</p>
+<p>Другие системы имеют несколько процессоров. В этом случае некоторые
+потоки выполняются действительно параллельно. Здесь тоже используется
+планировщик, который распределяет процессоры для исполнения активных
+потоков по возможности эффективно.</p>
+<p>В языках программирования параллельные процессы обычно называют потоки
+или задачи. Здесь мы используем второй вариант, который соответствует
+терминологии Ады. Существуют различные подходы к вопросу параллельности
+в разных языках. Одни предлагают многозадачные средства, встроенные
+непосредственно в язык. Другие просто предоставляют доступ к
+соответствующим примитивам операционной системы. Есть и такие, которые
+полностью игнорируют этот вопрос.</p>
+<p>Ада, Java, C# и последние версии C++ среди тех языков, где поддержка
+параллельности встроена в язык. В C нет такой поддержки и программистам
+приходится пользоваться внешними библиотеками или напрямую вызывать
+сервисы операционной системы.</p>
+<p>Есть, как минимум, три преимущества, когда язык имеет встроенные
+средства поддержки многозадачности:</p>
+<ul class="simple">
+<li><p>Встроенный синтаксис существенно облегчает написание корректных
+программ, поскольку язык может предотвратить появление множества
+видов ошибок. Здесь опять проявляет себя принцип абстракции. Мы
+избегаем ошибок, скрывая различные низкоуровневые детали.</p></li>
+<li><p>При использовании средств операционной системы напрямую существенно
+затрудняется переносимость, поскольку одна система может значительно
+отличаться от другой.</p></li>
+<li><p>Операционные системы общего назначения не предоставляют средства,
+необходимые для различных приложений систем реального времени.</p></li>
+</ul>
+<p>Многозадачной программе обычно нужны следующие условия:</p>
+<ul class="simple">
+<li><p>Необходимо предотвратить нарушение целостности данных, когда
+нескольким задачам требуется доступ к одним данным.</p></li>
+<li><p>Необходимо предоставить средства межзадачного взаимодействия для
+передачи данных от одной задачи к другой.</p></li>
+<li><p>Необходимы средства управления задачами с целью гарантирования
+специфичных временных условий.</p></li>
+<li><p>Необходим планировщик выполнения задач для эффективного использования
+ресурсов и попадания в установленные временные границы.</p></li>
+</ul>
+<p>В этой главе мы кратко остановимся на этих вопросах и продемонстрируем
+надежные способы их решения, применяемые в языке Ада. Реализация
+многозадачности влечет целый спектр сложных моментов, поскольку написать
+корректную многозадачную программу намного труднее, чем чисто
+последовательную. Но сначала мы рассмотрим простую концепцию задачи в
+языке Ада и общую структуру программы.</p>
+<p>В Аде программа может иметь множество задач, исполняющихся одновременно.
+Задача имеет две части, так же, как и пакет. Первая часть - это
+спецификация задачи. Она описывает интерфейс взаимодействия с другими
+задачами. Вторая часть - это тело задачи, где описывается, что
+собственно происходит. В простейшем случае спецификация задает лишь имя
+задачи и выглядит так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">A</span><span class="p">;</span> <span class="c1">--  Спецификация задачи</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">A</span> <span class="kr">is</span>      <span class="c1">--  Тело задачи</span>
+<span class="kr">begin</span>
+   <span class="p">...</span>   <span class="c1">--  инструкции, определяющие что делать</span>
+<span class="kr">end</span> <span class="nf">A</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Бывают случаи, когда удобно иметь несколько одинаковых задач, тогда мы
+объявляем задачный тип:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="kd">type</span> <span class="kt">Worker</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Worker</span> <span class="kr">is</span> <span class="p">...</span>
+</pre></div>
+</div>
+<p>После чего мы можем объявить несколько задач так же, как мы объявляем
+объекты:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">Tom</span><span class="p">,</span> <span class="n">Dick</span><span class="p">,</span> <span class="n">Harry</span><span class="p">:</span> <span class="n">Worker</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Тут мы создали три задачи Tom, Dick, Harry. Мы можем объявлять массивы
+задач, делать компоненты записи и прочее. Задачи можно объявлять всюду,
+где можно объявлять объекты, например в пакете, в подпрограмме или даже
+в другой задаче. Не удивительно, что задачи имеют лимитированный тип,
+поскольку нет смысла присваивать одной задаче другую.</p>
+<p>Главная подпрограмма всей программы вызывается из так называемой задачи
+окружения. Именно эта задача выполняет предвыполнение пакетов
+библиотечного уровня, как описано в главе «Безопасный запуск». Таким
+образом, программу с тремя пакетами A, B и C и главной процедурой Main
+можно представить, как:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="kd">type</span> <span class="kt">Environment_Task</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Environment_Task</span> <span class="kr">is</span>
+   <span class="p">...</span> <span class="c1">-- объявления пакетов A, B, C</span>
+   <span class="p">...</span> <span class="c1">-- и главной процедуры Main</span>
+<span class="kr">begin</span>
+   <span class="p">...</span> <span class="c1">-- вызов процедуры Main</span>
+<span class="kr">end</span> <span class="nf">Environment_Task</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Задача становится активной сразу после объявления. Она завершается,
+когда исполнение доходит до конца тела задачи. Существует важное
+правило, локальная задача (т. е. та, что объявлена внутри подпрограммы,
+блока или другой задачи) должна завершиться до того, как управление
+покинет охватывающий ее блок. Исполнение окружающего блока
+приостанавливается до тех пор, пока вложенная задача не завершится. Это
+правило предотвращает появление висящих ссылок на несуществующие более
+объекты.</p>
+</section>
+<section id="id3">
+<h2>Защищенные объекты<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Допустим, три задачи - Tom, Dick и Harry используют общий стек для
+временного хранения данных. Время от времени одна из них кладет элемент
+в стек, затем, время от времени, одна из них (возможна та же, а возможно
+другая) достает данные из стека.</p>
+<p>Три задачи исполняются параллельно, возможно на многопроцессорной
+машине, либо под управлением планировщика на однопроцессорной машине, в
+которой ОС выделяет кванты процессорного времени каждой задаче. Допустим
+второе и кванты длинной 10мс выделяются задачам по очереди.</p>
+<p>Пусть задачи используют стек из главы «Безопасная архитектура». Пусть
+квант, выделенный задаче Harry, истекает при вызове Push, затем
+управление передается задаче Tom, вызывающей Pop. Говоря более
+конкретно, пусть Harry теряет управление сразу после увеличения
+переменной Top</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">-- после этого Harry теряет управление</span>
+   <span class="n">A</span><span class="p">(</span><span class="n">Top</span><span class="p">)</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Push</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>В этот момент Top уже имеет новое значение, но новое значение X еще не
+помещено в массив. Когда задача Tom вызовет Pop, она получит старое,
+скорее всего бессмысленное значение, которое должно было быть
+переписанным новым значением X. Когда задача Harry получит управление
+назад (допустим к этому моменту не было других операций со стеком), она
+запишет значение X в элемент массива, который находится за вершиной
+стека. Другими словами, значение X будет потеряно.</p>
+<p>Еще хуже обстоят дела, когда задачи переключаются посреди выполнения
+инструкции языка. Например, Harry считал значение Top в регистр, но
+новое значение Top не успел сохранить, и тут переключился контекст.
+Далее, пусть Dick вызывает Push, таким образом увеличивает Top на
+единицу. Когда Harry продолжит исполнение, он заменит Top устаревшим
+значением. Таким образом, два вызова Push увеличивают Top лишь на 1,
+вместо 2.</p>
+<p>Такое нежелательное поведение может быть предотвращено благодаря
+использованию защищенного объекта для хранения стека. Такая возможность
+появилась в стандарте Ада 95. Мы напишем:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">protected</span> <span class="n">Stack</span> <span class="kr">is</span>
+   <span class="kd">procedure</span> <span class="nf">Clear</span><span class="p">;</span>
+   <span class="kd">procedure</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">);</span>
+   <span class="kd">procedure</span> <span class="nf">Pop</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">);</span>
+<span class="kd">private</span>
+   <span class="no">Max</span><span class="p">:</span> <span class="kr">constant</span> <span class="p">:=</span> <span class="mi">100</span><span class="p">;</span>
+   <span class="n">Top</span><span class="p">:</span> <span class="kt">Integer</span> <span class="kr">range</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">Max</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">A</span><span class="p">:</span> <span class="n">Float_Array</span><span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="n">Max</span><span class="p">);</span>
+<span class="kr">end</span> <span class="nf">Stack</span><span class="p">;</span>
+
+<span class="kd">protected</span> <span class="kr">body</span> <span class="n">Stack</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Clear</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">A</span><span class="p">(</span><span class="n">Top</span><span class="p">)</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Push</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Pop</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">X</span> <span class="p">:=</span> <span class="n">A</span><span class="p">(</span><span class="n">Top</span><span class="p">);</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Pop</span><span class="p">;</span>
+
+<span class="kr">end</span> <span class="nf">Stack</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Отметьте, как package поменялось на protected, данные из тела пакета
+переместились в private часть, функция Pop превратилась в процедуру. Мы
+предполагаем, что тип Float_Array объявлен в другом месте, как array
+(Integer range &lt;&gt;) of Float.</p>
+<p>Три процедуры Clear, Push и Pop называются защищенными операциями и
+вызываются аналогично обычным процедурам. Отличие состоит в том, что
+только одна задача может получить доступ к операциям объекта в один
+момент времени. Если задача, такая как Tom, пытается вызвать процедуру
+Pop, пока Harry исполняет Push, то Tom будет приостановлен, пока Harry
+не покинет Push. Это выполняется автоматически, без каких-то усилий со
+стороны программиста. Таким образом мы избежим несогласованности данных.</p>
+<p>За кулисами защищенного объекта лежит механизм блокировок. Перед
+исполнением операции этого объекта, задача должна сначала захватить
+блокировку. Если другая задача уже захватила блокировку, первая задача
+будет ждать, пока другая задача закончит исполнять операцию и отпустит
+блокировку. (Блокировка может быть реализована с помощью примитивов
+операционной системы, но также возможны реализации с меньшими накладными
+расходами.)</p>
+<p>Мы можем усовершенствовать наш пример, чтобы показать, как справиться с
+переполнением или опустошением стека. В первом варианте обе этих
+ситуации приводят к исключению Constraint_Error. В случае с Push, это
+происходит при попытке присвоить переменной Top значение Max+1;
+аналогичная проблема проявляется с Pop. При возбуждении исключения
+блокировка автоматически снимется, когда исключение завершит вызов
+процедуры.</p>
+<p>Чтобы избежать переполненния и опустошения стека, мы используем барьеры:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">protected</span> <span class="n">Stack</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span><span class="p">;</span>
+   <span class="kd">entry</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">);</span>
+   <span class="kd">entry</span> <span class="nf">Pop</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">);</span>
+<span class="kd">private</span>
+   <span class="no">Max</span><span class="p">:</span> <span class="kr">constant</span> <span class="p">:=</span> <span class="mi">100</span><span class="p">;</span>
+   <span class="n">Top</span><span class="p">:</span> <span class="kt">Integer</span> <span class="kr">range</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">Max</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">A</span><span class="p">:</span> <span class="n">Float_Array</span><span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="n">Max</span><span class="p">);</span>
+<span class="kr">end</span> <span class="nf">Stack</span><span class="p">;</span>
+
+<span class="kd">protected</span> <span class="kr">body</span> <span class="n">Stack</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Clear</span><span class="p">;</span>
+
+   <span class="kd">entry</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">when</span> <span class="n">Top</span> <span class="o">&lt;</span> <span class="n">Max</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">A</span><span class="p">(</span><span class="n">Top</span><span class="p">)</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Push</span><span class="p">;</span>
+
+   <span class="kd">entry</span> <span class="nf">Pop</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">when</span> <span class="n">Top</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">X</span> <span class="p">:=</span> <span class="n">A</span><span class="p">(</span><span class="n">Top</span><span class="p">);</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Pop</span><span class="p">;</span>
+
+<span class="kr">end</span> <span class="nf">Stack</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Операции Push и Pop теперь входы (entry), а не процедуры, и у них
+появились барьеры, логические условия, такие как Top &lt; Max. Вход не
+может принять исполнение, пока условие его барьера ложно. Заметьте, что
+это не значит, что такой вход нельзя вызвать. Просто вызывающая задача
+будет приостановлена до тех пор, пока условие не станет истинно.
+Например, если задача Harry пытается вызвать Push, когда стек заполнен,
+она должна дождаться, пока какая-нибудь другая задача (Tom или Dick)
+вызовет Pop и освободит верхний элемент. После этого исполнение Harry
+автоматически продолжится. Это произойдет без дополнительных действий
+программиста.</p>
+<p>Заметьте, что вызов входа или защищенной процедуры выполняется так же,
+как и вызов обычной процедуры</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">Stack</span><span class="p">.</span><span class="n">Push</span> <span class="p">(</span><span class="n">Z</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Подведем итог. Механизм защищенных объектов языка Ада обеспечивает
+эксклюзивный доступ к общим данным. В видимой части защищенного объекта
+объявляются защищенные операции, а защищаемые объектом компоненты
+объявляются в приватной части. Тело защищенного объекта содержит
+реализацию защищенных операций. Защищенные процедуры и входы
+предоставляют возможность читать/писать защищаемые данные, в то время,
+как защищенные функции — только читать. Это ограничение позволяет
+нескольким задачам читать общие данные одновременно (при использовании
+защищенных функций), но лишь одна задача может менять их. Из-за запрета
+защищенным функциям изменять данные нам пришлось переписать Pop как
+процедуру, хотя в изначальном варианте это была функция.</p>
+<p>Аналогично задачам, мы можем объявить защищенный тип, чтобы использовать
+его как шаблон для создания защищенных объектов. Аналогично задачному
+типу, защищенный тип также является лимитированным.</p>
+<p>Было бы поучительно рассмотреть, как мы запрограммировали бы этот
+пример, используя низкоуровневые примитивы. Исторически сложилось, что
+таким примитивом считается объект семафор, у которого определены две
+операции P (захватить) и V (освободить). Эффект операции P(sem) состоит
+в захвате блокировки, соответствующей sem, если блокировка свободна, в
+противном случае задача приостанавливается и помещается в очередь к sem.
+Эффект V(sem) состоит в том, чтобы снять блокировку и разбудить одну из
+задач очереди, если она есть.</p>
+<p>Чтобы обеспечить эксклюзивный доступ к данным, мы должны окружить каждую
+нашу операцию парой вызовов P и V. Например Push будет таким:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Push</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="n">P</span><span class="p">(</span><span class="n">Stack_Lock</span><span class="p">);</span> <span class="c1">--  захватить блокировку</span>
+   <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="n">A</span><span class="p">(</span><span class="n">Top</span><span class="p">)</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+   <span class="n">V</span><span class="p">(</span><span class="n">Stack_Lock</span><span class="p">);</span> <span class="c1">--  освободить блокировку</span>
+<span class="kr">end</span> <span class="nf">Push</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Аналогично делается для подпрограмм Clear и Pop. Так обычно пишут
+многозадачный код на ассемблере. При этом есть множество возможностей
+совершить ошибку:</p>
+<ul class="simple">
+<li><p>Можно пропустить одну из операций P или V, нарушив баланс блокировок.</p></li>
+<li><p>Можно забыть поставить обе операции и оставить нужный код без защиты.</p></li>
+<li><p>Можно перепутать имя семафора.</p></li>
+<li><p>Можно случайно обойти вызов закрывающей операции V при исполнении.</p></li>
+</ul>
+<p>Последняя ошибка могла бы возникнуть, например, если в варианте без
+барьеров, Push вызывается при заполненном массиве. Это приводит к
+возбуждению исключения Constraint_Error. Если мы не напишем обработчик
+исключения, где будем вызывать V, объект останется заблокированным
+навсегда.</p>
+<p>Все эти трудности не возникают, если пользоваться защищенными объектами
+языка Ада, поскольку все низкоуровневые действия выполняются
+автоматически. Если действовать осторожно, можно обойтись семафорами в
+простых случаях, но очень сложно получить правильный результат в более
+сложных ситуациях, таких, как наш пример с барьерами. Сложно не только
+написать правильную программу, но также чрезвычайно сложно доказать, что
+программа корректна.</p>
+<p>Входы с барьерами являются механизмом более высокого уровня, чем
+механизм «условных переменных», который можно найти в других языках
+программирования. Например, в языке Java, программист обязан явно
+вызывать wait, notify и notifyAll для переменных, отражающих состояния
+объекта, такие как «стек полон» и «стек пуст». Этот подход чреват
+ошибками и подвержен ситуации гонки приоритетов, в отличии от механизмов
+Ады.</p>
+</section>
+<section id="id4">
+<h2>Рандеву<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Еще одним средством поддержи многозадачности является возможность
+непосредственного обмена данными между двумя задачами. В Аде это
+реализовано с помощью механизма рандеву. Две взаимодействующие задачи
+вступают в отношение клиент-сервер. Сервер должен быть известен клиенту,
+нуждающемуся в каком-то его сервисе. В то же время серверу безразлично,
+какого клиента он обслуживает.</p>
+<p>Вот общий вид сервера, предоставляющего единственный сервис:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Server</span> <span class="kr">is</span>
+   <span class="kd">entry</span> <span class="nf">Some_Service</span><span class="p">(</span><span class="nv">Format</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Data</span><span class="p">);</span>
+<span class="kr">end</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Server</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="p">...</span>
+   <span class="kr">accept</span> <span class="n">Some_Service</span><span class="p">(</span><span class="n">Format</span><span class="p">:</span> <span class="ow">in</span> <span class="kr">out</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">do</span>
+      <span class="p">...</span> <span class="c1">-- код предоставляющий сервис</span>
+   <span class="kr">end</span> <span class="nf">Some_Service</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Server</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>По спецификации сервера видно, что он имеет вход Some_Service. Этот вход
+может быть вызван точно так же, как вход защищенного объекта. Отличие в
+том, что код, предоставляющий сервис, находится в соответствующей
+инструкции принятия (accept), которая исполняется лишь когда до нее
+доходит поток исполнения сервера. До этого момента вызывающая задача
+будет ожидать. Когда сервер достигнет инструкции принятия, она будет
+исполнена, используя любые параметры, переданные клиентом. Клиент будет
+ожидать окончания исполнения инструкции принятия, после чего все
+параметры out и in out получат новые значения.</p>
+<p>Тело клиента может выглядеть так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="kr">body</span> <span class="n">Client</span> <span class="kr">is</span>
+   <span class="n">Actual</span><span class="p">:</span> <span class="n">Data</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="p">...</span>
+   <span class="n">Server</span><span class="p">.</span><span class="n">Some_Service</span> <span class="p">(</span><span class="n">Actual</span><span class="p">);</span>
+   <span class="p">...</span>
+<span class="kr">end</span> <span class="nf">Client</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Каждый вход имеет соответствующую очередь. Если задача вызывает вход, а
+сервер в этот момент не ожидает на инструкции принятия, то задача
+ставится в очередь. С другой стороны, если сервер достигает инструкции
+принятия, а очередь пуста, то останавливается сервер. Инструкция
+принятия может находиться в любом месте в теле задачи, где допускаются
+инструкции, например, в одной из ветвей условной инструкции (if) или
+внутри цикла. Этот механизм очень гибкий.</p>
+<p>Рандеву - это механизм высокого уровня (как и защищенные объекты),
+следовательно, его легко применять правильно. Соответствующий
+низкоуровневый механизм очередей тяжело использовать без ошибок.</p>
+<p>Теперь приведем пример использования рандеву, в котором клиенту не нужно
+ожидать. Идея в том, что клиент передает серверу ссылку на вход, который
+необходимо вызвать, когда работа будет выполнена. Сначала мы объявим
+своего рода почтовый ящик, для обмена элементами некоторого типа Item,
+который определен где-то ранее:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="kd">type</span> <span class="kt">Mailbox</span> <span class="kr">is</span>
+   <span class="kd">entry</span> <span class="nf">Deposit</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Item</span><span class="p">);</span>
+   <span class="kd">entry</span> <span class="nf">Collect</span><span class="p">(</span><span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Item</span><span class="p">);</span>
+<span class="kr">end</span> <span class="nf">Mailbox</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="n">Mailbox</span> <span class="kr">is</span>
+   <span class="n">Local</span><span class="p">:</span> <span class="n">Item</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="kr">accept</span> <span class="n">Deposit</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="ow">in</span> <span class="n">Item</span><span class="p">)</span> <span class="kr">do</span>
+      <span class="n">Local</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+   <span class="kr">end</span><span class="p">;</span>
+   <span class="kr">accept</span> <span class="n">Collect</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="kr">out</span> <span class="n">Item</span><span class="p">)</span> <span class="kr">do</span>
+      <span class="n">X</span> <span class="p">:=</span> <span class="n">Local</span><span class="p">;</span>
+   <span class="kr">end</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Mailbox</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Мы можем положить элемент в Mailbox, чтобы забрать его позже. Клиент
+передаст ссылку на почтовый ящик, куда сервер положит элемент, а клиент
+заберет его там позже. Нам понадобится ссылочный тип:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Mailbox_Ref</span> <span class="kr">is</span> <span class="kr">access</span> <span class="n">Mailbox</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Клиент и сервер будут следующего вида:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Server</span> <span class="kr">is</span>
+   <span class="kd">entry</span> <span class="nf">Request</span><span class="p">(</span><span class="nv">Ref</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Mailbox_Ref</span><span class="p">;</span> <span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Item</span><span class="p">);</span>
+<span class="kr">end</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Server</span> <span class="kr">is</span>
+   <span class="n">Reply</span><span class="p">:</span> <span class="n">Mailbox_Ref</span><span class="p">;</span>
+   <span class="n">Job</span><span class="p">:</span> <span class="n">Item</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="kr">loop</span>
+      <span class="kr">accept</span> <span class="n">Request</span><span class="p">(</span><span class="n">Ref</span><span class="p">:</span> <span class="ow">in</span> <span class="n">Mailbox_Ref</span><span class="p">;</span> <span class="n">X</span><span class="p">:</span> <span class="ow">in</span> <span class="n">Item</span><span class="p">)</span> <span class="kr">do</span>
+         <span class="n">Reply</span> <span class="p">:=</span> <span class="n">Ref</span><span class="p">;</span>
+         <span class="n">Job</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+      <span class="kr">end</span><span class="p">;</span>
+      <span class="p">...</span>
+      <span class="c1">-- выполняем работу</span>
+      <span class="n">Reply</span><span class="p">.</span><span class="n">Deposit</span><span class="p">(</span><span class="n">Job</span><span class="p">);</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Server</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="n">Client</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Client</span> <span class="kr">is</span>
+   <span class="n">My_Box</span><span class="p">:</span> <span class="n">Mailbox_Ref</span> <span class="p">:=</span> <span class="kr">new</span> <span class="n">Mailbox</span><span class="p">;</span>
+   <span class="c1">-- создаем задачу-почтовый ящик</span>
+   <span class="n">My_Item</span><span class="p">:</span> <span class="n">Item</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="n">Server</span><span class="p">.</span><span class="n">Request</span><span class="p">(</span><span class="n">My_Box</span><span class="p">,</span> <span class="n">My_Item</span><span class="p">);</span>
+   <span class="p">...</span>
+   <span class="c1">-- занимаемся чем-то пока ждем</span>
+   <span class="n">My_Box</span><span class="p">.</span><span class="n">Collect</span><span class="p">(</span><span class="n">My_Item</span><span class="p">);</span>
+<span class="kr">end</span> <span class="nf">Client</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>На практике клиент мог бы время от времени проверять почтовый ящик. Это
+легко реализовать, используя условный вызов входа:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">select</span>
+   <span class="n">My_Box</span><span class="p">.</span><span class="n">Collect</span> <span class="p">(</span><span class="n">My_Item</span><span class="p">);</span>
+   <span class="c1">-- успешно получили элемент</span>
+<span class="kr">else</span>
+   <span class="c1">-- элемент еще не готов</span>
+<span class="kr">end</span> <span class="kr">select</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Почтовый ящик служит нескольким целям. Он отделяет операцию «положить
+элемент» от операции «взять элемент», что позволяет серверу сразу
+заняться следующим заданием. Кроме этого, он позволяет серверу ничего не
+знать о клиенте. Необходимость прямого вызова клиента привела бы к
+необходимости всегда иметь клиентов одного конкретного задачного типа,
+что совсем непрактично. Почтовый ящик позволяет нам очертить
+единственное необходимое свойство клиента — существование вызова
+Deposit.</p>
+</section>
+<section id="id5">
+<h2>Ограничения<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Директива компилятору pragma Restrictions, используемая для запрета
+использования некоторых возможностей языка, уже упоминалась в главах
+«Безопасное ООП» и «Безопасное управление памятью».</p>
+<p>Существует множество ограничений, касающихся многозадачности. Некоторые
+были известны еще со времен Ады 95, другие добавлены в Аде 2005 и 2012.
+Возможности Ады в этой области очень обширны. С их помощью можно
+создавать совершенно разные приложения реального времени. Но многие из
+них очень просты и не требуют использования всех возможностей языка. Вот
+некоторые примеры возможных ограничений:</p>
+<ul class="simple">
+<li><p>No_Task_Hierarchy</p></li>
+<li><p>No_Task_Termination</p></li>
+<li><p>Max_Entry_Queue_Length =&gt; n</p></li>
+</ul>
+<p>Ограничение No_Task_Hierarchy предотвращает создание задач внутри других
+задач или подпрограмм, таким образом, все задачи будут в пакетах
+библиотечного уровня. Ограничение No_Task_Termination означает, что все
+задачи будут исполняться вечно, это часто встречается во многих
+управляющих приложениях, где каждая задача содержит бесконечный цикл,
+исполняющий какое-то повторяющееся действие. Следующее ограничение
+обуславливает максимальное количество задач, ожидающих на одном входе в
+любой момент времени.</p>
+<p>Указание ограничений может дать возможность:</p>
+<ul class="simple">
+<li><p>использовать упрощенную версию библиотеки времени исполнения. В
+результате можно получить меньшую по объему и более быструю
+программу, что существенно в области встраиваемых систем.</p></li>
+<li><p>формально обосновать некоторые свойства программы, такие как
+детерминизм, отсутствие взаимных блокировок, способность уложится в
+указанные сроки исполнения.</p></li>
+</ul>
+<p>Существует множество других ограничений, касающихся многозадачности,
+которые мы не рассмотрели.</p>
+</section>
+<section id="ravenscar">
+<h2>Ravenscar<a class="headerlink" href="#ravenscar" title="Permalink to this heading"></a></h2>
+<p>Особенно важная группа ограничений налагается профилем Ravenscar,
+который был разработан в середине 1990-х и стандартизирован, как часть
+языка Ада 2005. Чтобы гарантировать, что программа соответствует этому
+профилю, достаточно написать:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">pragma</span> <span class="cp">Profile</span><span class="p">(</span><span class="n">Ravenscar</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Использование любой из запрещенных возможностей языка (на них мы
+остановимся далее) приведет к ошибке компиляции.</p>
+<p>Главной целью профиля Ravenscar является ограничение многозадачных
+возможностей таким образом, чтобы эффект от программы стал
+предсказуемым. (Профиль был определен Международным Симпозиумом по
+вопросам Реального Времени языка Ада, который проходил дважды в
+отдаленной деревне Равенскар на побережье Йоркшира в северо-восточной
+Англии.)</p>
+<p>Профиль определен как набор ограничений плюс несколько дополнительных
+директив компилятору, касающихся планировщика и других подобных вещей. В
+этот набор входят три ограничения, приведенные нами ранее — отсутствие
+вложенных задач, бесконечное исполнение задач, ограничения на
+максимальный размер очереди входа в один элемент (т. е. только одна
+задача может ожидать на данном входе).</p>
+<p>Оригинальная версия профиля Ravenscar предполагала исполнение программы
+на однопроцессорной машине. В Аде 2012 в профиль добавили семантику
+исполнения на многопроцессорной машине при условии, что задачи жестко
+закреплены за ЦПУ. Мы еще вернемся к этому вопросу.</p>
+<p>Совместный эффект всех ограничений состоит в том, что становится
+возможным сформулировать утверждения о способности данной программы
+удовлетворять жестким требованиям в целях ее сертификации.</p>
+<p>Никакой другой язык не предлагает таких средств обеспечения надежности,
+какие дает язык Ада с включенным профилем Ravenscar.</p>
+</section>
+<section id="id6">
+<h2>Безопасное завершение<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>В некоторых приложениях (например СУПР) задачи исполняются бесконечно, в
+других задачи доходят до своего конца и завершаются. В этих ситуациях
+вопросов, касающихся завершения задачи, не встает. Но бывают случаи,
+когда задача, предназначенная для бесконечной работы, должна быть
+завершена, например, по причине некоторой ошибки оборудования задача
+больше не нужна. Встает вопрос, как немедленно и безопасно завершить
+задачу. Увы, эти требования противоречат друг другу, и разработчику
+нужно искать компромисс. К счастью, язык Ада предлагает достаточно
+гибкие средства, чтобы разработчик смог реализовать нужный компромисс.
+Но даже если предпочтение отдается быстроте завершения, семантика языка
+гарантирует, что критические операции будут выполнены до того, как
+станет возможно завершить задачу.</p>
+<p>Важным понятием в этом подходе является концепция региона отложенного
+прекращения. Это такой участок кода, исполнение которого должно дойти до
+конца, иначе существует риск разрушения разделяемых структур данных.
+Примерами могут служить тела защищенных операций и операторов принятия.
+Заметим, что при исполнении такого региона задача может быть вытеснена
+задачей с более высоким приоритетом.</p>
+<p>Чтобы проиллюстрировать эти понятия, рассмотрим следующую версию задачи
+сервера:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Server</span> <span class="kr">is</span>
+   <span class="kd">entry</span> <span class="nf">Some_Service</span><span class="p">(</span><span class="nv">Formal</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Data</span><span class="p">);</span>
+<span class="kr">end</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Server</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="kr">loop</span>
+      <span class="kr">accept</span> <span class="n">Some_Service</span><span class="p">(</span><span class="n">Format</span><span class="p">:</span> <span class="ow">in</span> <span class="kr">out</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">do</span>
+         <span class="p">...</span> <span class="c1">-- код изменения значения Format</span>
+      <span class="kr">end</span> <span class="nf">Some_Service</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Server</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Задача будет исполнять периодически одну и ту же работу. Когда в ней
+больше не будет потребности, задача зависнет на инструкции принятия. Это
+напоминает анабиоз без перспективы пробуждения. Не очень приятная мысль
+и не очень приятный стиль программирования. Программа просто виснет,
+вместо того, чтобы изящно завершиться.</p>
+<p>Есть несколько способов разрешить этот вопрос. Первый — объявить
+клиентскую задачу специально для того, чтобы выключить сервер, когда
+клиентских запросов больше не будет. Вот так можно описать
+задачу-палача:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Grim_Reaper</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Grim_Reaper</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="kr">abort</span> <span class="n">Server</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Grim_Reaper</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Предназначение инструкции abort в том, чтобы прекратить указанную задачу
+(в нашем случае Server). Но это может быть рискованно - прекратить
+задачу немедленно, вне зависимости от того, что она делает в данный
+момент, будто вытащить вилку из розетки. Возможно, Server находится в
+процессе исполнения инструкции принятия входа Some_Service, и параметр
+может быть в несогласованном состоянии. Прекращение задачи привело бы к
+тому, что вызывающая задача получила бы искаженные данные, например,
+частично обработанный массив. Но, как сказано выше, инструкция принятия
+имеет «отложенное прекращение». Если будет попытка прекратить задачу в
+этот момент, то библиотека времени исполнения заметит это (формально,
+задача перейдет в аварийное состояние), но задача не будет завершена до
+тех пор, пока длится регион отложенного прекращения, т. е. в нашем
+случае до конца исполнения инструкции accept.</p>
+<p>Даже если завершаемая задача не находится в регионе отложенного
+прекращения, эффект не обязательно будет мгновенным. Говоря коротко,
+завершаемая задача перейдет в аварийное состояние, в котором она
+рассматривается, как своего рода прокаженный. Если какая-либо задача
+неблагоразумно попытается взаимодействовать с этим несчастным (например,
+обратившись к одному из входов задачи), то получит исключение
+Tasking_Error. Наконец, если/когда прерванная задача достигнет любой
+точки планирования, такой как, вызов входа или инструкция принятия, то
+ее страданию прийдет конец и она завершится. (Для реализаций,
+поддерживающих Приложение Систем Реального Времени, требования к
+прекращению более жесткие: грубо говоря, аварийная задача завершится,
+как только окажется вне региона отложенного прекращения.)</p>
+<p>Это может выглядеть немного гнетуще и сложно, и действительно,
+использование инструкции прекращения затрудняет написание программы, а
+применение формальных методов затрудняет еще больше. Популярный совет
+тут - «не делайте так». Можно использовать прекращение, когда нужно,
+например, сменить режим работы и завершить целое множество задач. В
+противном случае, лучше использовать одну из следующих техник, когда
+завершаемая задача сама решает, когда она готова уйти, т. е. завершение
+возможно только в особых точках.</p>
+<p>Следующая техника использует специальный вход для передачи запроса на
+завершение. Приняв такой вызов, задача затем завершается обычным
+способом. Вот иллюстрация этой техники:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Server</span> <span class="kr">is</span>
+   <span class="kd">entry</span> <span class="nf">Some_Service</span><span class="p">(</span><span class="nv">Formal</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Data</span><span class="p">);</span>
+   <span class="kd">entry</span> <span class="nf">Shutdown</span><span class="p">;</span>
+<span class="kr">end</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Server</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="kr">loop</span>
+      <span class="kr">select</span>
+         <span class="kr">accept</span> <span class="n">Shutdown</span><span class="p">;</span>
+         <span class="kr">exit</span><span class="p">;</span>
+      <span class="kr">or</span>
+         <span class="kr">accept</span> <span class="n">Some_Service</span><span class="p">(</span><span class="n">Format</span><span class="p">:</span> <span class="ow">in</span> <span class="kr">out</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">do</span>
+            <span class="p">...</span> <span class="c1">-- код изменения значения Format</span>
+         <span class="kr">end</span> <span class="nf">Some_Service</span><span class="p">;</span>
+      <span class="kr">end</span> <span class="kr">select</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Server</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>В этой версии применяется форма инструкции select, охватывающая
+несколько альтернатив, каждая из которых начинается инструкцией принятия
+входа. При исполнении такой инструкции сначала проверяется, есть ли
+вызовы, ожидающие приема на этих входах. Если нет, то задача
+приостанавливается до тех пор, пока не появится такой вызов (в этом
+случае управление передается на соответствующую ветку). Если такой вызов
+один, управление передается на нужную ветку. Если несколько, то выбор
+ветки зависит от политики очередей входов (если реализация поддерживает
+Приложение Систем Реального Времени, политика, по умолчанию,
+основывается на приоритетах).</p>
+<p>Такая форма инструкции select широко применяется в серверных задачах,
+когда задача имеет несколько входов, и порядок их вызова (либо
+количество) заранее не известен. В данном примере порядок вызова входов
+известен, сначала вызывается Some_Service, а затем Shutdown. Но мы не
+знаем, сколько раз вызовется Some_Service, поэтому нам понадобился
+бесконечный цикл.</p>
+<p>Как и в предыдущем примере, нам нужна отдельная задача для завершения
+сервера. Но в этом случае, вместо инструкции прерывания задачи будет
+вызываться вход Shutdown:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Grim_Reaper</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Grim_Reaper</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="n">Server</span><span class="p">.</span><span class="n">Shutdown</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Grim_Reaper</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>При условии, что Grim_Reaper написан корректно, т. е. вызывает Shutdown
+после всех возможных вызовов Some_Service, подход с использованием
+Shutdown отвечает нашим требованиям к безопасной остановке задачи. Цена,
+которую мы платим за это — дополнительная задержка, поскольку завершение
+не происходит мгновенно.</p>
+<p>Ада предлагает еще один подход к завершению, в котором нет необходимости
+какой-то из задач запускать процесс остановки. Идея состоит в том, что
+задача завершится автоматически (при содействии библиотеки времени
+исполнения), когда появится гарантия, что это можно сделать безопасно.
+Такую гарантию можно дать, если задача, имеющая один или несколько
+входов, висит на инструкции select и ни одна из ветвей этой инструкции
+не может быть вызвана. Чтобы это выразить, существует специальный
+вариант ветви инструкции select:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">task</span> <span class="n">Server</span> <span class="kr">is</span>
+   <span class="kd">entry</span> <span class="nf">Some_Service</span><span class="p">(</span><span class="nv">Formal</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Data</span><span class="p">);</span>
+   <span class="kd">entry</span> <span class="nf">Shutdown</span><span class="p">;</span>
+<span class="kr">end</span><span class="p">;</span>
+
+<span class="kd">task</span> <span class="kr">body</span> <span class="n">Server</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="kr">loop</span>
+      <span class="kr">select</span>
+         <span class="kr">terminate</span><span class="p">;</span>
+      <span class="kr">or</span>
+         <span class="kr">accept</span> <span class="n">Some_Service</span><span class="p">(</span><span class="n">Format</span><span class="p">:</span> <span class="ow">in</span> <span class="kr">out</span> <span class="n">Data</span><span class="p">)</span> <span class="kr">do</span>
+            <span class="p">...</span> <span class="c1">-- код изменения значения Format</span>
+         <span class="kr">end</span> <span class="nf">Some_Service</span><span class="p">;</span>
+      <span class="kr">end</span> <span class="kr">select</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Server</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>В этом случае, когда Server дойдет до инструкции select (или будет
+ожидать на ней), система времени исполнения посмотрит вокруг и
+определит, есть ли хоть одна живая задача, имеющая ссылку на Server (и
+таким образом имеющая возможность вызвать его вход). Если таких задач
+нет, то Server завершится безопасно и это произойдет автоматически. В
+этом случае нет возможности исполнить какой-либо код для очистки
+структур данных перед завершением. Но в стандарте Ада 2005 была
+добавлена возможность определить обработчик завершения, который будет
+вызван в процессе завершения задачи.</p>
+<p>К преимуществам этого подхода относится легкость понимания программы и
+надежность. Нет риска, как в других вариантах, забыть остановить задачу
+или остановить ее слишком рано. Недостаток - в существовании накладных
+расходов, которые несет библиотека времени исполнения при выполнении
+некоторых операций, даже если эта возможность не используется.</p>
+<p>Подведем итог: Ада предоставляет различные возможности и поддерживает
+различные подходы к завершению задач. Инструкция прерывания имеет
+наименьшую задержку (хотя и ожидает выхода из регионов с отложенным
+прерыванием), но могут возникнуть проблемы, когда задача не находится в
+подходящем для завершения состоянии. Вход для запроса завершения решает
+эту проблему (задача завершается только когда примет запрос), но
+увеличивает задержку завершения. Наконец, подход со специальной
+альтернативой завершения наиболее безопасен (поскольку избавляет от
+ручного управления завершением задачи), но вводит дополнительные
+накладные расходы.</p>
+<p>Среди возможностей, которые Ада избегает сознательно, возможность
+асинхронно возбудить исключение в другой задаче. Подобная возможность
+была, например, в изначальном варианте языка Java. Метод Thread.stop()
+(теперь считающийся устаревшим) позволяет легко разрушить разделяемые
+данные, оставив их в несогласованном состоянии. Исключения в Аде всегда
+выполняются синхронно и не имеют этой проблемы. Конечно, нужно аккуратно
+подходить к использованию исключений. Например, программист должен
+знать, что если он не обрабатывает исключения, то задача просто
+завершится при возникновении исключения, а исключение пропадет. Зато
+сложностей с асинхронными исключениями удалось избежать.</p>
+</section>
+<section id="id7">
+<h2>Время и планирование<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Наверное, нельзя закончить главу о многозадачности в Аде, не
+остановившись на времени и планировании.</p>
+<p>Есть инструкции для синхронизации исполнения программы с часами. Мы
+можем приостановить программу на некоторый промежуток времени (так
+называемая относительная задержка исполнения), либо до наступления
+нужного момента времени:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">delay</span> <span class="mi">2</span><span class="o">*</span><span class="n">Minutes</span><span class="p">;</span>
+
+<span class="kr">delay</span> <span class="kr">until</span> <span class="n">Next_Time</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>предположим, что существуют объявления для Minutes и Next_Time.
+Небольшие относительные задержки могут быть полезны для интерактивного
+использования, в то время как задержка до наступления момента может быть
+использована для программирования периодических событий. Время можно
+измерять часами реального времени (они гарантируют некоторую точность),
+либо локальными часами, подверженными таким фактором, как переход на
+летнее время. В Аде также учитываются временные зоны и високосные
+секунды.</p>
+<p>В стандарт Ада 2005 были добавлены несколько таймеров, при срабатывании
+которых вызывается защищенная процедура (обработчик). Есть три типа
+таймеров. Первый измеряет время ЦПУ, использованное конкретной задачей.
+Другой измеряет общий бюджет группы задач. Третий основан на часах
+реального времени. Установка обработчика выполняется по принципу
+процедуры Set_Handler.</p>
+<p>Проиллюстрируем это на забавном примере варки яиц. Мы объявим защищенные
+объект Egg:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">protected</span> <span class="n">Egg</span> <span class="kr">is</span>
+   <span class="kd">procedure</span> <span class="nf">Boil</span><span class="p">(</span><span class="nv">For_Time</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Time_Span</span><span class="p">);</span>
+<span class="kd">private</span>
+   <span class="kd">procedure</span> <span class="nf">Is_Done</span><span class="p">(</span><span class="nv">Event</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Timing_Event</span><span class="p">);</span>
+   <span class="n">Egg_Time</span><span class="p">:</span> <span class="n">Timing_Event</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Egg</span><span class="p">;</span>
+
+<span class="kd">protected</span> <span class="kr">body</span> <span class="n">Egg</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Boil</span><span class="p">(</span><span class="nv">For_Time</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Time_Span</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Put_Egg_In_Water</span><span class="p">;</span>
+      <span class="n">Set_Handler</span><span class="p">(</span><span class="n">Egg_Done</span><span class="p">,</span> <span class="n">For_Time</span><span class="p">,</span> <span class="n">Is_Done</span><span class="p">&#39;</span><span class="na">Access</span><span class="p">);</span>
+   <span class="kr">end</span> <span class="nf">Boil</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Is_Done</span><span class="p">(</span><span class="nv">Event</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Timing_Event</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Ring_The_Pinger</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Is_Done</span><span class="p">;</span>
+
+<span class="kr">end</span> <span class="nf">Egg</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Пользователь напишет так:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">Egg</span><span class="p">.</span><span class="n">Boil</span><span class="p">(</span><span class="n">Minutes</span> <span class="p">(</span><span class="mi">10</span><span class="p">));</span> <span class="c1">-- лучше сварить вкрутую</span>
+
+<span class="c1">-- читаем пока яйцо варится</span>
+</pre></div>
+</div>
+<p>и будильник зазвенит, когда яйцо будет готово.</p>
+<p>Планирование задается директивой компилятору Task_Dispatching_Policy(
+политика). В Аде 95 определена политика FIFO_Within_Priorities, а в Аде
+2005, в Приложении Систем Реального Времени — еще несколько. С помощью
+этой директивы можно назначить политику всем задачам или задачам,
+имеющим приоритет из заданного диапазона. Перечислим существующие
+политики:</p>
+<ul class="simple">
+<li><p>FIFO_Within_Priorities — В пределах каждого уровня приоритета с этой
+политикой задачи исполняются по принципу первый-пришел-первый-вышел.
+Задачи с более высоким приоритетом могут вытеснять задачи с меньшим
+приоритетом.</p></li>
+<li><p>Non_Preemtive_FIFO_Within_Priotities — В пределах каждого уровня
+приоритета с этой политикой задачи исполняются, пока не окончат
+выполнение, будут заблокированы или выполнят инструкцию задержки
+(delay). Задача с более высоким приоритетом не может вытеснить их.
+Эта политика широко используется в приложениях с повышенными
+требованиями к безопасности.</p></li>
+<li><p>Round_Robin_Within_Priotities — В пределах каждого уровня приоритета
+с этой политикой задачам выделяются кванты времени заданной
+продолжительности. Эта традиционная политика применяется с первых
+дней появления параллельных программ.</p></li>
+<li><p>EDF_Across_Priotities — EDF это сокращение Earliest Deadline First.
+Общая идея следующая. На заданном диапазоне уровней приоритета каждая
+задача имеет крайний срок исполнения (deadline). Исполняется та, у
+которой это значение меньше. Это новая политика. Для ее использования
+разработан специальный математический аппарат.</p></li>
+</ul>
+<p>Ада позволяет устанавливать и динамически изменять приоритеты задач и
+так называемые граничные приоритеты защищенных объектов. Это позволяет
+избежать проблемы инверсии приоритетов, как описано в [9].</p>
+<p>Стандарт Ада 2012 ввел множество полезных усовершенствований, касающихся
+времени и планирования. Большинство из них не касаются темы этого
+буклета, но мы затронем здесь один из вопросов, теперь отраженный в
+стандарте — поддержка многопроцессорных/многоядерных платформ. Эта
+проблема включает следующие возможности:</p>
+<ul class="simple">
+<li><p>Пакет System.Multiprocessors, где определена функция, возвращающая
+количество ЦПУ.</p></li>
+<li><p>Новый аспект, позволяющий назначить задачу данному ЦПУ.</p></li>
+<li><p>Дочерний пакет System.Multiprocessors.Dispatching_Domains позволяет
+выделить диапазон процессоров, как отдельный «домен диспетчеризации»,
+а затем назначать задачи на исполнение этим доменом либо с помощью
+аспектов, либо при помощи вызова подпрограммы. После этого задача
+будет исполняться любым ЦПУ из заданного диапазона.</p></li>
+<li><p>Определение директивы компилятору Volatile поменяли. Теперь она
+гарантирует корректный порядок операций чтения и записи вместо
+требования указанной переменной находиться в памяти, как было раньше.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="chapter_11.html" class="btn btn-neutral float-right" title="Сертификация с помощью SPARK" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="chapter_09.html" class="btn btn-neutral" title="Безопасная коммуникация" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

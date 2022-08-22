@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Контрактное проектирование &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Взаимодействие с языком C" href="interfacing_with_c.html" />
+    <link rel="prev" title="Управление задачами" href="tasking.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Введение в язык Ада</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../safe-secure-software-ru/index.html">Безопасное и надежное программное обеспечение</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Контрактное проектирование<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>Контракты используются в программировании чтобы сформулировать ожидания.
+Виды параметров подпрограммы можно рассматривать как простую форму
+контрактов. Когда спецификация подпрограммы <code class="code highlight ada docutils literal highlight-ada"><span class="n">Op</span></code> объявляет параметр,
+вида <code class="code highlight ada docutils literal highlight-ada"><span class="ow">in</span></code>, вызывающий <code class="code highlight ada docutils literal highlight-ada"><span class="n">Op</span></code> знает, что аргумент
+<code class="code highlight ada docutils literal highlight-ada"><span class="ow">in</span></code> не будет изменен <code class="code highlight ada docutils literal highlight-ada"><span class="n">Op</span></code>. Другими словами, вызывающий ожидает,
+что <code class="code highlight ada docutils literal highlight-ada"><span class="n">Op</span></code> не изменяет предоставляемый им аргумент, а просто читает
+информацию, хранящуюся в аргументе. Ограничения и подтипы являются другими
+примерами контрактов. В целом, эти спецификации улучшают согласованность
+приложения.</p>
+<p><em>Контрактное программирование</em> основывается на таких техниках, как
+указание пред- и постусловий, предикатов подтипов и инвариантов типов.
+Мы изучаем эти темы в этой главе.</p>
+<section id="id2">
+<h2>Пред- и постусловия<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Пред- и постусловия формализируют ожидания
+относительно входных и выходных параметров подпрограмм и возвращаемого
+значения функций. Если мы говорим, что некие требования должны быть выполнены
+перед вызовом подпрограммы <code class="code highlight ada docutils literal highlight-ada"><span class="n">Op</span></code>, это предварительные
+условия. Точно так же, если определенные требования должны быть
+выполнены после вызова подпрограммы <code class="code highlight ada docutils literal highlight-ada"><span class="n">Op</span></code>, это постусловия. Мы можем
+думать о предусловиях и постусловиях как об обещаниях между тем, кто вызывает
+и тем, кто принимает вызов подпрограммы: предусловие - это обещание от
+вызывающего к вызываемому, а постусловие - это обещание в
+обратном направлении.</p>
+<p>Пред- и постусловия указываются с помощью спецификации аспекта в
+объявлении подпрограммы. Спуцификация <code class="code highlight ada docutils literal highlight-ada"><span class="kn">with</span> <span class="n">Pre</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">условие</span><span class="o">&gt;</span></code>
+определяет предварительное условие, а спецификация
+<code class="code highlight ada docutils literal highlight-ada"><span class="kn">with</span> <span class="n">Post</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">условие</span><span class="o">&gt;</span></code> определяет постусловие.</p>
+<p>В следующем коде показан пример предварительных условий:</p>
+
+<widget id="26" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Contracts.Show_Simple_Precondition" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_simple_precondition.adb">procedure Show_Simple_Precondition is
+
+   procedure DB_Entry (Name : String;
+                       Age  : Natural)
+     with Pre =&gt; Name&#39;Length &gt; 0
+   is
+   begin
+      --  Missing implementation
+      null;
+   end DB_Entry;
+begin
+   DB_Entry (&#34;John&#34;, 30);
+
+   --  Precondition will fail!
+   DB_Entry (&#34;&#34;,     21);
+end Show_Simple_Precondition;</div>
+    
+    <div id="26.tab" class="tab">
+        
+            <button id="26.tab.show_simple_precondition.adb" class="tab-links">show_simple_precondition.adb</button>
+        
+    </div>
+    <div id="26.editor" class="editor-container"></div>
+    <div id="26.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="26.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="26.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="26.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="26.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="26.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="26.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В этом примере мы хотим, чтобы поле имени в нашей базе данных не
+содержало пустой строки. Мы реализуем это требование, используя
+предварительное условие, требующее, чтобы длина строки, используемой
+для параметра <code class="code highlight ada docutils literal highlight-ada"><span class="n">Name</span></code> процедуры <code class="code highlight ada docutils literal highlight-ada"><span class="n">DB_Entry</span></code>, была больше нуля.
+Если процедура <code class="code highlight ada docutils literal highlight-ada"><span class="n">DB_Entry</span></code> вызывается с пустой строкой для параметра
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Name</span></code>, вызов завершится неудачно, поскольку предварительное условие
+не выполнено.</p>
+<div class="admonition-gnat admonition">
+<p class="admonition-title">В наборе инструментов GNAT</p>
+<p>GNAT обрабатывает предварительные и постусловия, генерируя код для
+проверки утверждений (assertion) во время выполнения программы.
+Однако по умолчанию проверка утверждения не включена. Следовательно,
+чтобы проверять предварительные и постусловия во время выполнения,
+вам необходимо включить проверку утверждений с помощью ключа <cite>-gnata</cite>.</p>
+</div>
+<p>Прежде чем мы перейдем к следующему примеру, давайте кратко обсудим
+кванторные выражения, которые весьма полезны для краткого
+написания предварительных и постусловий. Кванторные выражения
+возвращают логическое значение, указывающее, соответствуют ли элементы
+массива или контейнера ожидаемому условию. Они имеют форму:
+<code class="code highlight ada docutils literal highlight-ada"><span class="p">(</span><span class="kr">for</span> <span class="kr">all</span> <span class="n">I</span> <span class="ow">in</span> <span class="n">A</span><span class="p">&#39;</span><span class="na">Range</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">условие</span> <span class="n">для</span> <span class="n">A</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">&gt;</span></code>, где
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span></code> - это массив, а <code class="code highlight ada docutils literal highlight-ada"><span class="n">I</span></code> - индекс. Кванторные выражения,
+использующие <code class="code highlight ada docutils literal highlight-ada"><span class="kr">for</span> <span class="kr">all</span></code>, проверяют, выполняется ли условие для каждого
+элемент. Например:</p>
+<div class="ada-nocheck highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kr">for</span> <span class="kr">all</span> <span class="n">I</span> <span class="ow">in</span> <span class="n">A</span><span class="p">&#39;</span><span class="na">Range</span> <span class="p">=&gt;</span> <span class="n">A</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Это кванторные выражение истинно только тогда, когда все элементы
+массива <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span></code> имеют нулевое значение.</p>
+<p>Другой вид кванторных выражений использует <code class="code highlight ada docutils literal highlight-ada"><span class="kr">for</span> <span class="kr">some</span></code>. Он выглядит
+примерно так: <code class="code highlight ada docutils literal highlight-ada"><span class="p">(</span><span class="kr">for</span> <span class="kr">some</span> <span class="n">I</span> <span class="ow">in</span> <span class="n">A</span><span class="p">&#39;</span><span class="na">Range</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">условие</span> <span class="n">для</span> <span class="n">A</span><span class="p">(</span><span class="n">I</span><span class="p">)</span><span class="o">&gt;</span></code>.
+И в этом случае кванторное выражение проверяет, есть ли <em>некоторые</em> (some)
+элементы (отсюда и название) для которых условие истино.</p>
+<p>Проиллюстрируем постусловия на следующем примере:</p>
+
+<widget id="27" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Contracts.Show_Simple_Postcondition" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_simple_postcondition.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Simple_Postcondition is
+
+   type Int_8 is range -2 ** 7 .. 2 ** 7 - 1;
+
+   type Int_8_Array is
+     array (Integer range &lt;&gt;) of Int_8;
+
+   function Square (A : Int_8) return Int_8 is
+     (A * A)
+     with Post =&gt; (if abs A in 0 | 1
+                   then Square&#39;Result = abs A
+                   else Square&#39;Result &gt; A);
+
+   procedure Square (A : in out Int_8_Array)
+     with Post =&gt; (for all I in A&#39;Range =&gt;
+                     A (I) = A&#39;Old (I) * A&#39;Old (I))
+   is
+   begin
+      for V of A loop
+         V := Square (V);
+      end loop;
+   end Square;
+
+   V : Int_8_Array := (-2, -1, 0, 1, 10, 11);
+begin
+   for E of V loop
+      Put_Line (&#34;Original: &#34;
+                &amp; Int_8&#39;Image (E));
+   end loop;
+   New_Line;
+
+   Square (V);
+   for E of V loop
+      Put_Line (&#34;Square:   &#34;
+                &amp; Int_8&#39;Image (E));
+   end loop;
+end Show_Simple_Postcondition;</div>
+    
+    <div id="27.tab" class="tab">
+        
+            <button id="27.tab.show_simple_postcondition.adb" class="tab-links">show_simple_postcondition.adb</button>
+        
+    </div>
+    <div id="27.editor" class="editor-container"></div>
+    <div id="27.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="27.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="27.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="27.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="27.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="27.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="27.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Мы объявляем 8-битный тип со знаком <code class="code highlight ada docutils literal highlight-ada"><span class="n">Int_8</span></code> и массив элементов этого типа
+(<code class="code highlight ada docutils literal highlight-ada"><span class="n">Int_8_Array</span></code>). Мы хотим убедиться, что  после вызова процедуры
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Square</span></code> каждый элемент массива <code class="code highlight ada docutils literal highlight-ada"><span class="n">Int_8_Array</span></code> возведен в квадрат.
+Мы делаем это с помощью постусловия, используя выражение <code class="code highlight ada docutils literal highlight-ada"><span class="kr">for</span> <span class="kr">all</span></code>.
+Это постусловие использует атрибут <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Old</span></code> чтобы сослаться на исходное
+(до вызова) значение параметра.</p>
+<p>Мы также хотим убедиться, что результат вызовов функции <code class="code highlight ada docutils literal highlight-ada"><span class="n">Square</span></code>
+больше, чем аргумент этого вызова. Для этого мы пишем постусловие,
+применяя атрибут <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Result</span></code> к именем функции и сравниваем его с входным
+значением.</p>
+<p>Мы можем использовать как предварительные, так и постусловия в
+объявлении одной подпрограммы. Например:</p>
+
+<widget id="28" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Contracts.Show_Simple_Contract" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_simple_contract.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Simple_Contract is
+
+   type Int_8 is range -2 ** 7 .. 2 ** 7 - 1;
+
+   function Square (A : Int_8) return Int_8 is
+     (A * A)
+     with
+          Pre  =&gt; (Integer&#39;Size &gt;= Int_8&#39;Size * 2
+                   and Integer (A) * Integer (A) &lt;=
+                       Integer (Int_8&#39;Last)),
+          Post =&gt; (if abs A in 0 | 1
+                   then Square&#39;Result = abs A
+                   else Square&#39;Result &gt; A);
+
+   V : Int_8;
+begin
+   V := Square (11);
+   Put_Line (&#34;Square of 11 is &#34; &amp; Int_8&#39;Image (V));
+
+   --  Precondition will fail...
+   V := Square (12);
+   Put_Line (&#34;Square of 12 is &#34; &amp; Int_8&#39;Image (V));
+end Show_Simple_Contract;</div>
+    
+    <div id="28.tab" class="tab">
+        
+            <button id="28.tab.show_simple_contract.adb" class="tab-links">show_simple_contract.adb</button>
+        
+    </div>
+    <div id="28.editor" class="editor-container"></div>
+    <div id="28.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="28.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="28.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="28.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="28.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="28.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="28.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В этом примере мы хотим убедиться, что входной аргумент вызовова
+функции <code class="code highlight ada docutils literal highlight-ada"><span class="n">Square</span></code> не вызовет переполнения типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">Int_8</span></code> в
+нашей функции. Мы делаем это путем преобразования входного значения в
+тип <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Integer</span></code>, который используется для промежуточных вычислений,
+и проверяем, находится ли результат в допустимом для типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">Int_8</span></code>
+диапазоне. В этом примере у нас то же постусловие, что и в предыдущем.</p>
+</section>
+<section id="id3">
+<h2>Предикаты<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Предикаты определяют ожидания касающиеся типов. Они похожи на
+предусловия и постусловия, но применяются к типам, а не к
+подпрограммам. Их условия проверяются для каждого объекта данного
+типа, что позволяет убедиться, что объект типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">T</span></code> соответствует
+требованиям, указанным для данного типа.</p>
+<p>Есть два вида предикатов: статические и динамические. Проще говоря,
+статические предикаты используются для проверки объектов во время
+компиляции, а динамические предикаты используются для проверок во
+время выполнения. Обычно статические предикаты используются для
+скалярных типов и динамические предикаты для более сложных типов.</p>
+<p>Статические и динамические предикаты указываются с помощью следующих
+спецификаций:</p>
+<ul class="simple">
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="kn">with</span> <span class="n">Static_Predicate</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">свойство</span><span class="o">&gt;</span></code></p></li>
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="kn">with</span> <span class="n">Dynamic_Predicate</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">свойство</span><span class="o">&gt;</span></code></p></li>
+</ul>
+<p>Давайте воспользуемся следующим примером, чтобы проиллюстрировать
+динамические предикаты:</p>
+
+<widget id="29" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Contracts.Show_Dynamic_Predicate_Courses" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_dynamic_predicate_courses.adb">with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with Ada.Calendar;          use Ada.Calendar;
+with Ada.Containers.Vectors;
+
+procedure Show_Dynamic_Predicate_Courses is
+
+   package Courses is
+      type Course_Container is private;
+
+      type Course is record
+         Name       : Unbounded_String;
+         Start_Date : Time;
+         End_Date   : Time;
+      end record
+        with Dynamic_Predicate =&gt;
+          Course.Start_Date &lt;= Course.End_Date;
+
+      procedure Add (CC : in out Course_Container;
+                     C  :        Course);
+   private
+      package Course_Vectors is new
+        Ada.Containers.Vectors
+          (Index_Type   =&gt; Natural,
+           Element_Type =&gt; Course);
+
+      type Course_Container is record
+         V : Course_Vectors.Vector;
+      end record;
+   end Courses;
+
+   package body Courses is
+      procedure Add (CC : in out Course_Container;
+                     C  :        Course) is
+      begin
+         CC.V.Append (C);
+      end Add;
+   end Courses;
+
+   use Courses;
+
+   CC : Course_Container;
+begin
+   Add (CC,
+        Course&#39;(
+          Name       =&gt; To_Unbounded_String
+                         (&#34;Intro to Photography&#34;),
+          Start_Date =&gt; Time_Of (2018, 5, 1),
+          End_Date   =&gt; Time_Of (2018, 5, 10)));
+
+   --  This should trigger an error in the
+   --  dynamic predicate check
+   Add (CC,
+        Course&#39;(
+          Name       =&gt; To_Unbounded_String
+                         (&#34;Intro to Video Recording&#34;),
+          Start_Date =&gt; Time_Of (2019, 5, 1),
+          End_Date   =&gt; Time_Of (2018, 5, 10)));
+
+end Show_Dynamic_Predicate_Courses;</div>
+    
+    <div id="29.tab" class="tab">
+        
+            <button id="29.tab.show_dynamic_predicate_courses.adb" class="tab-links">show_dynamic_predicate_courses.adb</button>
+        
+    </div>
+    <div id="29.editor" class="editor-container"></div>
+    <div id="29.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="29.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="29.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="29.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="29.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="29.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="29.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В этом примере пакет <code class="code highlight ada docutils literal highlight-ada"><span class="n">Courses</span></code> определяет тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Course</span></code> и тип
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Course_Container</span></code>, объект которого содержит
+все курсы. Мы хотим обеспечить согласованность дат каждого курса, в
+частности, чтобы дата начала была не позже даты окончания. Чтобы обеспечить
+соблюдение этого правила, мы объявляем динамический предикат для типа
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Course</span></code>, который будет действовать для каждого объекта. Предикат
+использует имя типа, так как будь-то это обычная переменная данного типа:
+такое имя обозначает экземпляр проверяемого объекта.</p>
+<p>Обратите внимание, что в приведенном выше примере используются
+неограниченные строки и даты. Оба типа
+доступны в стандартной библиотеке Ада. Пожалуйста, обратитесь к
+следующим разделам для получения дополнительной информации:</p>
+<ul class="simple">
+<li><p>о типе неограниченной строки (<code class="code highlight ada docutils literal highlight-ada"><span class="n">Unbounded_String</span></code>): раздел
+<a class="reference internal" href="standard_library_strings.html#intro-ada-ru-unboundedstrings"><span class="std std-ref">Неограниченные строки</span></a>;</p></li>
+<li><p>о дате и времени: Раздел <a class="reference internal" href="standard_library_dates_times.html#intro-ada-ru-datestimes"><span class="std std-ref">Даты и время</span></a>.</p></li>
+</ul>
+<p>Статические предикаты, как упоминалось выше, в основном используются
+для скалярных типов и проверяются во время компиляции. Они особенно
+полезны для представления несмежных элементов перечисления.
+Классический пример - список дней недели:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Week</span> <span class="kr">is</span> <span class="p">(</span><span class="nv">Mon</span><span class="p">,</span> <span class="nv">Tue</span><span class="p">,</span> <span class="nv">Wed</span><span class="p">,</span> <span class="nv">Thu</span><span class="p">,</span> <span class="nv">Fri</span><span class="p">,</span> <span class="nv">Sat</span><span class="p">,</span> <span class="nv">Sun</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Мы можем легко создать подсписок рабочих дней в неделе, указав подтип
+(<code class="code highlight ada docutils literal highlight-ada"><span class="kd">subtype</span></code>) с диапазоном на основе <code class="code highlight ada docutils literal highlight-ada"><span class="n">Week</span></code>. Например:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">subtype</span> <span class="kt">Work_Week</span> <span class="kr">is</span> <span class="n">Week</span> <span class="kr">range</span> <span class="n">Mon</span> <span class="p">..</span> <span class="n">Fri</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Диапазоны в Аде могут быть указаны только как непрерывные списки: они
+не позволяют нам выбирать определенные дни. Однако нам может понадобиться
+создать список, содержащий только первый, средний и последний день
+рабочей недели. Для этого мы используем статический предикат:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">subtype</span> <span class="kt">Check_Days</span> <span class="kr">is</span> <span class="n">Work_Week</span>
+  <span class="kr">with</span> <span class="n">Static_Predicate</span> <span class="p">=&gt;</span> <span class="n">Check_Days</span> <span class="ow">in</span> <span class="n">Mon</span> <span class="p">|</span> <span class="n">Wed</span> <span class="p">|</span> <span class="n">Fri</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Давайте посмотрим на полный пример:</p>
+
+<widget id="30" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Contracts.Show_Predicates" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_predicates.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Predicates is
+
+   type Week is (Mon, Tue, Wed, Thu,
+                 Fri, Sat, Sun);
+
+   subtype Work_Week is Week range Mon .. Fri;
+
+   subtype Test_Days is Work_Week
+     with Static_Predicate =&gt;
+       Test_Days in Mon | Wed | Fri;
+
+   type Tests_Week is array (Week) of Natural
+     with Dynamic_Predicate =&gt;
+       (for all I in Tests_Week&#39;Range =&gt;
+          (case I is
+               when Test_Days =&gt;
+                  Tests_Week (I) &gt; 0,
+               when others    =&gt;
+                  Tests_Week (I) = 0));
+
+   Num_Tests : Tests_Week :=
+                 (Mon =&gt; 3, Tue =&gt; 0,
+                  Wed =&gt; 4, Thu =&gt; 0,
+                  Fri =&gt; 2, Sat =&gt; 0,
+                  Sun =&gt; 0);
+
+   procedure Display_Tests (N : Tests_Week) is
+   begin
+      for I in Test_Days loop
+         Put_Line (&#34;# tests on &#34;
+                   &amp; Test_Days&#39;Image (I)
+                   &amp; &#34; =&gt; &#34;
+                   &amp; Integer&#39;Image (N (I)));
+      end loop;
+   end Display_Tests;
+
+begin
+   Display_Tests (Num_Tests);
+
+   --  Assigning non-conformant values to
+   --  individual elements of the Tests_Week
+   --  type does not trigger a predicate
+   --  check:
+   Num_Tests (Tue) := 2;
+
+   --  However, assignments with the &#34;complete&#34;
+   --  Tests_Week type trigger a predicate
+   --  check. For example:
+   --
+   --  Num_Tests := (others =&gt; 0);
+
+   --  Also, calling any subprogram with
+   --  parameters of Tests_Week type
+   --  triggers a predicate check. Therefore,
+   --  the following line will fail:
+   Display_Tests (Num_Tests);
+end Show_Predicates;</div>
+    
+    <div id="30.tab" class="tab">
+        
+            <button id="30.tab.show_predicates.adb" class="tab-links">show_predicates.adb</button>
+        
+    </div>
+    <div id="30.editor" class="editor-container"></div>
+    <div id="30.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="30.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="30.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="30.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="30.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="30.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="30.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Здесь у нас есть приложение, которое хочет проводить тесты только
+три дня в рабочей неделе. Эти дни указаны в подтипе <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test_Days</span></code>. Мы хотим
+отслеживать количество тестов, которые проводятся каждый день. Мы
+объявляем тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Tests_Week</span></code> как массив, объект которого будет содержать
+количество тестов, выполняемых каждый день. Согласно нашим требованиям,
+эти тесты должны проводиться только в вышеупомянутые три дня; в другие дни
+никаких анализов проводить не следует. Это требование реализовано с
+помощью динамического предиката типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">Tests_Week</span></code>. Наконец, фактическая
+информация об этих тестах хранится в массиве <code class="code highlight ada docutils literal highlight-ada"><span class="n">Num_Tests</span></code>, который
+является экземпляром типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">Tests_Week</span></code>.</p>
+<p>Динамический предикат типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">Tests_Week</span></code> проверяется во время
+инициализации <code class="code highlight ada docutils literal highlight-ada"><span class="n">Num_Tests</span></code>. Если
+у нас там будет несоответствующее значение, проверка не удастся.
+Однако, как мы видим в нашем примере, изменения отдельных элементов
+массива не приводят к выполнению проверки. Так происходит потому,
+что инициализация сложной структуры данных
+(например, массивов или записей) может требовать выполнения нескольких
+операций присваивания. Однако, как только объект передается в качестве
+аргумента подпрограмме, динамический предикат проверяется, потому что
+подпрограмма требует, чтобы объект был согласован. Это происходит при
+вызове <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display_Tests</span></code> в последнем операторе нашего примера.
+Здесь проверка предиката вызовет ошибку потому, что предыдущее изменение
+приводит к несогласованному значению.</p>
+</section>
+<section id="id4">
+<h2>Инварианты типа<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Инварианты типов - это еще один способ определить ожидания
+относительно типов. В то время как предикаты используются для всех типов,
+инварианты типов используются исключительно для определения
+ожиданий в отношении <em>личных типов</em>. Если тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">T</span></code> из пакета <code class="code highlight ada docutils literal highlight-ada"><span class="n">P</span></code>
+имеет инвариант типа, результаты операций с объектами типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">T</span></code>
+всегда согласуются с этим инвариантом.</p>
+<p>Инварианты типов указываются с помощью предложения
+<code class="code highlight ada docutils literal highlight-ada"><span class="kn">with</span> <span class="n">Type_Invariant</span> <span class="p">=&gt;</span> <span class="o">&lt;</span><span class="n">свойство</span><span class="o">&gt;</span></code>. Подобно
+предикатам, <em>свойство</em> определяет условие, которое позволяет нам
+контролировать, соответствует ли объект типа <code class="code highlight ada docutils literal highlight-ada"><span class="n">T</span></code> нашим требованиям.
+В этом смысле инварианты типов можно рассматривать как своего рода предикаты
+для личных типов. Однако есть некоторые отличия касающиеся проверок. Эти
+отличия приведены в следующей таблице:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 45%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Элемент</p></th>
+<th class="head"><p>Проверки параметров
+подпрограммы</p></th>
+<th class="head"><p>Проверки присвоения</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Предикаты</p></td>
+<td><p>По всем входящим <code class="code highlight ada docutils literal highlight-ada"><span class="ow">in</span></code>
+и выходящим <code class="code highlight ada docutils literal highlight-ada"><span class="kr">out</span></code>
+параметрам</p></td>
+<td><p>При присваивании и
+явных инициализациях</p></td>
+</tr>
+<tr class="row-odd"><td><p>Инварианты
+типов</p></td>
+<td><p>По параметрам <code class="code highlight ada docutils literal highlight-ada"><span class="kr">out</span></code>,
+возвращенным из подпрограмм,
+объявленных в том же
+видимом разделе</p></td>
+<td><p>При всех инициализациях</p></td>
+</tr>
+</tbody>
+</table>
+<p>Мы могли бы переписать наш предыдущий пример и заменить динамические
+предикаты инвариантами типов. Это выглядело бы так:</p>
+
+<widget id="31" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Contracts.Show_Type_Invariant" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_type_invariant.adb">with Ada.Text_IO;           use Ada.Text_IO;
+with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with Ada.Calendar;          use Ada.Calendar;
+with Ada.Containers.Vectors;
+
+procedure Show_Type_Invariant is
+
+   package Courses is
+      type Course is private
+        with Type_Invariant =&gt; Check (Course);
+
+      type Course_Container is private;
+
+      procedure Add (CC : in out Course_Container;
+                     C  :        Course);
+
+      function Init
+        (Name                 : String;
+         Start_Date, End_Date : Time) return Course;
+
+      function Check (C : Course) return Boolean;
+
+   private
+      type Course is record
+         Name       : Unbounded_String;
+         Start_Date : Time;
+         End_Date   : Time;
+      end record;
+
+      function Check (C : Course) return Boolean is
+        (C.Start_Date &lt;= C.End_Date);
+
+      package Course_Vectors is new
+        Ada.Containers.Vectors
+          (Index_Type   =&gt; Natural,
+           Element_Type =&gt; Course);
+
+      type Course_Container is record
+         V : Course_Vectors.Vector;
+      end record;
+   end Courses;
+
+   package body Courses is
+      procedure Add (CC : in out Course_Container;
+                     C  :        Course) is
+      begin
+         CC.V.Append (C);
+      end Add;
+
+      function Init
+        (Name                 : String;
+         Start_Date, End_Date : Time) return Course is
+      begin
+         return
+           Course&#39;(Name       =&gt; To_Unbounded_String (Name),
+                   Start_Date =&gt; Start_Date,
+                   End_Date   =&gt; End_Date);
+      end Init;
+   end Courses;
+
+   use Courses;
+
+   CC : Course_Container;
+begin
+   Add (CC,
+        Init (Name       =&gt; &#34;Intro to Photography&#34;,
+              Start_Date =&gt; Time_Of (2018, 5, 1),
+              End_Date   =&gt; Time_Of (2018, 5, 10)));
+
+   --  This should trigger an error in the
+   --  type-invariant check
+   Add (CC,
+        Init (Name       =&gt; &#34;Intro to Video Recording&#34;,
+              Start_Date =&gt; Time_Of (2019, 5, 1),
+              End_Date   =&gt; Time_Of (2018, 5, 10)));
+end Show_Type_Invariant;</div>
+    
+    <div id="31.tab" class="tab">
+        
+            <button id="31.tab.show_type_invariant.adb" class="tab-links">show_type_invariant.adb</button>
+        
+    </div>
+    <div id="31.editor" class="editor-container"></div>
+    <div id="31.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="31.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="31.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="31.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="31.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="31.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="31.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Основное отличие состоит в том, что в предыдущем примере тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Course</span></code>
+был полностью описан в видимом разделе пакета <code class="code highlight ada docutils literal highlight-ada"><span class="n">Courses</span></code>, но в этом
+примере он является личным типом.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="interfacing_with_c.html" class="btn btn-neutral float-right" title="Взаимодействие с языком C" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="tasking.html" class="btn btn-neutral" title="Управление задачами" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

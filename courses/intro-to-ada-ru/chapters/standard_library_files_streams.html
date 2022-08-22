@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Стандартная библиотека: Файлы и потоки &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Стандартная библиотека: Numerics" href="standard_library_numerics.html" />
+    <link rel="prev" title="Стандартная библиотека: Строки" href="standard_library_strings.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Введение в язык Ада</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../safe-secure-software-ru/index.html">Безопасное и надежное программное обеспечение</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Стандартная библиотека: Файлы и потоки<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>Ада предлагает различные средства для ввода/вывода файлов (I/O):</p>
+<ul class="simple">
+<li><p><em>Текстовый</em> ввод-вывод в текстовом
+формате, включая отображение информации на консоли.</p></li>
+<li><p><em>Последовательный</em> ввод-вывод в
+двоичном формате последовательным образом для
+конкретного типа данных.</p></li>
+<li><p><em>Прямой</em> ввод-вывод в двоичном
+формате для конкретного типа данных, но также поддерживающий доступ
+к любой позиции файла.</p></li>
+<li><p><em>Потоковый</em> ввод-вывод информации для
+нескольких типов данных, включая объекты неограниченных типов, с
+использованием файлов в двоичном формате.</p></li>
+</ul>
+<p>В этой таблице представлено краткое описание функций, которые мы
+только что видели:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 20%" />
+<col style="width: 24%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Опция ввода-
+вывода файлов</p></th>
+<th class="head"><p>Формат</p></th>
+<th class="head"><p>Произвольный
+доступ</p></th>
+<th class="head"><p>Типы данных</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Text I/O</p></td>
+<td><p>текст</p></td>
+<td></td>
+<td><p>строковый тип</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sequential I/O</p></td>
+<td><p>двоичный</p></td>
+<td></td>
+<td><p>одиночный тип</p></td>
+</tr>
+<tr class="row-even"><td><p>Direct I/O</p></td>
+<td><p>двоичный</p></td>
+<td><p>да</p></td>
+<td><p>одиночный тип</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stream I/O</p></td>
+<td><p>двоичный</p></td>
+<td><p>да</p></td>
+<td><p>несколько типов</p></td>
+</tr>
+</tbody>
+</table>
+<p>В следующих разделах мы подробно обсудим эти средства ввода-вывода.</p>
+<section id="id2">
+<h2>Текстовый ввод-вывод<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>В большинстве примеров этого курса мы использовали процедуру <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put_Line</span></code> для
+отображения информации на консоли. Однако эта процедура также
+принимает параметр <code class="code highlight ada docutils literal highlight-ada"><span class="kt">File_Type</span></code>. Например, вы можете выбрать между стандартным
+выводом (Standard_Output) и выводом стандартной ошибкой
+(Standard_Error), явно задав этот параметр:</p>
+
+<widget id="188" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Std_Text_Out" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_std_text_out.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Std_Text_Out is
+begin
+   Put_Line (Standard_Output, &#34;Hello World #1&#34;);
+   Put_Line (Standard_Error,  &#34;Hello World #2&#34;);
+end Show_Std_Text_Out;</div>
+    
+    <div id="188.tab" class="tab">
+        
+            <button id="188.tab.show_std_text_out.adb" class="tab-links">show_std_text_out.adb</button>
+        
+    </div>
+    <div id="188.editor" class="editor-container"></div>
+    <div id="188.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="188.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="188.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="188.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="188.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="188.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="188.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Вы также можете использовать этот параметр для записи информации в
+любой текстовый файл. Чтобы создать новый файл для записи, используйте
+процедуру <code class="code highlight ada docutils literal highlight-ada"><span class="n">Create</span></code> для инициализации объекта <code class="code highlight ada docutils literal highlight-ada"><span class="kt">File_Type</span></code>,
+который впоследствии можно передать в <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put_Line</span></code>
+(вместо, например, <code class="code highlight ada docutils literal highlight-ada"><span class="n">Standard_Output</span></code>). После того, как вы закончите
+запись информации, вы можете закрыть файл, вызвав процедуру <code class="code highlight ada docutils literal highlight-ada"><span class="n">Close</span></code>.</p>
+<p>Вы используете аналогичный метод для чтения информации из текстового
+файла. Однако при открытии файла вы должны указать, что это входной
+файл (<code class="code highlight ada docutils literal highlight-ada"><span class="n">In_File</span></code>), а не выходной файл. Кроме того, вместо вызова процедуры
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Put_Line</span></code> вы вызываете функцию <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Line</span></code> для чтения информации
+из файла.</p>
+<p>Давайте посмотрим на пример, который записывает информацию в новый
+текстовый файл, а затем считывает ее обратно из того же файла:</p>
+
+<widget id="189" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Simple_Text_File_IO" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_simple_text_file_io.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Simple_Text_File_IO is
+   F         : File_Type;
+   File_Name : constant String := &#34;simple.txt&#34;;
+begin
+   Create (F, Out_File, File_Name);
+   Put_Line (F, &#34;Hello World #1&#34;);
+   Put_Line (F, &#34;Hello World #2&#34;);
+   Put_Line (F, &#34;Hello World #3&#34;);
+   Close (F);
+
+   Open (F, In_File, File_Name);
+   while not End_Of_File (F) loop
+      Put_Line (Get_Line (F));
+   end loop;
+   Close (F);
+end Show_Simple_Text_File_IO;</div>
+    
+    <div id="189.tab" class="tab">
+        
+            <button id="189.tab.show_simple_text_file_io.adb" class="tab-links">show_simple_text_file_io.adb</button>
+        
+    </div>
+    <div id="189.editor" class="editor-container"></div>
+    <div id="189.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="189.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="189.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="189.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="189.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="189.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="189.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В дополнение к процедурам <code class="code highlight ada docutils literal highlight-ada"><span class="n">Create</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="n">Close</span></code> стандартная библиотека
+также включает процедуру <code class="code highlight ada docutils literal highlight-ada"><span class="n">Reset</span></code>, которая, как следует из названия,
+сбрасывает (стирает) всю информацию из файла. Например:</p>
+
+<widget id="190" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Text_File_Reset" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_text_file_reset.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Text_File_Reset is
+   F         : File_Type;
+   File_Name : constant String := &#34;simple.txt&#34;;
+begin
+   Create (F, Out_File, File_Name);
+   Put_Line (F, &#34;Hello World #1&#34;);
+   Reset (F);
+   Put_Line (F, &#34;Hello World #2&#34;);
+   Close (F);
+
+   Open (F, In_File, File_Name);
+   while not End_Of_File (F) loop
+      Put_Line (Get_Line (F));
+   end loop;
+   Close (F);
+end Show_Text_File_Reset;</div>
+    
+    <div id="190.tab" class="tab">
+        
+            <button id="190.tab.show_text_file_reset.adb" class="tab-links">show_text_file_reset.adb</button>
+        
+    </div>
+    <div id="190.editor" class="editor-container"></div>
+    <div id="190.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="190.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="190.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="190.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="190.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="190.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="190.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Запустив эту программу, мы замечаем, что, хотя мы записали первую
+строку (<code class="code highlight ada docutils literal highlight-ada"><span class="s">&quot;Hello World #1&quot;</span></code>) в файл, она была удалена вызовом
+процедуры сброса <code class="code highlight ada docutils literal highlight-ada"><span class="n">Reset</span></code>.</p>
+<p>В дополнение к открытию файла для чтения или записи, вы также можете
+открыть существующий файл для добавления в конец. Сделайте это, вызвав
+процедуру <code class="code highlight ada docutils literal highlight-ada"><span class="n">Open</span></code> с параметром <code class="code highlight ada docutils literal highlight-ada"><span class="n">Append_File</span></code>.</p>
+<p>При вызове процедуры открытия <code class="code highlight ada docutils literal highlight-ada"><span class="n">Open</span></code> возбуждает исключение, если
+указанный файл не найден. Поэтому вы должны обрабатывать исключения в этом
+контексте. В следующем примере удаляется файл, а затем предпринимается
+попытка открыть тот же файл для чтения:</p>
+
+<widget id="191" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Text_File_Input_Except" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_text_file_input_except.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Text_File_Input_Except is
+   F         : File_Type;
+   File_Name : constant String := &#34;simple.txt&#34;;
+begin
+   --  Open output file and delete it
+   Create (F, Out_File, File_Name);
+   Delete (F);
+
+   --  Try to open deleted file
+   Open (F, In_File, File_Name);
+   Close (F);
+exception
+   when Name_Error =&gt;
+      Put_Line (&#34;File does not exist&#34;);
+   when others =&gt;
+      Put_Line (&#34;Error while processing input file&#34;);
+end Show_Text_File_Input_Except;</div>
+    
+    <div id="191.tab" class="tab">
+        
+            <button id="191.tab.show_text_file_input_except.adb" class="tab-links">show_text_file_input_except.adb</button>
+        
+    </div>
+    <div id="191.editor" class="editor-container"></div>
+    <div id="191.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="191.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="191.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="191.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="191.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="191.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="191.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В этом примере файл создается вызовом <code class="code highlight ada docutils literal highlight-ada"><span class="n">Create</span></code>, а затем удаляется
+вызовом <code class="code highlight ada docutils literal highlight-ada"><span class="n">Delete</span></code>. После вызова функции <code class="code highlight ada docutils literal highlight-ada"><span class="n">Delete</span></code> мы больше не можем
+использовать объект <code class="code highlight ada docutils literal highlight-ada"><span class="kt">File_Type</span></code>. После удаления файла мы пытаемся открыть
+несуществующий файл, что возбуждает исключение <code class="code highlight ada docutils literal highlight-ada"><span class="n">Name_Error</span></code>.</p>
+</section>
+<section id="id3">
+<h2>Последовательный ввод-вывод<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>В предыдущем разделе представлена подробная информация о вводе/выводе
+текстовых файлов. Здесь мы обсудим выполнение операций ввода-вывода для
+файловов двоичного формата. Первый пакет, который мы рассмотрим -
+это <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Sequential_IO</span></code>. Поскольку этот пакет является настраиваемым,
+необходимо его настроить на тип данных ввод/вывлд которого мы будем
+производить. После этого можно использовать те же процедуры, что и в предыдущем
+разделе: <code class="code highlight ada docutils literal highlight-ada"><span class="n">Create</span></code>, <code class="code highlight ada docutils literal highlight-ada"><span class="n">Open</span></code>, <code class="code highlight ada docutils literal highlight-ada"><span class="n">Close</span></code>, <code class="code highlight ada docutils literal highlight-ada"><span class="n">Reset</span></code> и
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Delete</span></code>. Однако вместо вызова процедур <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Line</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put_Line</span></code>
+следует вызвать процедуры <code class="code highlight ada docutils literal highlight-ada"><span class="n">Read</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="n">Write</span></code>.</p>
+<p>В следующем примере создается настройка пакета <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Sequential_IO</span></code> для
+типов с плавающей запятой:</p>
+
+<widget id="192" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Seq_Float_IO" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_seq_float_io.adb">with Ada.Text_IO;
+with Ada.Sequential_IO;
+
+procedure Show_Seq_Float_IO is
+   package Float_IO is
+     new Ada.Sequential_IO (Float);
+   use Float_IO;
+
+   F         : Float_IO.File_Type;
+   File_Name : constant String := &#34;float_file.bin&#34;;
+begin
+   Create (F, Out_File, File_Name);
+   Write (F,  1.5);
+   Write (F,  2.4);
+   Write (F,  6.7);
+   Close (F);
+
+   declare
+      Value : Float;
+   begin
+      Open (F, In_File, File_Name);
+      while not End_Of_File (F) loop
+         Read (F, Value);
+         Ada.Text_IO.Put_Line (Float&#39;Image (Value));
+      end loop;
+      Close (F);
+   end;
+end Show_Seq_Float_IO;</div>
+    
+    <div id="192.tab" class="tab">
+        
+            <button id="192.tab.show_seq_float_io.adb" class="tab-links">show_seq_float_io.adb</button>
+        
+    </div>
+    <div id="192.editor" class="editor-container"></div>
+    <div id="192.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="192.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="192.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="192.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="192.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="192.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="192.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Мы используем один и тот же подход для чтения и записи сложной
+структурной информации. В следующем примере используется тип запись,
+включающая логическое значение типа Boolean и значение с
+плавающей запятой типа Float:</p>
+
+<widget id="193" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Seq_Rec_IO" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_seq_rec_io.adb">with Ada.Text_IO;
+with Ada.Sequential_IO;
+
+procedure Show_Seq_Rec_IO is
+   type Num_Info is record
+      Valid : Boolean := False;
+      Value : Float;
+   end record;
+
+   procedure Put_Line (N : Num_Info) is
+   begin
+      if N.Valid then
+         Ada.Text_IO.Put_Line (&#34;(ok,     &#34;
+                               &amp; Float&#39;Image (N.Value) &amp; &#34;)&#34;);
+      else
+         Ada.Text_IO.Put_Line (&#34;(not ok,  -----------)&#34;);
+      end if;
+   end Put_Line;
+
+   package Num_Info_IO is new Ada.Sequential_IO (Num_Info);
+   use Num_Info_IO;
+
+   F         : Num_Info_IO.File_Type;
+   File_Name : constant String := &#34;float_file.bin&#34;;
+begin
+   Create (F, Out_File, File_Name);
+   Write (F,  (True,  1.5));
+   Write (F,  (False, 2.4));
+   Write (F,  (True,  6.7));
+   Close (F);
+
+   declare
+      Value : Num_Info;
+   begin
+      Open (F, In_File, File_Name);
+      while not End_Of_File (F) loop
+         Read (F, Value);
+         Put_Line (Value);
+      end loop;
+      Close (F);
+   end;
+end Show_Seq_Rec_IO;</div>
+    
+    <div id="193.tab" class="tab">
+        
+            <button id="193.tab.show_seq_rec_io.adb" class="tab-links">show_seq_rec_io.adb</button>
+        
+    </div>
+    <div id="193.editor" class="editor-container"></div>
+    <div id="193.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="193.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="193.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="193.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="193.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="193.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="193.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Как показывает пример, мы можем использовать тот же подход, который мы
+использовали для типов с плавающей запятой, для выполнения файлового
+ввода-вывода для этой записи. После того, как мы создадим экземпляр
+пакета <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Sequential_IO</span></code> для типа записи, операции ввода-вывода файлов будут
+выполняться таким же образом.</p>
+</section>
+<section id="id4">
+<h2>Прямой ввод-вывод<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Прямой ввод-вывод доступен в пакете <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Direct_IO</span></code>. Этот механизм похож
+на только что представленный последовательный ввод-вывод, но позволяет
+нам получить доступ к любой позиции в файле. Создание пакета и
+большинство операций очень похожи на последовательный ввод-вывод.
+Чтобы переписать приложение <code class="code highlight ada docutils literal highlight-ada"><span class="n">Show_Seq_Float_IO</span></code> из предыдущего раздела
+для использования пакета <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Direct_IO</span></code>, нам просто нужно заменить
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Sequential_IO</span></code> на <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Direct_IO</span></code> в настройке пакета.
+Это новый исходный код:</p>
+
+<widget id="194" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Dir_Float_IO" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_dir_float_io.adb">with Ada.Text_IO;
+with Ada.Direct_IO;
+
+procedure Show_Dir_Float_IO is
+   package Float_IO is new Ada.Direct_IO (Float);
+   use Float_IO;
+
+   F         : Float_IO.File_Type;
+   File_Name : constant String := &#34;float_file.bin&#34;;
+begin
+   Create (F, Out_File, File_Name);
+   Write (F,  1.5);
+   Write (F,  2.4);
+   Write (F,  6.7);
+   Close (F);
+
+   declare
+      Value : Float;
+   begin
+      Open (F, In_File, File_Name);
+      while not End_Of_File (F) loop
+         Read (F, Value);
+         Ada.Text_IO.Put_Line (Float&#39;Image (Value));
+      end loop;
+      Close (F);
+   end;
+end Show_Dir_Float_IO;</div>
+    
+    <div id="194.tab" class="tab">
+        
+            <button id="194.tab.show_dir_float_io.adb" class="tab-links">show_dir_float_io.adb</button>
+        
+    </div>
+    <div id="194.editor" class="editor-container"></div>
+    <div id="194.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="194.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="194.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="194.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="194.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="194.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="194.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В отличие от последовательного ввода-вывода, прямой ввод-вывод
+позволяет получить доступ к любой позиции в файле. Однако он не
+предлагает возможность добавлять информацию в конец файла. Вместо этого он
+предоставляет режим <code class="code highlight ada docutils literal highlight-ada"><span class="n">Inout_File</span></code>, позволяющий читать и записывать в файл
+через один и тот же объект <code class="code highlight ada docutils literal highlight-ada"><span class="kt">File_Type</span></code>.</p>
+<p>Чтобы получить доступ к нужной позиции в файле, вызовите процедуру
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Set_Index</span></code> и она установит новую позицию / индекс.
+Вы можете использовать функцию <code class="code highlight ada docutils literal highlight-ada"><span class="n">Index</span></code> чтобы узать текущий индекс.
+Посмотрим на пример:</p>
+
+<widget id="195" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Dir_Float_In_Out_File" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_dir_float_in_out_file.adb">with Ada.Text_IO;
+with Ada.Direct_IO;
+
+procedure Show_Dir_Float_In_Out_File is
+   package Float_IO is new Ada.Direct_IO (Float);
+   use Float_IO;
+
+   F         : Float_IO.File_Type;
+   File_Name : constant String := &#34;float_file.bin&#34;;
+begin
+   --  Open file for input / output
+   Create (F, Inout_File, File_Name);
+   Write (F,  1.5);
+   Write (F,  2.4);
+   Write (F,  6.7);
+
+   --  Set index to previous position and overwrite value
+   Set_Index (F, Index (F) - 1);
+   Write (F,  7.7);
+
+   declare
+      Value : Float;
+   begin
+      --  Set index to start of file
+      Set_Index (F, 1);
+
+      while not End_Of_File (F) loop
+         Read (F, Value);
+         Ada.Text_IO.Put_Line (Float&#39;Image (Value));
+      end loop;
+      Close (F);
+   end;
+end Show_Dir_Float_In_Out_File;</div>
+    
+    <div id="195.tab" class="tab">
+        
+            <button id="195.tab.show_dir_float_in_out_file.adb" class="tab-links">show_dir_float_in_out_file.adb</button>
+        
+    </div>
+    <div id="195.editor" class="editor-container"></div>
+    <div id="195.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="195.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="195.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="195.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="195.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="195.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="195.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Запустив этот пример, мы видим, что файл содержит значение <code class="docutils literal notranslate"><span class="pre">7.7</span></code> и не
+содержит значения <code class="docutils literal notranslate"><span class="pre">6.7</span></code>, которое мы записали сначала. Мы перезаписали
+значение, установив индекс на предыдущую позицию перед выполнением следующей
+операции записи.</p>
+<p>В этом примере мы использовали режим <code class="code highlight ada docutils literal highlight-ada"><span class="n">Inout_File</span></code>. Используя этот режим,
+мы просто вернули индекс в начальное положение перед чтением из файла
+(<code class="code highlight ada docutils literal highlight-ada"><span class="n">Set_Index</span> <span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></code>) вместо того, чтобы закрывать файл и повторно
+открывать его для чтения.</p>
+</section>
+<section id="id5">
+<h2>Потоковый ввод-вывод<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Все предыдущие подходы к файловому вводу-выводу в двоичном формате
+(последовательный и прямой ввод-вывод) работают с одним типом
+данных (тем, на который мы их настраиваем). Вы можете
+использовать эти подходы для записи объектов одного типа данных,
+хотя это может быть массивы или записи (потенциально со многими
+полями), но если вам нужно создать или обработать файлы, которые
+включают разные типы данных, либо объекты неограниченного типа,
+этих средств недостаточно. Вместо этого вы должны использовать
+потоковый ввод-вывод.</p>
+<p>Потоковый ввод-вывод имеет некоторые общие черты с предыдущими
+подходами. Мы по-прежнему используем процедуры <code class="code highlight ada docutils literal highlight-ada"><span class="n">Create</span></code>,
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Open</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="n">Close</span></code>. Однако вместо прямого доступа к файлу через объект
+<code class="code highlight ada docutils literal highlight-ada"><span class="kt">File_Type</span></code> вы используете тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Stream_Access</span></code>. Для
+чтения и записи информации вы используете атрибуты <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Read</span></code> или
+<code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Write</span></code> тех типов данных, которые вы читаете или пишете.</p>
+<p>Давайте посмотрим на версию процедуры <code class="code highlight ada docutils literal highlight-ada"><span class="n">Show_Dir_Float_IO</span></code> из предыдущего
+раздела. Процедура использует потоковый ввод-вывод вместо прямого ввода-вывода:</p>
+
+<widget id="196" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_Float_Stream" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_float_stream.adb">with Ada.Text_IO;
+with Ada.Streams.Stream_IO; use Ada.Streams.Stream_IO;
+
+procedure Show_Float_Stream is
+   F         : File_Type;
+   S         : Stream_Access;
+   File_Name : constant String := &#34;float_file.bin&#34;;
+begin
+   Create (F, Out_File, File_Name);
+   S := Stream (F);
+
+   Float&#39;Write (S, 1.5);
+   Float&#39;Write (S, 2.4);
+   Float&#39;Write (S, 6.7);
+
+   Close (F);
+
+   declare
+      Value : Float;
+   begin
+      Open (F, In_File, File_Name);
+      S := Stream (F);
+
+      while not End_Of_File (F) loop
+         Float&#39;Read (S, Value);
+         Ada.Text_IO.Put_Line (Float&#39;Image (Value));
+      end loop;
+      Close (F);
+   end;
+end Show_Float_Stream;</div>
+    
+    <div id="196.tab" class="tab">
+        
+            <button id="196.tab.show_float_stream.adb" class="tab-links">show_float_stream.adb</button>
+        
+    </div>
+    <div id="196.editor" class="editor-container"></div>
+    <div id="196.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="196.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="196.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="196.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="196.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="196.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="196.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>После вызова <code class="code highlight ada docutils literal highlight-ada"><span class="n">Create</span></code> мы получаем соответствующее значение
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Stream_Access</span></code>, вызывая функцию <code class="code highlight ada docutils literal highlight-ada"><span class="n">Stream</span></code> (поток).
+Затем мы используем этот поток для записи информации в файл
+используя атрибут <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Write</span></code> типа <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Float</span></code>.
+После закрытия файла и повторного открытия его для
+чтения мы снова получаем значение <code class="code highlight ada docutils literal highlight-ada"><span class="n">Stream_Access</span></code> и используем его
+для чтения информации из файла
+с помощью атрибута <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Read</span></code> типа <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Float</span></code>.</p>
+<p>Вы можете использовать потоки для создания и обработки файлов,
+содержащих разные типы данных в одном файле. Вы также можете читать и
+записывать неограниченные типы данных, такие как строки. Однако при
+использовании неограниченных типов данных вы должны вызывать атрибуты
+<code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Input</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Output</span></code> неограниченного типа данных: эти атрибуты
+записывают информацию о границах или дискриминантах в дополнение
+к фактическим данным объекта.</p>
+<p>В следующем примере показан файловый ввод-вывод, который смешивает как
+строки разной длины, так и значения с плавающей запятой:</p>
+
+<widget id="197" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Standard_Library.Show_String_Stream" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_string_stream.adb">with Ada.Text_IO;
+with Ada.Streams.Stream_IO; use Ada.Streams.Stream_IO;
+
+procedure Show_String_Stream is
+   F         : File_Type;
+   S         : Stream_Access;
+   File_Name : constant String := &#34;float_file.bin&#34;;
+
+   procedure Output (S  : Stream_Access;
+                     FV : Float;
+                     SV : String) is
+   begin
+      String&#39;Output (S, SV);
+      Float&#39;Output (S,  FV);
+   end Output;
+
+   procedure Input_Display (S : Stream_Access) is
+      SV : String := String&#39;Input (S);
+      FV : Float  := Float&#39;Input (S);
+   begin
+      Ada.Text_IO.Put_Line (Float&#39;Image (FV)
+                            &amp; &#34; --- &#34; &amp; SV);
+   end Input_Display;
+
+begin
+   Create (F, Out_File, File_Name);
+   S := Stream (F);
+
+   Output (S, 1.5, &#34;Hi!!&#34;);
+   Output (S, 2.4, &#34;Hello world!&#34;);
+   Output (S, 6.7, &#34;Something longer here...&#34;);
+
+   Close (F);
+
+   Open (F, In_File, File_Name);
+   S := Stream (F);
+
+   while not End_Of_File (F) loop
+      Input_Display (S);
+   end loop;
+   Close (F);
+
+end Show_String_Stream;</div>
+    
+    <div id="197.tab" class="tab">
+        
+            <button id="197.tab.show_string_stream.adb" class="tab-links">show_string_stream.adb</button>
+        
+    </div>
+    <div id="197.editor" class="editor-container"></div>
+    <div id="197.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="197.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="197.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="197.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="197.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="197.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="197.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Когда вы используете потоковый ввод-вывод, в файл не записывается
+никакая информация, указывающая тип данных, которые вы записали. Если
+файл содержит данные разных типов, при чтении файла вы должны
+ссылаться на типы в том же порядке, что и при его написании. В
+противном случае полученная информация будет повреждена. К сожалению,
+строгая типизация данных в этом случае вам не поможет. Написание
+простых процедур для файлового ввода-вывода (как в приведенном выше
+примере) может помочь обеспечить согласованность формата файла.</p>
+<p>Как и прямой ввод-вывод, поддержка потокового ввода-вывода также
+позволяет получить доступ к любому месту в файле. Однако при этом
+нужно быть предельно осторожным, чтобы положение нового индекса
+соответствовало ожидаемым типам данных.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="standard_library_numerics.html" class="btn btn-neutral float-right" title="Стандартная библиотека: Numerics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="standard_library_strings.html" class="btn btn-neutral" title="Стандартная библиотека: Строки" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

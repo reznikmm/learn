@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generics &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../courses/intro-to-ada-ru/index.html">Введение в язык Ада</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/intro-to-ada-ru/chapters/appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../courses/safe-secure-software-ru/index.html">Безопасное и надежное программное обеспечение</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../courses/safe-secure-software-ru/chapters/biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generics">
+<h1>Generics<a class="headerlink" href="#generics" title="Permalink to this heading"></a></h1>
+<section id="display-array">
+<h2>Display Array<a class="headerlink" href="#display-array" title="Permalink to this heading"></a></h2>
+<p><strong>Goal</strong>: create a generic procedure that displays the elements of an array.</p>
+<p><strong>Steps</strong>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Implement the generic procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display_Array</span></code>.</p></li>
+</ol>
+</div></blockquote>
+<p><strong>Requirements</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Generic procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display_Array</span></code> displays the elements of an
+array.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>It uses the following scheme:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>First, it displays a header.</p></li>
+<li><p>Then, it displays the elements of the array.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>When displaying the elements, it must:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>use one line per element, and</p></li>
+<li><p>include the corresponding index of the array.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>This is the expected format:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;HEADER&gt;
+&lt;index #1&gt;: &lt;element #1&gt;
+&lt;index #2&gt;: &lt;element #2&gt;
+...
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>For example:</p>
+<blockquote>
+<div><ul>
+<li><p>For the following code:</p>
+<blockquote>
+<div><div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Test</span> <span class="kr">is</span>
+   <span class="n">A</span> <span class="p">:</span> <span class="n">Int_Array</span> <span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="mi">2</span><span class="p">)</span> <span class="p">:=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="kr">begin</span>
+   <span class="n">Display_Int_Array</span> <span class="p">(</span><span class="s">&quot;Elements of A&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">);;</span>
+<span class="kr">end</span> <span class="nf">Test</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>The output is:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Elements of A
+ 1:  1
+ 2:  5
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>These are the formal parameters of the procedure:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>a range type <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Range</span></code> for the the array;</p></li>
+<li><p>a formal type <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code> for the elements of the array;</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This type must be declared in such a way that it can be mapped to
+any type in the instantiation — including record types.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>an array type <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Array</span></code> using the <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Range</span></code> and
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code> types;</p></li>
+<li><p>a function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Image</span></code> that converts a variable of <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code>
+type to a <code class="code highlight ada docutils literal highlight-ada"><span class="kt">String</span></code>.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+
+<widget id="280" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Generics.Display_Array" data-lab="True" data-switches='{}' data-main="">
+    
+        <div class="shadow-file" style="display:none" data-basename="lab_io.txt">in 0:Int_Array_Chk
+out 0:Integers  1:  1  2:  2  3:  5  4:  7  5:  10
+in 1:Point_Array_Chk
+out 1:Points  0: ( 1.00000E+00,  5.00000E-01)  1: ( 2.00000E+00, -5.00000E-01)  2: ( 5.00000E+00,  2.00000E+00)  3: (-5.00000E-01,  2.00000E+00)</div>
+    
+    
+        <div class="file" data-basename="display_array.ads">generic
+procedure Display_Array (Header : String;
+                         A      : T_Array);</div>
+    
+        <div class="file" data-basename="display_array.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Display_Array (Header : String;
+                         A      : T_Array) is
+begin
+   null;
+end Display_Array;</div>
+    
+        <div class="file" data-basename="main.adb">with Ada.Command_Line; use Ada.Command_Line;
+with Ada.Text_IO;      use Ada.Text_IO;
+
+with Display_Array;
+
+procedure Main is
+   type Test_Case_Index is (Int_Array_Chk,
+                            Point_Array_Chk);
+
+   procedure Test_Int_Array is
+      type Int_Array is array (Positive range &lt;&gt;) of Integer;
+
+      procedure Display_Int_Array is new
+        Display_Array (T_Range =&gt; Positive,
+                       T_Element =&gt; Integer,
+                       T_Array   =&gt; Int_Array,
+                       Image     =&gt; Integer&#39;Image);
+
+      A : constant Int_Array (1 .. 5) := (1, 2, 5, 7, 10);
+   begin
+      Display_Int_Array (&#34;Integers&#34;, A);
+   end Test_Int_Array;
+
+   procedure Test_Point_Array is
+      type Point is record
+         X : Float;
+         Y : Float;
+      end record;
+
+      type Point_Array is array (Natural range &lt;&gt;) of Point;
+
+      function Image (P : Point) return String is
+      begin
+         return &#34;(&#34; &amp; Float&#39;Image (P.X)
+           &amp; &#34;, &#34; &amp; Float&#39;Image (P.Y) &amp; &#34;)&#34;;
+      end Image;
+
+      procedure Display_Point_Array is new
+        Display_Array (T_Range   =&gt; Natural,
+                       T_Element =&gt; Point,
+                       T_Array   =&gt; Point_Array,
+                       Image     =&gt; Image);
+
+      A : constant Point_Array (0 .. 3) := ((1.0, 0.5), (2.0, -0.5),
+                                            (5.0, 2.0), (-0.5, 2.0));
+   begin
+      Display_Point_Array (&#34;Points&#34;, A);
+   end Test_Point_Array;
+
+   procedure Check (TC : Test_Case_Index) is
+   begin
+      case TC is
+         when Int_Array_Chk =&gt;
+            Test_Int_Array;
+         when Point_Array_Chk =&gt;
+            Test_Point_Array;
+      end case;
+   end Check;
+
+begin
+   if Argument_Count &lt; 1 then
+      Put_Line (&#34;ERROR: missing arguments! Exiting...&#34;);
+      return;
+   elsif Argument_Count &gt; 1 then
+      Put_Line (&#34;Ignoring additional arguments...&#34;);
+   end if;
+
+   Check (Test_Case_Index&#39;Value (Argument (1)));
+end Main;</div>
+    
+    <div id="280.tab" class="tab">
+        
+            <button id="280.tab.display_array.ads" class="tab-links">display_array.ads</button>
+        
+            <button id="280.tab.display_array.adb" class="tab-links">display_array.adb</button>
+        
+            <button id="280.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="280.editor" class="editor-container"></div>
+    <div id="280.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="280.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="280.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="280.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="280.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="280.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="submit" title="Submit code for lab">Submit</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="280.output-area" class="output-area"></div>
+            
+                <div id="280.lab-area" class="lab-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="average-of-array-of-float">
+<h2>Average of Array of Float<a class="headerlink" href="#average-of-array-of-float" title="Permalink to this heading"></a></h2>
+<p><strong>Goal</strong>: create a generic function that calculates the average of an array
+of floating-point elements.</p>
+<p><strong>Steps</strong>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Declare and implement the generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code>.</p></li>
+</ol>
+</div></blockquote>
+<p><strong>Requirements</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> calculates the average of an array
+containing floating-point values of arbitrary precision.</p></li>
+<li><p>Generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> must contain the following formal
+parameters:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>a range type <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Range</span></code> for the array;</p></li>
+<li><p>a formal type <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code> that can be mapped to floating-point
+types of arbitrary precision;</p></li>
+<li><p>an array type <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Array</span></code> using <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Range</span></code> and
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code>;</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p><strong>Remarks</strong>:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>You should use the <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Float</span></code> type for the accumulator.</p></li>
+</ol>
+</div></blockquote>
+
+<widget id="281" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Generics.Average_Array_Of_Float" data-lab="True" data-switches='{}' data-main="">
+    
+        <div class="shadow-file" style="display:none" data-basename="lab_io.txt">in 0:Float_Array_Chk
+out 0:Average:  8.00000E-01
+in 1:Digits_7_Float_Array_Chk
+out 1:Average:  5.200000E-01</div>
+    
+    
+        <div class="file" data-basename="average.ads">generic
+function Average (A : T_Array) return T_Element;</div>
+    
+        <div class="file" data-basename="average.adb">function Average (A : T_Array) return T_Element is
+begin
+   return 0.0;
+end Average;</div>
+    
+        <div class="file" data-basename="main.adb">with Ada.Command_Line; use Ada.Command_Line;
+with Ada.Text_IO;      use Ada.Text_IO;
+
+with Average;
+
+procedure Main is
+   type Test_Case_Index is (Float_Array_Chk,
+                            Digits_7_Float_Array_Chk);
+
+   procedure Test_Float_Array is
+      type Float_Array is array (Positive range &lt;&gt;) of Float;
+
+      function Average_Float is new
+        Average (T_Range   =&gt; Positive,
+                 T_Element =&gt; Float,
+                 T_Array   =&gt; Float_Array);
+
+      A : constant Float_Array (1 .. 5) := (1.0, 3.0, 5.0, 7.5, -12.5);
+   begin
+      Put_Line (&#34;Average: &#34; &amp; Float&#39;Image (Average_Float (A)));
+   end Test_Float_Array;
+
+   procedure Test_Digits_7_Float_Array is
+      type Custom_Float is digits 7 range 0.0 .. 1.0;
+
+      type Float_Array is
+        array (Integer range &lt;&gt;) of Custom_Float;
+
+      function Average_Float is new
+        Average (T_Range   =&gt; Integer,
+                 T_Element =&gt; Custom_Float,
+                 T_Array   =&gt; Float_Array);
+
+      A : constant Float_Array (-1 .. 3) := (0.5, 0.0, 1.0, 0.6, 0.5);
+   begin
+      Put_Line (&#34;Average: &#34;
+                &amp; Custom_Float&#39;Image (Average_Float (A)));
+   end Test_Digits_7_Float_Array;
+
+   procedure Check (TC : Test_Case_Index) is
+   begin
+      case TC is
+         when Float_Array_Chk =&gt;
+            Test_Float_Array;
+         when Digits_7_Float_Array_Chk =&gt;
+            Test_Digits_7_Float_Array;
+      end case;
+   end Check;
+
+begin
+   if Argument_Count &lt; 1 then
+      Put_Line (&#34;ERROR: missing arguments! Exiting...&#34;);
+      return;
+   elsif Argument_Count &gt; 1 then
+      Put_Line (&#34;Ignoring additional arguments...&#34;);
+   end if;
+
+   Check (Test_Case_Index&#39;Value (Argument (1)));
+end Main;</div>
+    
+    <div id="281.tab" class="tab">
+        
+            <button id="281.tab.average.ads" class="tab-links">average.ads</button>
+        
+            <button id="281.tab.average.adb" class="tab-links">average.adb</button>
+        
+            <button id="281.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="281.editor" class="editor-container"></div>
+    <div id="281.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="281.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="281.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="281.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="281.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="281.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="submit" title="Submit code for lab">Submit</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="281.output-area" class="output-area"></div>
+            
+                <div id="281.lab-area" class="lab-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="average-of-array-of-any-type">
+<h2>Average of Array of Any Type<a class="headerlink" href="#average-of-array-of-any-type" title="Permalink to this heading"></a></h2>
+<p><strong>Goal</strong>: create a generic function that calculates the average of an array
+of elements of any arbitrary type.</p>
+<p><strong>Steps</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Declare and implement the generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code>.</p></li>
+<li><p>Implement the test procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test_Item</span></code>.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Declare the <code class="code highlight ada docutils literal highlight-ada"><span class="n">F_IO</span></code> package.</p></li>
+<li><p>Implement the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Total</span></code> function for the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> type.</p></li>
+<li><p>Implement the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Price</span></code> function for the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> type.</p></li>
+<li><p>Declare the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average_Total</span></code> function.</p></li>
+<li><p>Declare the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average_Price</span></code> function.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p><strong>Requirements</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> calculates the average of an array
+containing elements of any arbitrary type.</p></li>
+<li><p>Generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> has the same formal parameters as in the
+previous exercise, except for:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code>, which is now a formal type that can be mapped to
+any arbitrary type.</p></li>
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code>, which is an <em>additional</em> formal parameter.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code> is a function that converts the arbitrary element
+of <code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code> type to the <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Float</span></code> type.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test_Item</span></code> is used to test the generic <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code>
+procedure for a record type (<code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code>).</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Record type <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> contains the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Quantity</span></code> and
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Price</span></code> components.</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>The following functions have to implemented to be used for the formal
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code> function parameter:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>For the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Decimal</span></code> type, the function is pretty straightforward:
+it simply returns the floating-point value converted from the
+decimal type.</p></li>
+<li><p>For the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> type, two functions must be created to convert
+to floating-point type:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Total</span></code>, which returns the multiplication of the
+quantity and the price components of the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> type;</p></li>
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Price</span></code>, which returns just the price.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>The generic function <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> must be instantiated as follows:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>For the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> type, you must:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>declare the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average_Total</span></code> function (as an instance of
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code>) using the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Total</span></code> for the
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code> parameter;</p></li>
+<li><p>declare the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average_Price</span></code> function (as an instance of
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code>) using the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Price</span></code> for the
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code> parameter.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>You must use the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put</span></code> procedure from <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Text_IO</span><span class="p">.</span><span class="n">Float_IO</span></code>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>The generic standard package <code class="code highlight ada docutils literal highlight-ada"><span class="n">Ada</span><span class="p">.</span><span class="n">Text_IO</span><span class="p">.</span><span class="n">Float_IO</span></code> must be
+instantiated as <code class="code highlight ada docutils literal highlight-ada"><span class="n">F_IO</span></code> in the test procedures.</p></li>
+<li><p>This is the specification of the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put</span></code> procedure, as described
+in the appendix A.10.9 of the Ada Reference Manual:</p>
+<blockquote>
+<div><div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">procedure</span> <span class="nf">Put</span><span class="p">(</span><span class="nv">Item</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Num</span><span class="p">;</span>
+              <span class="nv">Fore</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Field</span> <span class="p">:=</span> <span class="nv">Default_Fore</span><span class="p">;</span>
+              <span class="nv">Aft</span>  <span class="p">: </span><span class="nv">in</span> <span class="nv">Field</span> <span class="p">:=</span> <span class="nv">Default_Aft</span><span class="p">;</span>
+              <span class="nv">Exp</span>  <span class="p">: </span><span class="nv">in</span> <span class="nv">Field</span> <span class="p">:=</span> <span class="nv">Default_Exp</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This is the expected format when calling <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put</span></code> from
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Float_IO</span></code>:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 60%" />
+<col style="width: 15%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Fore</p></th>
+<th class="head"><p>Aft</p></th>
+<th class="head"><p>Exp</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">Test_Item</span></code></p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p><strong>Remarks</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>In this exercise, you'll abstract the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> function from the
+previous exercises a step further.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>In this case, the function shall be able to calculate the average of
+any arbitrary type — including arrays containing elements of
+record types.</p></li>
+<li><p>Since record types can be composed by many components of different
+types, we need to provide a way to indicate which component (or
+components) of the record will be used when calculating the average
+of the array.</p></li>
+<li><p>This problem is solved by specifying a <code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code> function as a
+formal parameter, which converts the arbitrary element of
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">T_Element</span></code> type to the <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Float</span></code> type.</p></li>
+<li><p>In the implementation of the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Average</span></code> function, we use the
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">To_Float</span></code> function and calculate the average using a
+floating-point variable.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+
+<widget id="282" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Generics.Average_Any" data-lab="True" data-switches='{}' data-main="">
+    
+        <div class="shadow-file" style="display:none" data-basename="lab_io.txt">in 0:Item_Array_Chk
+out 0:Average per item &amp; quantity: 175.00 Average price:                 7.50</div>
+    
+    
+        <div class="file" data-basename="average.ads">generic
+function Average (A : T_Array) return Float;</div>
+    
+        <div class="file" data-basename="average.adb">function Average (A : T_Array) return Float is
+begin
+   null;
+end Average;</div>
+    
+        <div class="file" data-basename="test_item.ads">procedure Test_Item;</div>
+    
+        <div class="file" data-basename="test_item.adb">with Ada.Text_IO;      use Ada.Text_IO;
+
+with Average;
+
+procedure Test_Item is
+   type Amount is delta 0.01 digits 12;
+
+   type Item is record
+      Quantity : Natural;
+      Price    : Amount;
+   end record;
+
+   type Item_Array is
+     array (Positive range &lt;&gt;) of Item;
+
+   A : constant Item_Array (1 .. 4)
+     := ((Quantity =&gt;  5,   Price =&gt; 10.00),
+         (Quantity =&gt; 80,   Price =&gt;  2.50),
+         (Quantity =&gt; 40,   Price =&gt;  5.00),
+         (Quantity =&gt; 20,   Price =&gt; 12.50));
+
+begin
+   Put (&#34;Average per item &amp; quantity: &#34;);
+   F_IO.Put (Average_Total (A));
+   New_Line;
+
+   Put (&#34;Average price:               &#34;);
+   F_IO.Put (Average_Price (A));
+   New_Line;
+end Test_Item;</div>
+    
+        <div class="file" data-basename="main.adb">with Ada.Command_Line; use Ada.Command_Line;
+with Ada.Text_IO;      use Ada.Text_IO;
+
+with Test_Item;
+
+procedure Main is
+   type Test_Case_Index is (Item_Array_Chk);
+
+   procedure Check (TC : Test_Case_Index) is
+   begin
+      case TC is
+         when Item_Array_Chk =&gt;
+            Test_Item;
+      end case;
+   end Check;
+
+begin
+   if Argument_Count &lt; 1 then
+      Put_Line (&#34;ERROR: missing arguments! Exiting...&#34;);
+      return;
+   elsif Argument_Count &gt; 1 then
+      Put_Line (&#34;Ignoring additional arguments...&#34;);
+   end if;
+
+   Check (Test_Case_Index&#39;Value (Argument (1)));
+end Main;</div>
+    
+    <div id="282.tab" class="tab">
+        
+            <button id="282.tab.average.ads" class="tab-links">average.ads</button>
+        
+            <button id="282.tab.average.adb" class="tab-links">average.adb</button>
+        
+            <button id="282.tab.test_item.ads" class="tab-links">test_item.ads</button>
+        
+            <button id="282.tab.test_item.adb" class="tab-links">test_item.adb</button>
+        
+            <button id="282.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="282.editor" class="editor-container"></div>
+    <div id="282.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="282.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="282.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="282.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="282.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="282.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="submit" title="Submit code for lab">Submit</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="282.output-area" class="output-area"></div>
+            
+                <div id="282.lab-area" class="lab-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="generic-list">
+<h2>Generic list<a class="headerlink" href="#generic-list" title="Permalink to this heading"></a></h2>
+<p><strong>Goal</strong>: create a system based on a generic list to add and displays elements.</p>
+<p><strong>Steps</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Declare and implement the generic package <code class="code highlight ada docutils literal highlight-ada"><span class="n">Gen_List</span></code>.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Implement the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Init</span></code> procedure.</p></li>
+<li><p>Implement the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Add</span></code> procedure.</p></li>
+<li><p>Implement the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display</span></code> procedure.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p><strong>Requirements</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Generic package <code class="code highlight ada docutils literal highlight-ada"><span class="n">Gen_List</span></code> must have the following subprograms:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Init</span></code> initializes the list.</p></li>
+<li><p>Procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Add</span></code> adds an item to the list.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>This procedure must contain a <code class="code highlight ada docutils literal highlight-ada"><span class="n">Status</span></code> output parameter
+that is set to <code class="code highlight ada docutils literal highlight-ada"><span class="kc">False</span></code> when the list was full — i.e.
+if the procedure failed while trying to add the item;</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display</span></code> displays the complete list.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>This includes the <em>name</em> of the list and its elements —
+using one line per element.</p></li>
+<li><p>This is the expected format:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;NAME&gt;
+&lt;element #1&gt;
+&lt;element #2&gt;
+...
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Generic package <code class="code highlight ada docutils literal highlight-ada"><span class="n">Gen_List</span></code> has these formal parameters:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>an arbitrary formal type <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code>;</p></li>
+<li><p>an unconstrained array type <code class="code highlight ada docutils literal highlight-ada"><span class="n">Items</span></code> of <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> element with
+positive range;</p></li>
+<li><p>the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Name</span></code> parameter containing the name of the list;</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This must be a formal input object of <code class="code highlight ada docutils literal highlight-ada"><span class="kt">String</span></code> type.</p></li>
+<li><p>It must be used in the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display</span></code> procedure.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>an actual array <code class="code highlight ada docutils literal highlight-ada"><span class="n">List_Array</span></code> to store the list;</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This must be a formal <code class="code highlight ada docutils literal highlight-ada"><span class="ow">in</span> <span class="kr">out</span></code> object of <code class="code highlight ada docutils literal highlight-ada"><span class="n">Items</span></code> type.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>the variable <code class="code highlight ada docutils literal highlight-ada"><span class="n">Last</span></code> to store the index of the last element;</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This must be a formal <code class="code highlight ada docutils literal highlight-ada"><span class="ow">in</span> <span class="kr">out</span></code> object of <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Natural</span></code>
+type.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>a procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put</span></code> for the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Item</span></code> type.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>This procedure is used in the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Display</span></code> procedure to display
+individual elements of the list.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>The test procedure <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test_Int</span></code> is used to test a list of
+elements of <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Integer</span></code> type.</p></li>
+<li><p>For both test procedures, you must:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>add missing type declarations;</p></li>
+<li><p>declare and implement a <code class="code highlight ada docutils literal highlight-ada"><span class="n">Put</span></code> procedure for individual elements
+of the list;</p></li>
+<li><p>declare instances of the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Gen_List</span></code> package.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For the <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test_Int</span></code> procedure, declare the
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Int_List</span></code> package.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p><strong>Remarks</strong>:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>In previous labs, you've been implementing lists for a variety of types.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <em>List of Names</em> exercise from the <a class="reference internal" href="arrays.html"><span class="doc">Arrays</span></a> labs is an
+example.</p></li>
+<li><p>In this exercise, you have to abstract those implementations to
+create the generic <code class="code highlight ada docutils literal highlight-ada"><span class="n">Gen_List</span></code> package.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+
+<widget id="283" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Generics.Gen_List" data-lab="True" data-switches='{}' data-main="">
+    
+        <div class="shadow-file" style="display:none" data-basename="lab_io.txt">in 0:Int_Chk
+out 0:Added item successfully! Added item successfully! Added item successfully! Couldn&#39;t add item! List of integers  2  5  7</div>
+    
+    
+        <div class="file" data-basename="gen_list.ads">generic
+package Gen_List is
+
+   procedure Init;
+
+   procedure Add (I      :     Item;
+                  Status : out Boolean);
+
+   procedure Display;
+
+end Gen_List;</div>
+    
+        <div class="file" data-basename="gen_list.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+package body Gen_List is
+
+   procedure Init is
+   begin
+      null;
+   end Init;
+
+   procedure Add (I      :     Item;
+                  Status : out Boolean) is
+   begin
+      null;
+   end Add;
+
+   procedure Display is
+   begin
+      null;
+   end Display;
+
+end Gen_List;</div>
+    
+        <div class="file" data-basename="test_int.ads">procedure Test_Int;</div>
+    
+        <div class="file" data-basename="test_int.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+with Gen_List;
+
+procedure Test_Int is
+
+   type Integer_Array is array (Positive range &lt;&gt;) of Integer;
+
+   A : Integer_Array (1 .. 3);
+   L : Natural;
+
+   Success : Boolean;
+
+   procedure Display_Add_Success (Success : Boolean) is
+   begin
+      if Success then
+         Put_Line (&#34;Added item successfully!&#34;);
+      else
+         Put_Line (&#34;Couldn&#39;t add item!&#34;);
+      end if;
+
+   end Display_Add_Success;
+
+begin
+   Int_List.Init;
+
+   Int_List.Add (2, Success);
+   Display_Add_Success (Success);
+
+   Int_List.Add (5, Success);
+   Display_Add_Success (Success);
+
+   Int_List.Add (7, Success);
+   Display_Add_Success (Success);
+
+   Int_List.Add (8, Success);
+   Display_Add_Success (Success);
+
+   Int_List.Display;
+end Test_Int;</div>
+    
+        <div class="file" data-basename="main.adb">with Ada.Command_Line; use Ada.Command_Line;
+with Ada.Text_IO;      use Ada.Text_IO;
+
+with Test_Int;
+
+procedure Main is
+   type Test_Case_Index is (Int_Chk);
+
+   procedure Check (TC : Test_Case_Index) is
+   begin
+      case TC is
+         when Int_Chk =&gt;
+            Test_Int;
+      end case;
+   end Check;
+
+begin
+   if Argument_Count &lt; 1 then
+      Put_Line (&#34;ERROR: missing arguments! Exiting...&#34;);
+      return;
+   elsif Argument_Count &gt; 1 then
+      Put_Line (&#34;Ignoring additional arguments...&#34;);
+   end if;
+
+   Check (Test_Case_Index&#39;Value (Argument (1)));
+end Main;</div>
+    
+    <div id="283.tab" class="tab">
+        
+            <button id="283.tab.gen_list.ads" class="tab-links">gen_list.ads</button>
+        
+            <button id="283.tab.gen_list.adb" class="tab-links">gen_list.adb</button>
+        
+            <button id="283.tab.test_int.ads" class="tab-links">test_int.ads</button>
+        
+            <button id="283.tab.test_int.adb" class="tab-links">test_int.adb</button>
+        
+            <button id="283.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="283.editor" class="editor-container"></div>
+    <div id="283.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="283.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="283.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="283.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="283.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="283.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="submit" title="Submit code for lab">Submit</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="283.output-area" class="output-area"></div>
+            
+                <div id="283.lab-area" class="lab-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+    
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

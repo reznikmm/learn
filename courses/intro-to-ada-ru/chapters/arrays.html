@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Массивы &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Подробнее о типах" href="more_about_types.html" />
+    <link rel="prev" title="Записи" href="records.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Введение в язык Ада</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../safe-secure-software-ru/index.html">Безопасное и надежное программное обеспечение</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Массивы<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>Массивы (или индексируемые типы) предоставляют еще одно фундаментальное
+семейство составных типов в Аде.</p>
+<section id="id2">
+<h2>Объявление типа массива<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Массивы в Аде используются для определения непрерывных коллекций
+элементов, к которым можно обращаться по индексу.</p>
+
+<widget id="7" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Greet" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="greet.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Greet is
+   type My_Int is range 0 .. 1000;
+   type Index is range 1 .. 5;
+
+   type My_Int_Array is
+     array (Index) of My_Int;
+   --                 ^ Type of elements
+   --       ^ Bounds of the array
+   Arr : My_Int_Array := (2, 3, 5, 7, 11);
+   --                    ^ Array literal
+   --                      (aggregate)
+
+   V : My_Int;
+begin
+   for I in Index loop
+      V := Arr (I);
+      --        ^ Take the Ith element
+      Put (My_Int&#39;Image (V));
+   end loop;
+   New_Line;
+end Greet;</div>
+    
+    <div id="7.tab" class="tab">
+        
+            <button id="7.tab.greet.adb" class="tab-links">greet.adb</button>
+        
+    </div>
+    <div id="7.editor" class="editor-container"></div>
+    <div id="7.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="7.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="7.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="7.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="7.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="7.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="7.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Первое, что следует отметить, - это то, что мы указываем не размер массива,
+а тип его индекса. Здесь мы объявили целочисленный тип с
+именем <code class="code highlight ada docutils literal highlight-ada"><span class="n">Index</span></code> в диапазоне от <code class="code highlight ada docutils literal highlight-ada"><span class="mi">1</span></code> до <code class="code highlight ada docutils literal highlight-ada"><span class="mi">5</span></code>, поэтому каждый
+экземпляр массива будет иметь 5 элементов, с индексами от 1 до 5.</p>
+<p>Хотя в этом примере в качестве индекса использовался целочисленный тип,
+в Аде любой дискретный тип может служить для индексации массива, включая
+(<a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-enumtypes"><span class="std std-ref">перечислимые типы</span></a>).
+Скоро мы увидим, что это значит.</p>
+<p>Следующий момент, который следует отметить, заключается в том, что
+доступ к элементу массива по заданному индексу использует тот же
+синтаксис, что и для вызовов функций: то есть имя массива, за
+которым следует индекс в скобках.</p>
+<p>Таким образом, когда вы видите выражение, такое как <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span> <span class="p">(</span><span class="n">B</span><span class="p">)</span></code>, является
+ли оно вызовом функции или индексом массива, зависит от того, на что
+ссылается <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span></code>.</p>
+<p>Наконец, обратите внимание, как мы инициализируем массив выражением
+<code class="code highlight ada docutils literal highlight-ada"><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span></code>. Это еще один вид агрегата в Аде, который в
+некотором смысле является литералом для массива, точно так
+же, как <code class="code highlight ada docutils literal highlight-ada"><span class="mi">3</span></code> является литералом для целого числа.
+Обозначение очень мощное, с рядом свойств, которые мы представим позже.
+Подробный обзор приводится в главе
+о <a class="reference internal" href="more_about_types.html#intro-ada-ru-aggregates"><span class="std std-ref">агрегатах типов</span></a>.</p>
+<p>Пример также иллюстрирует две процедуры из:ada:<cite>Ada.Text_IO</cite>,
+которые не связанны с массивами:</p>
+<ul class="simple">
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">Put</span></code> - выводит строку без завершающего конца строки.</p></li>
+<li><p><code class="code highlight ada docutils literal highlight-ada"><span class="n">New_Line</span></code> - вывод конца строки</p></li>
+</ul>
+<p>Давайте теперь углубимся в то, что значит иметь возможность
+использовать любой дискретный тип в качестве индекса массива.</p>
+<div class="admonition- admonition">
+<p class="admonition-title">На других языках</p>
+<p>Семантически объект массива в Аде - это цельная структура данных, а не
+просто дескриптор или указатель. В отличие от C и C ++, не существует
+неявной эквивалентности между массивом и указателем на его начальный
+элемент.</p>
+</div>
+
+<widget id="8" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Array_Bounds_Example" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="array_bounds_example.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Array_Bounds_Example is
+   type My_Int is range 0 .. 1000;
+   type Index is range 11 .. 15;
+   --                  ^ Low bound can be any value
+   type My_Int_Array is array (Index) of My_Int;
+   Tab : constant My_Int_Array := (2, 3, 5, 7, 11);
+begin
+   for I in Index loop
+      Put (My_Int&#39;Image (Tab (I)));
+   end loop;
+   New_Line;
+end Array_Bounds_Example;</div>
+    
+    <div id="8.tab" class="tab">
+        
+            <button id="8.tab.array_bounds_example.adb" class="tab-links">array_bounds_example.adb</button>
+        
+    </div>
+    <div id="8.editor" class="editor-container"></div>
+    <div id="8.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="8.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="8.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="8.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="8.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="8.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="8.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Как следствие границы массива могут иметь произвольные
+значения. В первом примере мы создали тип массива, первый индекс
+которого равен <code class="code highlight ada docutils literal highlight-ada"><span class="mi">1</span></code>, но в приведенном выше примере мы объявляем тип
+массива, первый индекс которого равен <code class="code highlight ada docutils literal highlight-ada"><span class="mi">11</span></code>.</p>
+<p>Это прекрасно работает в Аде, а, кроме того, поскольку мы
+для итерации по массиву указали как диапазон тип индекса, то код
+использующий массив, не приходится менять.</p>
+<p>Это приводит нас к важному принципу написания кода, оперируещего с
+массивами. Поскольку границы могут меняться, лучше не полагаться
+на конкретные значения и не указывать их в коде использующем массив.
+Это означает, что приведенный выше код
+хорош, потому что он использует тип индекса, но цикл <code class="code highlight ada docutils literal highlight-ada"><span class="kr">for</span></code>, приведенный
+ниже, считается плохой практикой, даже если он работает правильно:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">for</span> <span class="n">I</span> <span class="ow">in</span> <span class="mi">11</span> <span class="p">..</span> <span class="mi">15</span> <span class="kr">loop</span>
+   <span class="n">Tab</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="n">Tab</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kr">end</span> <span class="kr">loop</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Поскольку для индексации массива можно использовать любой дискретный
+тип, разрешены и перечислимые типы.</p>
+
+<widget id="9" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Month_Example" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="month_example.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Month_Example is
+   type Month_Duration is range 1 .. 31;
+   type Month is (Jan, Feb, Mar, Apr,
+                  May, Jun, Jul, Aug,
+                  Sep, Oct, Nov, Dec);
+
+   type My_Int_Array is
+     array (Month) of Month_Duration;
+   --       ^ Can use an enumeration type
+   --         as the index
+
+   Tab : constant My_Int_Array :=
+   --    ^ constant is like a variable but
+   --      cannot be modified
+     (31, 28, 31, 30, 31, 30,
+      31, 31, 30, 31, 30, 31);
+   --  Maps months to number of days
+   --  (ignoring leap years)
+
+   Feb_Days : Month_Duration := Tab (Feb);
+   --  Number of days in February
+begin
+   for M in Month loop
+      Put_Line
+        (Month&#39;Image (M) &amp; &#34; has &#34;
+         &amp; Month_Duration&#39;Image (Tab (M))
+         &amp; &#34; days.&#34;);
+   --    ^ Concatenation operator
+   end loop;
+end Month_Example;</div>
+    
+    <div id="9.tab" class="tab">
+        
+            <button id="9.tab.month_example.adb" class="tab-links">month_example.adb</button>
+        
+    </div>
+    <div id="9.editor" class="editor-container"></div>
+    <div id="9.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="9.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="9.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="9.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="9.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="9.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="9.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В приведенном выше примере мы:</p>
+<ul class="simple">
+<li><p>Создание типа массива для отображения месяца в его продолжительность в днях.</p></li>
+<li><p>Создание экземпляра этого массива и инициализация его с помощью агрегата
+указывающего фактическую продолжительностью каждого месяца в днях.</p></li>
+<li><p>Итерация по массиву, печать месяцев и количество дней для каждого.</p></li>
+</ul>
+<p>Возможность использования перечислимых значений в качестве индекса
+очень полезна при создании сопоставлений, как показано выше, и часто
+используется в Аде.</p>
+</section>
+<section id="id3">
+<h2>Доступ по индексу<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Мы уже видели синтаксис обращения к элементам массива. Однако следует
+отметить еще несколько моментов.</p>
+<p>Во-первых, как и в целом в Аде, операция индексирования строго
+типизирована. Если для индексации массива используется значение
+неправильного типа, будет получена ошибка времени компиляции.</p>
+
+<widget id="10" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Greet_2" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="greet.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Greet is
+   type My_Int is range 0 .. 1000;
+
+   type My_Index   is range 1 .. 5;
+   type Your_Index is range 1 .. 5;
+
+   type My_Int_Array is array (My_Index) of My_Int;
+   Tab : My_Int_Array := (2, 3, 5, 7, 11);
+begin
+   for I in Your_Index loop
+      Put (My_Int&#39;Image (Tab (I)));
+   --                         ^ Compile time error
+   end loop;
+   New_Line;
+end Greet;</div>
+    
+    <div id="10.tab" class="tab">
+        
+            <button id="10.tab.greet.adb" class="tab-links">greet.adb</button>
+        
+    </div>
+    <div id="10.editor" class="editor-container"></div>
+    <div id="10.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="10.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="10.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="10.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="10.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="10.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="10.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Во-вторых, в Аде контролируется выход за границы массива. Это означает, что
+если вы попытаетесь обратиться к элементу за пределами массива,
+вы получите ошибку во время выполнения вместо доступа к случайной
+памяти, как в небезопасных языках.</p>
+
+<widget id="11" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Greet_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="greet.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Greet is
+   type My_Int is range 0 .. 1000;
+   type Index is range 1 .. 5;
+   type My_Int_Array is array (Index) of My_Int;
+   Tab : My_Int_Array := (2, 3, 5, 7, 11);
+begin
+   for I in Index range 2 .. 6 loop
+      Put (My_Int&#39;Image (Tab (I)));
+      --                      ^ Will raise an
+      --                        exception when
+      --                        I = 6
+   end loop;
+   New_Line;
+end Greet;</div>
+    
+    <div id="11.tab" class="tab">
+        
+            <button id="11.tab.greet.adb" class="tab-links">greet.adb</button>
+        
+    </div>
+    <div id="11.editor" class="editor-container"></div>
+    <div id="11.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="11.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="11.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="11.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="11.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="11.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="11.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="id4">
+<h2>Более простые объявления массива<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>В предыдущих примерах мы всегда явно создавали тип индекса для
+массива. Хотя это может быть полезно для типизации и удобства чтения,
+иногда вам просто нужно указать диапазон значений. Ада позволяет
+вам делать и так.</p>
+
+<widget id="12" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Simple_Array_Bounds" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="simple_array_bounds.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Simple_Array_Bounds is
+   type My_Int is range 0 .. 1000;
+   type My_Int_Array is array (1 .. 5) of My_Int;
+   --                          ^ Subtype of Integer
+   Tab : constant My_Int_Array := (2, 3, 5, 7, 11);
+begin
+   for I in 1 .. 5 loop
+   --       ^ Subtype of Integer
+      Put (My_Int&#39;Image (Tab (I)));
+   end loop;
+   New_Line;
+end Simple_Array_Bounds;</div>
+    
+    <div id="12.tab" class="tab">
+        
+            <button id="12.tab.simple_array_bounds.adb" class="tab-links">simple_array_bounds.adb</button>
+        
+    </div>
+    <div id="12.editor" class="editor-container"></div>
+    <div id="12.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="12.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="12.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="12.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="12.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="12.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="12.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В этом примере диапазон массива определен с помощью синтаксиса
+диапазона, который указывает анонимный подтип Integer и использует его
+в качестве индекса массива.</p>
+<p>Это означает, что индекс имеет целочисленный тип <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Integer</span></code>. Точно так
+же, когда вы используете анонимный диапазон в цикле <code class="code highlight ada docutils literal highlight-ada"><span class="kr">for</span></code>, как
+в приведенном
+выше примере, тип параметра цикла также является <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Integer</span></code>, поэтому
+вы можете использовать <code class="code highlight ada docutils literal highlight-ada"><span class="n">I</span></code> для индексации <code class="code highlight ada docutils literal highlight-ada"><span class="n">Tab</span></code>.</p>
+<p>Также вы можете использовать именованный подтип для указания границ массива.</p>
+</section>
+<section id="id5">
+<h2>Атрибут диапазона<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Ранее мы отметили, что указывать жесткие границы при итерации по
+массиву - плохая идея, и показали, как использовать тип/подтип
+индекса массива для итерации в цикле <code class="code highlight ada docutils literal highlight-ada"><span class="kr">for</span></code>. Это
+поднимает вопрос о том, как написать итерацию, когда массив имеет
+анонимный диапазон для своих границ, поскольку нет имени позволяющего
+сослаться на диапазон. В Аде эта проблема решается с помощью нескольких
+атрибутов существующих у массивов:</p>
+
+<widget id="13" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Range_Example" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="range_example.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Range_Example is
+   type My_Int is range 0 .. 1000;
+   type My_Int_Array is array (1 .. 5) of My_Int;
+   Tab : constant My_Int_Array := (2, 3, 5, 7, 11);
+begin
+   for I in Tab&#39;Range loop
+   --          ^ Gets the range of Tab
+      Put (My_Int&#39;Image (Tab (I)));
+   end loop;
+   New_Line;
+end Range_Example;</div>
+    
+    <div id="13.tab" class="tab">
+        
+            <button id="13.tab.range_example.adb" class="tab-links">range_example.adb</button>
+        
+    </div>
+    <div id="13.editor" class="editor-container"></div>
+    <div id="13.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="13.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="13.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="13.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="13.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="13.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="13.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Если требуется более точный контроль, можно использовать
+отдельные атрибуты <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">First</span></code> («Первый») и <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Last</span></code> («Последний»).</p>
+
+<widget id="14" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Array_Attributes_Example" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="array_attributes_example.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Array_Attributes_Example is
+   type My_Int is range 0 .. 1000;
+   type My_Int_Array is array (1 .. 5) of My_Int;
+   Tab : My_Int_Array := (2, 3, 5, 7, 11);
+begin
+   for I in Tab&#39;First .. Tab&#39;Last - 1 loop
+   --          ^ Iterate on every index
+   --            except the last
+      Put (My_Int&#39;Image (Tab (I)));
+   end loop;
+   New_Line;
+end Array_Attributes_Example;</div>
+    
+    <div id="14.tab" class="tab">
+        
+            <button id="14.tab.array_attributes_example.adb" class="tab-links">array_attributes_example.adb</button>
+        
+    </div>
+    <div id="14.editor" class="editor-container"></div>
+    <div id="14.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="14.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="14.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="14.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="14.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="14.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="14.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Атрибуты <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Range</span></code>, <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">First</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Last</span></code> показанные в этих
+примерах также можно применять к имени типа массива, а не только
+к экземплярам массива.</p>
+<p>Хотя это не демонстрируется в вышеприведенных примерах, другим полезным
+атрибутом для экземпляра массива <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span></code> является <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span><span class="p">&#39;</span><span class="na">Length</span></code>, который
+возвращает количеством элементов в <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span></code>.</p>
+<p>Законно и иногда полезно иметь «пустой массив», который
+не содержит элементов. Чтобы получить его, достаточно определить
+диапазон индексов, верхняя граница которого меньше нижней границы.</p>
+</section>
+<section id="intro-ada-ru-unconstrainedarraytypes">
+<span id="id6"></span><h2>Неограниченные массивы<a class="headerlink" href="#intro-ada-ru-unconstrainedarraytypes" title="Permalink to this heading"></a></h2>
+<p>Давайте теперь рассмотрим одину из самых мощных возможностей
+массивов в языке Ада.</p>
+<p>Все типы массивов, который мы определили до сих пор, имеют
+фиксированный размер: все экземпляры такого типа будут иметь
+одинаковые границы и, следовательно, одинаковое количество элементов и
+одинаковый размер.</p>
+<p>Но Ада также позволяет объявлять типы массивов, границы которых не
+являются фиксированными: в этом случае границы необходимо будет
+указать при создании экземпляров типа.</p>
+
+<widget id="15" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Unconstrained_Array_Example" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="unconstrained_array_example.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Unconstrained_Array_Example is
+   type Days is (Monday, Tuesday, Wednesday,
+                 Thursday, Friday,
+                 Saturday, Sunday);
+
+   type Workload_Type is
+     array (Days range &lt;&gt;) of Natural;
+   --  Indefinite array type
+   --       ^ Bounds are of type Days,
+   --         but not known
+
+   Workload : constant
+     Workload_Type (Monday .. Friday) :=
+   --               ^ Specify the bounds
+   --                 when declaring
+      (Friday =&gt; 7, others =&gt; 8);
+   --               ^ Default value
+   --  ^ Specify element by name of index
+begin
+   for I in Workload&#39;Range loop
+      Put_Line (Integer&#39;Image (Workload (I)));
+   end loop;
+end Unconstrained_Array_Example;</div>
+    
+    <div id="15.tab" class="tab">
+        
+            <button id="15.tab.unconstrained_array_example.adb" class="tab-links">unconstrained_array_example.adb</button>
+        
+    </div>
+    <div id="15.editor" class="editor-container"></div>
+    <div id="15.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="15.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="15.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="15.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="15.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="15.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="15.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Тот факт, что границы массива неизвестны, указывается синтаксисом
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Days</span> <span class="kr">range</span> <span class="p">&lt;&gt;</span></code>. Взяв, для примера дискретный тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Discrete_Type</span></code>,
+eсли бы мы указали просто <code class="code highlight ada docutils literal highlight-ada"><span class="n">Discrete_Type</span></code> как индекс
+массива, то для <em>каждого</em> значения из <code class="code highlight ada docutils literal highlight-ada"><span class="n">Discrete_Type</span></code>
+существовал бы индекс и соответствующий элемент в <em>каждом</em>
+экземпляре массива.</p>
+<p>Но, если мы определим индекс как <code class="code highlight ada docutils literal highlight-ada"><span class="n">Discrete_Type</span> <span class="kr">range</span> <span class="p">&lt;&gt;</span></code>,
+то, хотя <code class="code highlight ada docutils literal highlight-ada"><span class="n">Discrete_Type</span></code> все еще будет типом индекса, но разные
+экземпляры массива смогут иметь свои границы.</p>
+<p>Тип массива, который определяется с помощью синтаксиса
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Discrete_Type</span> <span class="kr">range</span> <span class="p">&lt;&gt;</span></code>, называется неограниченным индексируемым типом,
+и, как показано выше, при создании экземпляра необходимо указать границы.</p>
+<p>В приведенном выше примере также показаны другие формы записи
+агрегата. Вы можете использовать именованное сопоставление, задав значение
+индекса слева от стрелки. Таким образом, <code class="code highlight ada docutils literal highlight-ada"><span class="mi">1</span> <span class="p">=&gt;</span> <span class="mi">2</span></code>
+означает «присвоить значение 2 элементу с индексом 1 в моем массиве».
+Запись <code class="code highlight ada docutils literal highlight-ada"><span class="kr">others</span> <span class="p">=&gt;</span> <span class="mi">8</span></code> означает «присвоить значение 8 каждому элементу,
+который ранее не был назначен в этом агрегате».</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Так называемый «бокс» (<code class="code highlight ada docutils literal highlight-ada"><span class="p">&lt;&gt;</span></code>) в Аде обычно
+используется для обозначение места, где отсутствует некий элемент.
+Как мы увидим еще не раз, такое обозначение можно читать, как
+«значение, не заданое явно».</p>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">На других языках</p>
+<p>В то время как неограниченные массивы в Аде могут казаться похожими на
+массивы переменной длины в C, в действительности они гораздо более
+мощные, поскольку работают как настоящие значения.
+Их можно передавать их как параметры при вызове подпрограммам и возвращать
+как результат функции, и они неявно содержат границы как часть своего
+значения.
+Это означает, что нет нужды явно передавать границы или длину массива
+вместе с массивом, поскольку эти значения доступны через атрибуты
+<code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">First</span></code>, <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Last</span></code>, <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Range</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Length</span></code>,
+описанные ранее.</p>
+</div>
+<p>Хотя различные экземпляры одного и того же неограниченного типа
+массива могут иметь разные границы, конкретный экземпляр имеет
+постоянные границы в течение всего срока его существования. Это
+позволяет компилятору языка Ада эффективно реализовывать неограниченные
+массивы; массивы могут храниться в стеке и не требуют выделения в куче, как в
+других языках, типа Java.</p>
+</section>
+<section id="string">
+<h2>Предопределенный тип String<a class="headerlink" href="#string" title="Permalink to this heading"></a></h2>
+<p>В нашем введении в типы языка Ада было отмечено, что такие важные
+встроенные типы, как <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Boolean</span></code> или <code class="code highlight ada docutils literal highlight-ada"><span class="kt">Integer</span></code>, определяются
+с помощью тех же средств, что доступны пользователю. Это также верно и для
+строк: тип <code class="code highlight ada docutils literal highlight-ada"><span class="kt">String</span></code> в Аде является простым массивом.</p>
+<p>Вот как тип строки определяется в Аде:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">String</span> <span class="kr">is</span> <span class="kr">array</span> <span class="p">(</span><span class="kt">Positive</span> <span class="kr">range</span> <span class="p">&lt;&gt;)</span> <span class="kr">of</span> <span class="kt">Character</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Единственной дополнительной возможностью, которую Ада добавляет, чтобы сделать
+строки более простыми в использовании, являются строковые литералы, как мы
+можем видеть в примере ниже.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Строковые литералы являются синтаксическим сахаром для агрегатов, так
+что в следующем примере <code class="code highlight ada docutils literal highlight-ada"><span class="n">A</span></code> и <code class="code highlight ada docutils literal highlight-ada"><span class="n">B</span></code> имеют одинаковое значение.</p>
+
+<widget id="16" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.String_Literals" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="string_literals.ads">package String_Literals is
+    --  Those two declarations are equivalent
+    A : String (1 .. 11) := &#34;Hello World&#34;;
+    B : String (1 .. 11) :=
+        (&#39;H&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;, &#39; &#39;,
+         &#39;W&#39;, &#39;o&#39;, &#39;r&#39;, &#39;l&#39;, &#39;d&#39;);
+end String_Literals;</div>
+    
+    <div id="16.tab" class="tab">
+        
+            <button id="16.tab.string_literals.ads" class="tab-links">string_literals.ads</button>
+        
+    </div>
+    <div id="16.editor" class="editor-container"></div>
+    <div id="16.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="16.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="16.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="16.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="16.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="16.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="16.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</div>
+
+<widget id="17" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Greet_4" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="greet.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Greet is
+   Message : String (1 .. 11) := &#34;dlroW olleH&#34;;
+   --        ^ Pre-defined array type.
+   --          Component type is Character
+begin
+   for I in reverse Message&#39;Range loop
+      --    ^ Iterate in reverse order
+      Put (Message (I));
+   end loop;
+   New_Line;
+end Greet;</div>
+    
+    <div id="17.tab" class="tab">
+        
+            <button id="17.tab.greet.adb" class="tab-links">greet.adb</button>
+        
+    </div>
+    <div id="17.editor" class="editor-container"></div>
+    <div id="17.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="17.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="17.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="17.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="17.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="17.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="17.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Однако явное указание границ объекта - это немного хлопотно; вам нужно
+вручную подсчитать количество символов в литерале. К счастью, Ада
+предлагает более простой способ.</p>
+<p>Вы можете опустить границы при создании экземпляра неограниченного
+типа массива, если вы предоставляете инициализацию, поскольку границы
+могут быть вычислены по выражению инициализации.</p>
+
+<widget id="18" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Greet_5" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="greet.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Greet is
+   Message : constant String := &#34;dlroW olleH&#34;;
+   --                 ^ Bounds are automatically
+   --                   computed from
+   --                   initialization value
+begin
+   for I in reverse Message&#39;Range loop
+      Put (Message (I));
+   end loop;
+   New_Line;
+end Greet;</div>
+    
+    <div id="18.tab" class="tab">
+        
+            <button id="18.tab.greet.adb" class="tab-links">greet.adb</button>
+        
+    </div>
+    <div id="18.editor" class="editor-container"></div>
+    <div id="18.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="18.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="18.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="18.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="18.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="18.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="18.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+
+<widget id="19" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Constant_Integer_Array" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="main.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Main is
+   type Integer_Array is array (Natural range &lt;&gt;) of Integer;
+
+   My_Array : constant Integer_Array := (1, 2, 3, 4);
+   --                  ^ Bounds are automatically
+   --                    computed from
+   --                    initialization value
+begin
+    null;
+end Main;</div>
+    
+    <div id="19.tab" class="tab">
+        
+            <button id="19.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="19.editor" class="editor-container"></div>
+    <div id="19.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="19.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="19.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="19.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="19.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="19.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="19.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Как вы можете видеть выше, стандартный тип <cite>String</cite> в Аде - это массив.
+Таким образом, он сохраняет преимущества и недостатки массивов: значение
+<code class="code highlight ada docutils literal highlight-ada"><span class="kt">String</span></code> выделяется в стеке, доступ к нему осуществляется эффективно,
+а его границы неизменны.</p>
+<p>Если вам нужно что-то вроде :c++:<cite>std::string</cite> в C++, вы можете
+использовать <a class="reference internal" href="standard_library_strings.html#intro-ada-ru-unboundedstrings"><span class="std std-ref">Unbounded Strings</span></a> из
+стандартной библиотеки Ада. Этот тип больше похож на изменяемый,
+автоматически управляемый строковый буфер, в который вы можете
+добавлять содержимое.</p>
+</div>
+</section>
+<section id="id7">
+<h2>Ограничения<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Очень важный момент, касающийся массивов: границы <em>должны</em> быть
+известны при создании экземпляров. Например, незаконно делать
+следующее.</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">declare</span>
+   <span class="n">A</span> <span class="p">:</span> <span class="kt">String</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="n">A</span> <span class="p">:=</span> <span class="s">&quot;World&quot;</span><span class="p">;</span>
+<span class="kr">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Кроме того, хотя вы, конечно, можете изменять значения элементов в
+массиве, вы не можете изменять границы массива (и, следовательно, его
+размер) после его инициализации. Так что это тоже незаконно:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">declare</span>
+   <span class="n">A</span> <span class="p">:</span> <span class="kt">String</span> <span class="p">:=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="n">A</span> <span class="p">:=</span> <span class="s">&quot;World&quot;</span><span class="p">;</span>       <span class="c1">--  OK: Same size</span>
+   <span class="n">A</span> <span class="p">:=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span> <span class="c1">--  Not OK: Different size</span>
+<span class="kr">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Кроме того, хотя вы можете ожидать предупреждения об ошибке такого
+рода в очень простых случаях, подобных этому, но компилятор в общем
+случае не может знать, присваиваете ли вы значение правильной длины,
+поэтому это нарушение обычно приведет к ошибке во время выполнения.</p>
+<div class="admonition- admonition">
+<p class="admonition-title">Обратите внимание</p>
+<p>Хотя мы остановимся на этом позже, важно знать, что массивы - не
+единственные типы, экземпляры которых могут быть неизвестного размера
+в момент компиляции.</p>
+<p>Говорят, что такие объекты имеют <em>неопределенный подтип</em>, что
+означает, что размер подтипа неизвестен во время компиляции, но
+динамически вычисляется (во время выполнения).</p>
+
+<widget id="20" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Indefinite_Subtypes" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="indefinite_subtypes.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Indefinite_Subtypes is
+    function Get_Number return Integer is
+    begin
+        return Integer&#39;Value (Get_Line);
+    end Get_Number;
+
+   A : String := &#34;Hello&#34;;
+   --  Indefinite subtype
+
+   B : String (1 .. 5) := &#34;Hello&#34;;
+   --  Definite subtype
+
+   C : String (1 .. Get_Number);
+   --  Indefinite subtype
+   --  (Get_Number&#39;s value is computed at
+   --  run-time)
+begin
+   null;
+end Indefinite_Subtypes;</div>
+    
+    <div id="20.tab" class="tab">
+        
+            <button id="20.tab.indefinite_subtypes.adb" class="tab-links">indefinite_subtypes.adb</button>
+        
+    </div>
+    <div id="20.editor" class="editor-container"></div>
+    <div id="20.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="20.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="20.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="20.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="20.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="20.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="20.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</div>
+</section>
+<section id="id8">
+<h2>Возврат неограниченных массивов<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<p>Тип возвращаемого значения функции может быть любым; функция может
+возвращать значение, размер которого неизвестен во время компиляции.
+Точно так же параметры могут быть любого типа.</p>
+<p>Например, это функция, которая возвращает неограниченную строку:</p>
+
+<widget id="21" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Day_Name_1" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="main.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Main is
+
+   type Days is (Monday, Tuesday, Wednesday,
+                 Thursday, Friday,
+                 Saturday, Sunday);
+
+   function Get_Day_Name (Day : Days := Monday)
+                          return String is
+   begin
+      return
+        (case Day is
+         when Monday    =&gt; &#34;Monday&#34;,
+         when Tuesday   =&gt; &#34;Tuesday&#34;,
+         when Wednesday =&gt; &#34;Wednesday&#34;,
+         when Thursday  =&gt; &#34;Thursday&#34;,
+         when Friday    =&gt; &#34;Friday&#34;,
+         when Saturday  =&gt; &#34;Saturday&#34;,
+         when Sunday    =&gt; &#34;Sunday&#34;);
+   end Get_Day_Name;
+
+begin
+   Put_Line (&#34;First day is &#34;
+             &amp; Get_Day_Name (Days&#39;First));
+end Main;</div>
+    
+    <div id="21.tab" class="tab">
+        
+            <button id="21.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="21.editor" class="editor-container"></div>
+    <div id="21.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="21.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="21.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="21.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="21.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="21.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="21.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Примечание. Этот пример приведен только в иллюстративных целях.
+Существует встроенный механизм, атрибут <code class="code highlight ada docutils literal highlight-ada"><span class="p">&#39;</span><span class="na">Image</span></code> для скалярных типов,
+который возвращает имя (в виде строки – типа <code class="code highlight ada docutils literal highlight-ada"><span class="kt">String</span></code>) любого элемента
+типа перечисления. Например, <code class="code highlight ada docutils literal highlight-ada"><span class="n">Days</span><span class="p">&#39;</span><span class="na">Image</span><span class="p">(</span><span class="n">Monday</span><span class="p">)</span></code> есть <code class="code highlight ada docutils literal highlight-ada"><span class="s">&quot;MONDAY&quot;</span></code>.)</p>
+<div class="admonition- admonition">
+<p class="admonition-title">На других языках</p>
+<p>Возврат объектов переменного размера в языках, в которых отсутствует
+сборщик мусора, довольно сложен с точки зрения реализации, поэтому C и
+C++ не допускают такого, предпочитая зависеть от явного динамического
+распределения/освобождения памяти пользователем.</p>
+<p>Проблема в том, что явное управление памятью становится
+небезопасным, как только вы захотите использовать выделенную память
+повторно.
+Способность Ада возвращать объекты переменного размера устраняют
+необходимость динамического распределения для одгого
+варианта использования и,
+следовательно, удаляет один потенциальный источник ошибок из ваших
+программ.</p>
+<p>Rust следует модели C/C++, но использует указатели с безопасной семантикой.
+При этом динамическое распределение все еще используется. Ада может
+извлечь выгоду в виде повышения производительности, поскольку оставляет
+возможность использовать любой из этих механизмов.</p>
+</div>
+</section>
+<section id="id9">
+<h2>Объявление массивов (2)<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<p>Хотя мы можем иметь типы массивов, размер и границы которых
+определяются во время выполнения, тип компоненты массива всегда должен быть
+определенного и ограниченного типа.</p>
+<p>Таким образом, если необходимо объявить, например, массив строк,
+подтип <code class="code highlight ada docutils literal highlight-ada"><span class="kt">String</span></code>, используемый в качестве компоненты, должен иметь
+фиксированный размер.</p>
+
+<widget id="22" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Day_Name_2" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_days.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Show_Days is
+   type Days is (Monday, Tuesday, Wednesday,
+                 Thursday, Friday,
+                 Saturday, Sunday);
+
+   subtype Day_Name is String (1 .. 2);
+   --  Subtype of string with known size
+
+   type Days_Name_Type is
+     array (Days) of Day_Name;
+   --       ^ Type of the index
+   --                ^ Type of the element.
+   --                  Must be definite
+
+   Names : constant Days_Name_Type :=
+     (&#34;Mo&#34;, &#34;Tu&#34;, &#34;We&#34;, &#34;Th&#34;, &#34;Fr&#34;, &#34;Sa&#34;, &#34;Su&#34;);
+   --  Initial value given by aggregate
+begin
+   for I in Names&#39;Range loop
+      Put_Line (Names (I));
+   end loop;
+end Show_Days;</div>
+    
+    <div id="22.tab" class="tab">
+        
+            <button id="22.tab.show_days.adb" class="tab-links">show_days.adb</button>
+        
+    </div>
+    <div id="22.editor" class="editor-container"></div>
+    <div id="22.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="22.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="22.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="22.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="22.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="22.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="22.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="id10">
+<h2>Отрезки массива<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<p>Последняя особенность массивов Аде, которую мы собираемся рассмотреть,
+- это отрезки массива. Можно взять и использовать отрезок массива
+(непрерывную последовательность элементов) в качестве имени или
+значения.</p>
+
+<widget id="23" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Slices" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="main.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+procedure Main is
+    Buf : String := &#34;Hello ...&#34;;
+
+    Full_Name : String := &#34;John Smith&#34;;
+begin
+    Buf (7 .. 9) := &#34;Bob&#34;;
+    --  Careful! This works because the string
+    --  on the right side is the same length as
+    --  the replaced slice!
+
+    --  Prints &#34;Hello Bob&#34;
+    Put_Line (Buf);
+
+     --  Prints &#34;Hi John&#34;
+    Put_Line (&#34;Hi &#34; &amp; Full_Name (1 .. 4));
+end Main;</div>
+    
+    <div id="23.tab" class="tab">
+        
+            <button id="23.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="23.editor" class="editor-container"></div>
+    <div id="23.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="23.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="23.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="23.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="23.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="23.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="23.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Как мы видим выше, вы можете использовать отрезок слева от присваивания,
+чтобы заменить только часть массива.</p>
+<p>Отрезок массива имеет тот же тип, что и массив, но имеет другой подтип,
+ограниченния которого заданы границами отрезка.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>В Ада есть <a class="reference external" href="http://www.adaic.org/resources/add_content/standards/12rm/html/RM-3-6.html">многомерные массивы</a>,
+которые не рассматриваются в этом курсе. Отрезки будут работать только
+с одномерными массивами.</p>
+</div>
+</section>
+<section id="intro-ada-ru-object-renaming">
+<span id="id12"></span><h2>Переименование<a class="headerlink" href="#intro-ada-ru-object-renaming" title="Permalink to this heading"></a></h2>
+<p>До сих пор мы видели, что следующие элементы могут быть переименованы:
+<a class="reference internal" href="subprograms.html#intro-ada-ru-subprogram-renaming"><span class="std std-ref">подпрограммы</span></a>,
+<a class="reference internal" href="modular_programming.html#intro-ada-ru-package-renaming"><span class="std std-ref">пакеты</span></a>
+и <span class="xref std std-ref">компоненты записи</span>. Мы также можем
+переименовывать объекты с помощью ключевого слова <code class="code highlight ada docutils literal highlight-ada"><span class="kr">renames</span></code>. Это
+позволяет создавать альтернативные имена для данных объектов. Давайте
+посмотрим на пример:</p>
+
+<widget id="24" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Variable_Renaming" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="measurements.ads">package Measurements is
+
+   subtype Degree_Celsius is Float;
+
+   Current_Temperature : Degree_Celsius;
+
+end Measurements;</div>
+    
+        <div class="file" data-basename="main.adb">with Ada.Text_IO;  use Ada.Text_IO;
+with Measurements;
+
+procedure Main is
+   subtype Degrees is Measurements.Degree_Celsius;
+
+   T : Degrees
+     renames Measurements.Current_Temperature;
+begin
+    T := 5.0;
+
+    Put_Line (Degrees&#39;Image (T));
+    Put_Line (Degrees&#39;Image
+      (Measurements.Current_Temperature));
+
+    T := T + 2.5;
+
+    Put_Line (Degrees&#39;Image (T));
+    Put_Line (Degrees&#39;Image
+      (Measurements.Current_Temperature));
+end Main;</div>
+    
+    <div id="24.tab" class="tab">
+        
+            <button id="24.tab.measurements.ads" class="tab-links">measurements.ads</button>
+        
+            <button id="24.tab.main.adb" class="tab-links">main.adb</button>
+        
+    </div>
+    <div id="24.editor" class="editor-container"></div>
+    <div id="24.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="24.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="24.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="24.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="24.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="24.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="24.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В приведенном выше примере мы объявляем переменную <code class="code highlight ada docutils literal highlight-ada"><span class="n">T</span></code>, переименовывая
+объект <code class="code highlight ada docutils literal highlight-ada"><span class="n">Current_Temperature</span></code> из пакета <code class="code highlight ada docutils literal highlight-ada"><span class="n">Measurements</span></code>. Как вы
+можете видеть, запустив этот пример, и <code class="code highlight ada docutils literal highlight-ada"><span class="n">Current_Temperature</span></code>, и
+его альтернативное имя <code class="code highlight ada docutils literal highlight-ada"><span class="n">T</span></code> имеют одинаковые значения:</p>
+<ul class="simple">
+<li><p>сначала они показывают значение 5.0</p></li>
+<li><p>после сложения они показывают значение 7.5.</p></li>
+</ul>
+<p>Это потому, что они по существу обозначают однин и тот же объект,
+но с двумя разными именами.</p>
+<p>Обратите внимание, что в приведенном выше примере мы используем <code class="code highlight ada docutils literal highlight-ada"><span class="n">Degrees</span></code>
+как псевдоним <code class="code highlight ada docutils literal highlight-ada"><span class="n">Degree_Celsius</span></code>. Мы обсуждали этот метод переименования
+<a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-subtypealiases"><span class="std std-ref">ранее в курсе</span></a>.</p>
+<p>Переименование может быть полезно для улучшения читаемости кода со
+сложной индексацией массивов. Вместо того, чтобы явно использовать
+индексы каждый раз, когда мы обращаемся к определенным позициям
+массива, мы можем создавать короткие имена для этих позиций,
+переименовывая их. Давайте посмотрим на следующий пример:</p>
+
+<widget id="25" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Arrays.Reverse_Colors" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="colors.ads">package Colors is
+
+   type Color is (Black, Red, Green, Blue, White);
+
+   type Color_Array is
+     array (Positive range &lt;&gt;) of Color;
+
+   procedure Reverse_It (X : in out Color_Array);
+
+end Colors;</div>
+    
+        <div class="file" data-basename="colors.adb">package body Colors is
+
+   procedure Reverse_It (X : in out Color_Array) is
+   begin
+      for I in X&#39;First .. (X&#39;Last + X&#39;First) / 2 loop
+         declare
+            Tmp     : Color;
+            X_Left  : Color
+              renames X (I);
+            X_Right : Color
+              renames X (X&#39;Last + X&#39;First - I);
+         begin
+            Tmp     := X_Left;
+            X_Left  := X_Right;
+            X_Right := Tmp;
+         end;
+      end loop;
+   end Reverse_It;
+
+end Colors;</div>
+    
+        <div class="file" data-basename="test_reverse_colors.adb">with Ada.Text_IO; use Ada.Text_IO;
+
+with Colors; use Colors;
+
+procedure Test_Reverse_Colors is
+
+   My_Colors : Color_Array (1 .. 5) :=
+     (Black, Red, Green, Blue, White);
+
+begin
+   for C of My_Colors loop
+      Put_Line (&#34;My_Color: &#34; &amp; Color&#39;Image (C));
+   end loop;
+
+   New_Line;
+   Put_Line (&#34;Reversing My_Color...&#34;);
+   New_Line;
+   Reverse_It (My_Colors);
+
+   for C of My_Colors loop
+      Put_Line (&#34;My_Color: &#34; &amp; Color&#39;Image (C));
+   end loop;
+
+end Test_Reverse_Colors;</div>
+    
+    <div id="25.tab" class="tab">
+        
+            <button id="25.tab.colors.ads" class="tab-links">colors.ads</button>
+        
+            <button id="25.tab.colors.adb" class="tab-links">colors.adb</button>
+        
+            <button id="25.tab.test_reverse_colors.adb" class="tab-links">test_reverse_colors.adb</button>
+        
+    </div>
+    <div id="25.editor" class="editor-container"></div>
+    <div id="25.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="25.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="25.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="25.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="25.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="25.button-group" class="col-md-3 button-group">
+            
+                <button type="button" class="btn btn-primary" data-mode="run" title="Run code in editor">Run</button>
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="25.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В приведенном выше примере пакет <code class="code highlight ada docutils literal highlight-ada"><span class="n">Colors</span></code> содержит процедуру
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Reverse_It</span></code>, где объявлены новые имена для двух позиций массива.
+Таким образом реализация становится легко читаемой:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">begin</span>
+   <span class="n">Tmp</span>     <span class="p">:=</span> <span class="n">X_Left</span><span class="p">;</span>
+   <span class="n">X_Left</span>  <span class="p">:=</span> <span class="n">X_Right</span><span class="p">;</span>
+   <span class="n">X_Right</span> <span class="p">:=</span> <span class="n">Tmp</span><span class="p">;</span>
+<span class="kr">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Сравните это с альтернативной версией без переименования:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">begin</span>
+   <span class="n">Tmp</span>                      <span class="p">:=</span> <span class="n">X</span> <span class="p">(</span><span class="n">I</span><span class="p">);</span>
+   <span class="n">X</span> <span class="p">(</span><span class="n">I</span><span class="p">)</span>                    <span class="p">:=</span> <span class="n">X</span> <span class="p">(</span><span class="n">X</span><span class="p">&#39;</span><span class="na">Last</span> <span class="o">+</span> <span class="n">X</span><span class="p">&#39;</span><span class="na">First</span> <span class="o">-</span> <span class="n">I</span><span class="p">);</span>
+   <span class="n">X</span> <span class="p">(</span><span class="n">X</span><span class="p">&#39;</span><span class="na">Last</span> <span class="o">+</span> <span class="n">X</span><span class="p">&#39;</span><span class="na">First</span> <span class="o">-</span> <span class="n">I</span><span class="p">)</span> <span class="p">:=</span> <span class="n">Tmp</span><span class="p">;</span>
+<span class="kr">end</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="more_about_types.html" class="btn btn-neutral float-right" title="Подробнее о типах" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="records.html" class="btn btn-neutral" title="Записи" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

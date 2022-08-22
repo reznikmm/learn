@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Взаимодействие с языком C &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Объектно-ориентированное программирование" href="object_oriented_programming.html" />
+    <link rel="prev" title="Контрактное проектирование" href="contracts.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Введение в язык Ада</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../safe-secure-software-ru/index.html">Безопасное и надежное программное обеспечение</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_04.html#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../safe-secure-software-ru/chapters/chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../safe-secure-software-ru/chapters/biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="c">
+<h1>Взаимодействие с языком C<a class="headerlink" href="#c" title="Permalink to this heading"></a></h1>
+<p>Ада позволяет нам взаимодействовать с кодом на многих языках, включая
+C и C++. В этом разделе обсуждается, как взаимодействовать с C.</p>
+<section id="id1">
+<h2>Многоязычный проект<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>По умолчанию при использовании <strong class="program">gprbuild</strong> мы компилируем только
+исходные файлы Ада. Чтобы скомпилировать файлы C, нам нужно изменить файл
+проекта, используемый <strong class="program">gprbuild</strong>. Мы добавляем запись
+<code class="docutils literal notranslate"><span class="pre">Languages</span></code>, как в следующем примере:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="n">project</span> <span class="n">Multilang</span> <span class="kr">is</span>
+
+   <span class="kr">for</span> <span class="n">Languages</span> <span class="kn">use</span> <span class="p">(</span><span class="s">&quot;ada&quot;</span><span class="p">,</span> <span class="s">&quot;c&quot;</span><span class="p">);</span>
+
+   <span class="kr">for</span> <span class="n">Source_Dirs</span> <span class="kn">use</span> <span class="p">(</span><span class="s">&quot;src&quot;</span><span class="p">);</span>
+   <span class="kr">for</span> <span class="n">Main</span> <span class="kn">use</span> <span class="p">(</span><span class="s">&quot;main.adb&quot;</span><span class="p">);</span>
+   <span class="kr">for</span> <span class="n">Object_Dir</span> <span class="kn">use</span> <span class="s">&quot;obj&quot;</span><span class="p">;</span>
+
+<span class="kr">end</span> <span class="nf">Multilang</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>Соглашение о типах<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Для взаимодействия с типами данных, объявленными в приложении на C,
+необходимо указать аспект <code class="code highlight ada docutils literal highlight-ada"><span class="n">Convention</span></code> в соответствующем объявлении
+типа Ада. В следующем примере вводим перечисленимый тип
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">C_Enum</span></code>, для соответствующего типа в исходном файле C:</p>
+
+<widget id="76" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Enum" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_c_enum.adb">procedure Show_C_Enum is
+
+   type C_Enum is (A, B, C)
+     with Convention =&gt; C;
+   --  Use C convention for C_Enum
+begin
+   null;
+end Show_C_Enum;</div>
+    
+    <div id="76.tab" class="tab">
+        
+            <button id="76.tab.show_c_enum.adb" class="tab-links">show_c_enum.adb</button>
+        
+    </div>
+    <div id="76.editor" class="editor-container"></div>
+    <div id="76.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="76.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="76.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="76.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="76.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="76.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="76.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Для взаимодействия со встроенными типами C используется пакет
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Interfaces</span><span class="p">.</span><span class="n">C</span></code>, содержащий большинство необходимых определений
+типов. Например:</p>
+
+<widget id="77" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Struct" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_c_struct.adb">with Interfaces.C; use Interfaces.C;
+
+procedure Show_C_Struct is
+
+   type c_struct is record
+      a : int;
+      b : long;
+      c : unsigned;
+      d : double;
+   end record
+     with Convention =&gt; C;
+
+begin
+   null;
+end Show_C_Struct;</div>
+    
+    <div id="77.tab" class="tab">
+        
+            <button id="77.tab.show_c_struct.adb" class="tab-links">show_c_struct.adb</button>
+        
+    </div>
+    <div id="77.editor" class="editor-container"></div>
+    <div id="77.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="77.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="77.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="77.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="77.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="77.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="77.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Здесь мы взаимодействуем со структурой C (<code class="code highlight ada docutils literal highlight-ada"><span class="n">C_Struct</span></code>) и используем
+соответствующие типы данных C (<code class="code highlight c docutils literal highlight-c"><span class="kt">int</span><span class="w"></span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">long</span><span class="w"></span></code>, <code class="code highlight c docutils literal highlight-c"><span class="kt">unsigned</span><span class="w"></span></code> и
+<code class="code highlight c docutils literal highlight-c"><span class="kt">double</span><span class="w"></span></code>). А вот объявление в C:</p>
+
+<widget id="78" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Struct" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="c_struct.h">struct c_struct
+{
+    int         a;
+    long        b;
+    unsigned    c;
+    double      d;
+};</div>
+    
+    <div id="78.tab" class="tab">
+        
+            <button id="78.tab.c_struct.h" class="tab-links">c_struct.h</button>
+        
+    </div>
+    <div id="78.editor" class="editor-container"></div>
+    <div id="78.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="78.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="78.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="78.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="78.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="78.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="78.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="id3">
+<h2>Подпрограммы на других языках<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<section id="id4">
+<h3>Вызов подпрограмм C из Ады<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>Мы используем аналогичный подход при взаимодействии с подпрограммами,
+написанными на C. Рассмотрим следующее объявление в заголовочном файле
+C:</p>
+
+<widget id="79" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="my_func.h">int my_func (int a);</div>
+    
+    <div id="79.tab" class="tab">
+        
+            <button id="79.tab.my_func.h" class="tab-links">my_func.h</button>
+        
+    </div>
+    <div id="79.editor" class="editor-container"></div>
+    <div id="79.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="79.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="79.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="79.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="79.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="79.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="79.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Вот соответствующее определение функции на C:</p>
+
+<widget id="80" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="my_func.c">#include &#34;my_func.h&#34;
+
+int my_func (int a)
+{
+    return a * 2;
+}</div>
+    
+    <div id="80.tab" class="tab">
+        
+            <button id="80.tab.my_func.c" class="tab-links">my_func.c</button>
+        
+    </div>
+    <div id="80.editor" class="editor-container"></div>
+    <div id="80.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="80.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="80.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="80.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="80.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="80.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="80.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Мы можем связать этот код с кодом на Аде, указывая аспект <code class="code highlight ada docutils literal highlight-ada"><span class="n">Import</span></code>.
+Например:</p>
+
+<widget id="81" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_c_func.adb">with Interfaces.C; use Interfaces.C;
+with Ada.Text_IO;  use Ada.Text_IO;
+
+procedure Show_C_Func is
+
+   function my_func (a : int) return int
+     with
+       Import        =&gt; True,
+       Convention    =&gt; C;
+
+   --  Imports function &#39;my_func&#39; from C.
+   --  You can now call it from Ada.
+
+   V : int;
+begin
+   V := my_func (2);
+   Put_Line (&#34;Result is &#34; &amp; int&#39;Image (V));
+end Show_C_Func;</div>
+    
+    <div id="81.tab" class="tab">
+        
+            <button id="81.tab.show_c_func.adb" class="tab-links">show_c_func.adb</button>
+        
+    </div>
+    <div id="81.editor" class="editor-container"></div>
+    <div id="81.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="81.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="81.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="81.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="81.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="81.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="81.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>При необходимости можно использовать другое имя подпрограммы в
+Ада коде. Например, можно назвать функцию <code class="code highlight ada docutils literal highlight-ada"><span class="n">Get_Value</span></code>:</p>
+
+<widget id="82" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_c_func.adb">with Interfaces.C; use Interfaces.C;
+with Ada.Text_IO;  use Ada.Text_IO;
+
+procedure Show_C_Func is
+
+   function Get_Value (a : int) return int
+     with
+       Import        =&gt; True,
+       Convention    =&gt; C,
+       External_Name =&gt; &#34;my_func&#34;;
+
+   --  Imports function &#39;my_func&#39; from C and
+   --  rename it to &#39;Get_Value&#39;
+
+   V : int;
+begin
+   V := Get_Value (2);
+   Put_Line (&#34;Result is &#34; &amp; int&#39;Image (V));
+end Show_C_Func;</div>
+    
+    <div id="82.tab" class="tab">
+        
+            <button id="82.tab.show_c_func.adb" class="tab-links">show_c_func.adb</button>
+        
+    </div>
+    <div id="82.editor" class="editor-container"></div>
+    <div id="82.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="82.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="82.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="82.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="82.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="82.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="82.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+<section id="id5">
+<h3>Вызов Ада подпрограмм из C<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>Вы также можете вызывать Ада подпрограммы из C приложений. Это делается
+с помощью аспекта <code class="code highlight ada docutils literal highlight-ada"><span class="n">Export</span></code>. Например:</p>
+
+<widget id="83" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="c_api.ads">with Interfaces.C; use Interfaces.C;
+
+package C_API is
+
+   function My_Func (a : int) return int
+     with
+       Export        =&gt; True,
+       Convention    =&gt; C,
+       External_Name =&gt; &#34;my_func&#34;;
+
+end C_API;</div>
+    
+    <div id="83.tab" class="tab">
+        
+            <button id="83.tab.c_api.ads" class="tab-links">c_api.ads</button>
+        
+    </div>
+    <div id="83.editor" class="editor-container"></div>
+    <div id="83.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="83.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="83.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="83.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="83.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="83.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="83.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Вот соответствующее тело пакета с реализфцией этой функции:</p>
+
+<widget id="84" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="c_api.adb">package body C_API is
+
+   function My_Func (a : int) return int is
+   begin
+      return a * 2;
+   end My_Func;
+
+end C_API;</div>
+    
+    <div id="84.tab" class="tab">
+        
+            <button id="84.tab.c_api.adb" class="tab-links">c_api.adb</button>
+        
+    </div>
+    <div id="84.editor" class="editor-container"></div>
+    <div id="84.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="84.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="84.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="84.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="84.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="84.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="84.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>На стороне C мы делаем так, как если бы функция была
+написана на C: просто объявляем ее с помощью ключевого слова <code class="code highlight c docutils literal highlight-c"><span class="k">extern</span><span class="w"></span></code>.
+Например:</p>
+
+<widget id="85" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Func" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="main.c">#include &lt;stdio.h&gt;
+
+extern int my_func (int a);
+
+int main (int argc, char **argv) {
+
+  int v = my_func(2);
+
+  printf(&#34;Result is %d\n&#34;, v);
+
+  return 0;
+}</div>
+    
+    <div id="85.tab" class="tab">
+        
+            <button id="85.tab.main.c" class="tab-links">main.c</button>
+        
+    </div>
+    <div id="85.editor" class="editor-container"></div>
+    <div id="85.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="85.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="85.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="85.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="85.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="85.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="85.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+</section>
+</section>
+<section id="id6">
+<h2>Внешние переменные<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<section id="id7">
+<h3>Использование глобальных переменных C в Аде<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>Чтобы использовать глобальные переменные из C, мы используем тот
+же метод, что и для подпрограмм: мы указываем аспекты <code class="code highlight ada docutils literal highlight-ada"><span class="n">Import</span></code> и
+<code class="code highlight ada docutils literal highlight-ada"><span class="n">Convention</span></code> для каждой переменной, которую мы хотим импортировать.</p>
+<p>Давайте воспользуемся примером из предыдущего раздела. Мы
+добавим глобальную переменную (<code class="code highlight c docutils literal highlight-c"><span class="n">func_cnt</span><span class="w"></span></code>) для подсчета количества вызовов
+функции (<code class="code highlight c docutils literal highlight-c"><span class="n">my_func</span><span class="w"></span></code>):</p>
+
+<widget id="86" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Vars" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="test.h">extern int func_cnt;
+
+int my_func (int a);</div>
+    
+    <div id="86.tab" class="tab">
+        
+            <button id="86.tab.test.h" class="tab-links">test.h</button>
+        
+    </div>
+    <div id="86.editor" class="editor-container"></div>
+    <div id="86.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="86.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="86.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="86.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="86.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="86.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="86.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Переменная объявлена в файле C и увеличивается в <code class="code highlight c docutils literal highlight-c"><span class="n">my_func</span><span class="w"></span></code>:</p>
+
+<widget id="87" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Vars" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="test.c">#include &#34;test.h&#34;
+
+int func_cnt = 0;
+
+int my_func (int a)
+{
+  func_cnt++;
+
+  return a * 2;
+}</div>
+    
+    <div id="87.tab" class="tab">
+        
+            <button id="87.tab.test.c" class="tab-links">test.c</button>
+        
+    </div>
+    <div id="87.editor" class="editor-container"></div>
+    <div id="87.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="87.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="87.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="87.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="87.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="87.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="87.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В коде на Аде мы просто ссылаемся на внешнюю переменную:</p>
+
+<widget id="88" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.Ada_C_Vars" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_c_func.adb">with Interfaces.C; use Interfaces.C;
+with Ada.Text_IO;  use Ada.Text_IO;
+
+procedure Show_C_Func is
+
+   function my_func (a : int) return int
+     with
+       Import     =&gt; True,
+       Convention =&gt; C;
+
+   V : int;
+
+   func_cnt : int
+     with
+       Import        =&gt; True,
+       Convention    =&gt; C;
+   --  We can access the func_cnt variable
+   --  from test.c
+
+begin
+   V := my_func (1);
+   V := my_func (2);
+   V := my_func (3);
+   Put_Line (&#34;Result is &#34; &amp; int&#39;Image (V));
+
+   Put_Line (&#34;Function was called &#34;
+             &amp; int&#39;Image (func_cnt)
+             &amp; &#34; times&#34;);
+end Show_C_Func;</div>
+    
+    <div id="88.tab" class="tab">
+        
+            <button id="88.tab.show_c_func.adb" class="tab-links">show_c_func.adb</button>
+        
+    </div>
+    <div id="88.editor" class="editor-container"></div>
+    <div id="88.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="88.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="88.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="88.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="88.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="88.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="88.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Как мы видим, запустив приложение, значение счетчика - это количество
+вызовов <code class="code highlight c docutils literal highlight-c"><span class="n">my_func</span><span class="w"></span></code>.</p>
+<p>Мы можем использовать аспект <code class="code highlight ada docutils literal highlight-ada"><span class="n">External_Name</span></code>, если хотим сослаться
+на имя отличное от наименования переменной в Аде, как мы это делали для
+подпрограмм.</p>
+</section>
+<section id="id8">
+<h3>Использование переменных Ада в C<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<p>Вы также можете использовать переменные, объявленные в файлах Ада, в
+приложениях C. Точно так же, как мы делали для подпрограмм, вы делаете
+это с помощью аспекта <code class="code highlight ada docutils literal highlight-ada"><span class="n">Export</span></code>.</p>
+<p>Давайте повторно воспользуемся прошлым примером и добавим счетчик,
+аналогично предыдущему примеру, но на этот раз будем увеличивать счетчик
+в Ада коде:</p>
+
+<widget id="89" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Vars" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="c_api.ads">with Interfaces.C; use Interfaces.C;
+
+package C_API is
+
+   func_cnt : int := 0
+     with
+       Export     =&gt; True,
+       Convention =&gt; C;
+
+   function My_Func (a : int) return int
+     with
+       Export        =&gt; True,
+       Convention    =&gt; C,
+       External_Name =&gt; &#34;my_func&#34;;
+
+end C_API;</div>
+    
+    <div id="89.tab" class="tab">
+        
+            <button id="89.tab.c_api.ads" class="tab-links">c_api.ads</button>
+        
+    </div>
+    <div id="89.editor" class="editor-container"></div>
+    <div id="89.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="89.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="89.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="89.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="89.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="89.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="89.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Затем переменная увеличивается в <code class="code highlight ada docutils literal highlight-ada"><span class="n">My_Func</span></code>:</p>
+
+<widget id="90" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Vars" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="c_api.adb">package body C_API is
+
+   function My_Func (a : int) return int is
+   begin
+      func_cnt := func_cnt + 1;
+      return a * 2;
+   end My_Func;
+
+end C_API;</div>
+    
+    <div id="90.tab" class="tab">
+        
+            <button id="90.tab.c_api.adb" class="tab-links">c_api.adb</button>
+        
+    </div>
+    <div id="90.editor" class="editor-container"></div>
+    <div id="90.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="90.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="90.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="90.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="90.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="90.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="90.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>В приложении C нам просто нужно объявить переменную и использовать ее:</p>
+
+<widget id="91" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Ada_Vars" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="main.c">#include &lt;stdio.h&gt;
+
+extern int my_func (int a);
+
+extern int func_cnt;
+
+int main (int argc, char **argv) {
+
+  int v;
+
+  v = my_func(1);
+  v = my_func(2);
+  v = my_func(3);
+
+  printf(&#34;Result is %d\n&#34;, v);
+
+  printf(&#34;Function was called %d times\n&#34;, func_cnt);
+
+  return 0;
+}</div>
+    
+    <div id="91.tab" class="tab">
+        
+            <button id="91.tab.main.c" class="tab-links">main.c</button>
+        
+    </div>
+    <div id="91.editor" class="editor-container"></div>
+    <div id="91.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="91.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="91.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="91.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="91.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="91.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="91.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Опять же, запустив приложение, мы видим, что значение счетчика - это
+количество вызовов <code class="code highlight c docutils literal highlight-c"><span class="n">my_func</span><span class="w"></span></code>.</p>
+</section>
+</section>
+<section id="id9">
+<h2>Автоматическое создание связок<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<p>В приведенных выше примерах мы вручную добавили аспекты в наш код Ада,
+чтобы они соответствовали исходному коду C, с которым мы
+взаимодействуем. Это называется созданием <em>cвязки</em>. Мы можем
+автоматизировать этот процесс, используя особый ключ компилятора для
+<em>дампа спецификации Ада</em>: <code class="docutils literal notranslate"><span class="pre">-fdump-ada-spec</span></code>. Мы проиллюстрируем
+это, вернувшись к нашему предыдущему примеру.</p>
+<p>Это был наш заголовочный файл C:</p>
+
+<widget id="92" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="my_func.c">extern int func_cnt;
+
+int my_func (int a);</div>
+    
+    <div id="92.tab" class="tab">
+        
+            <button id="92.tab.my_func.c" class="tab-links">my_func.c</button>
+        
+    </div>
+    <div id="92.editor" class="editor-container"></div>
+    <div id="92.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="92.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="92.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="92.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="92.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="92.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="92.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Чтобы создать связку на Аде, мы вызовем компилятор следующим образом:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gcc -c -fdump-ada-spec -C ./test.h
+</pre></div>
+</div>
+<p>Результатом является файл спецификации Ада с именем <code class="file docutils literal notranslate"><span class="pre">test_h.ads</span></code>:</p>
+
+<widget id="93" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="test_h.ads">pragma Ada_2005;
+pragma Style_Checks (Off);
+
+with Interfaces.C; use Interfaces.C;
+
+package test_h is
+
+   func_cnt : aliased int;  -- ./test.h:3
+   pragma Import (C, func_cnt, &#34;func_cnt&#34;);
+
+   function my_func (arg1 : int) return int;  -- ./test.h:5
+   pragma Import (C, my_func, &#34;my_func&#34;);
+
+end test_h;</div>
+    
+    <div id="93.tab" class="tab">
+        
+            <button id="93.tab.test_h.ads" class="tab-links">test_h.ads</button>
+        
+    </div>
+    <div id="93.editor" class="editor-container"></div>
+    <div id="93.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="93.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="93.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="93.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="93.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="93.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="93.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Теперь мы просто ссылаемся на этот пакет <code class="file docutils literal notranslate"><span class="pre">test_h</span></code> в нашем приложении Ада:</p>
+
+<widget id="94" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_c_func.adb">with Interfaces.C; use Interfaces.C;
+with Ada.Text_IO;  use Ada.Text_IO;
+with test_h;       use test_h;
+
+procedure Show_C_Func is
+   V : int;
+begin
+   V := my_func (1);
+   V := my_func (2);
+   V := my_func (3);
+   Put_Line (&#34;Result is &#34; &amp; int&#39;Image (V));
+
+   Put_Line (&#34;Function was called &#34;
+             &amp; int&#39;Image (func_cnt)
+             &amp; &#34; times&#34;);
+end Show_C_Func;</div>
+    
+    <div id="94.tab" class="tab">
+        
+            <button id="94.tab.show_c_func.adb" class="tab-links">show_c_func.adb</button>
+        
+    </div>
+    <div id="94.editor" class="editor-container"></div>
+    <div id="94.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="94.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="94.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="94.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="94.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="94.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="94.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Вы можете указать имя родительского модуля создаваемых связок в
+качестве операнда для <code class="docutils literal notranslate"><span class="pre">fdump-ada-spec</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gcc -c -fdump-ada-spec -fada-spec-parent<span class="o">=</span>Ext_C_Code -C ./test.h
+</pre></div>
+</div>
+<p>И получим файл <code class="file docutils literal notranslate"><span class="pre">ext_c_code-test_h.ads</span></code>:</p>
+
+<widget id="95" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_2" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="ext_c_code-test_h.ads">package Ext_C_Code.test_h is
+
+   --  automatic generated bindings...
+
+end Ext_C_Code.test_h;</div>
+    
+    <div id="95.tab" class="tab">
+        
+            <button id="95.tab.ext_c_code-test_h.ads" class="tab-links">ext_c_code-test_h.ads</button>
+        
+    </div>
+    <div id="95.editor" class="editor-container"></div>
+    <div id="95.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="95.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="95.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="95.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="95.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="95.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="95.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<section id="id10">
+<h3>Адаптация связок<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<p>Компилятор делает все возможное при создании связок для файла
+заголовка C. Однако мы получаем достаточно хороший результат и
+сгенерированные связки не всегда соответствуют нашим ожиданиям.
+Например, так может произойти при создании связок для функций,
+которые имеют указатели в качестве аргументов. В этом случае
+компилятор может использовать <code class="code highlight ada docutils literal highlight-ada"><span class="n">System</span><span class="p">.</span><span class="kt">Address</span></code> как тип одного
+или нескольких указателей. Хотя этот подход работает нормально
+(как мы увидим позже),
+обычно человек не так интерпретирует заголовочный файл C. Следующий
+пример иллюстрирует эту проблему.</p>
+<p>Начнем с такого заголовочного файла C:</p>
+
+<widget id="96" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="test.h">struct test;
+
+struct test * test_create(void);
+
+void test_destroy(struct test *t);
+
+void test_reset(struct test *t);
+
+void test_set_name(struct test *t, char *name);
+
+void test_set_address(struct test *t, char *address);
+
+void test_display(const struct test *t);</div>
+    
+    <div id="96.tab" class="tab">
+        
+            <button id="96.tab.test.h" class="tab-links">test.h</button>
+        
+    </div>
+    <div id="96.editor" class="editor-container"></div>
+    <div id="96.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="96.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="96.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="96.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="96.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="96.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="96.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>И соответствующей реализация на C:</p>
+
+<widget id="97" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="test.c">#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+#include &#34;test.h&#34;
+
+struct test {
+  char name[80];
+  char address[120];
+};
+
+static size_t
+strlcpy(char *dst, const char *src, size_t dstsize)
+{
+  size_t len = strlen(src);
+  if (dstsize) {
+    size_t bl = (len &lt; dstsize-1 ? len : dstsize-1);
+    ((char*)memcpy(dst, src, bl))[bl] = 0;
+  }
+  return len;
+}
+
+struct test * test_create(void)
+{
+  return malloc (sizeof (struct test));
+}
+
+void test_destroy(struct test *t)
+{
+  if (t != NULL) {
+    free(t);
+  }
+}
+
+void test_reset(struct test *t)
+{
+  t-&gt;name[0]    = &#39;\0&#39;;
+  t-&gt;address[0] = &#39;\0&#39;;
+}
+
+void test_set_name(struct test *t, char *name)
+{
+  strlcpy(t-&gt;name, name, sizeof(t-&gt;name));
+}
+
+void test_set_address(struct test *t, char *address)
+{
+  strlcpy(t-&gt;address, address, sizeof(t-&gt;address));
+}
+
+void test_display(const struct test *t)
+{
+  printf(&#34;Name:    %s\n&#34;, t-&gt;name);
+  printf(&#34;Address: %s\n&#34;, t-&gt;address);
+}</div>
+    
+    <div id="97.tab" class="tab">
+        
+            <button id="97.tab.test.c" class="tab-links">test.c</button>
+        
+    </div>
+    <div id="97.editor" class="editor-container"></div>
+    <div id="97.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="97.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="97.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="97.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="97.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="97.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="97.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Далее мы создадим наши связки:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>gcc -c -fdump-ada-spec -C ./test.h
+</pre></div>
+</div>
+<p>Это создает следующую спецификацию в <code class="file docutils literal notranslate"><span class="pre">test_h.ads</span></code>:</p>
+
+<widget id="98" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="test_h.ads">pragma Ada_2005;
+pragma Style_Checks (Off);
+
+with Interfaces.C; use Interfaces.C;
+with System;
+with Interfaces.C.Strings;
+
+package test_h is
+
+   --  skipped empty struct test
+
+   function test_create return System.Address;  -- ./test.h:5
+   pragma Import (C, test_create, &#34;test_create&#34;);
+
+   procedure test_destroy (arg1 : System.Address);  -- ./test.h:7
+   pragma Import (C, test_destroy, &#34;test_destroy&#34;);
+
+   procedure test_reset (arg1 : System.Address);  -- ./test.h:9
+   pragma Import (C, test_reset, &#34;test_reset&#34;);
+
+   procedure test_set_name (arg1 : System.Address; arg2 : Interfaces.C.Strings.chars_ptr);  -- ./test.h:11
+   pragma Import (C, test_set_name, &#34;test_set_name&#34;);
+
+   procedure test_set_address (arg1 : System.Address; arg2 : Interfaces.C.Strings.chars_ptr);  -- ./test.h:13
+   pragma Import (C, test_set_address, &#34;test_set_address&#34;);
+
+   procedure test_display (arg1 : System.Address);  -- ./test.h:15
+   pragma Import (C, test_display, &#34;test_display&#34;);
+
+end test_h;</div>
+    
+    <div id="98.tab" class="tab">
+        
+            <button id="98.tab.test_h.ads" class="tab-links">test_h.ads</button>
+        
+    </div>
+    <div id="98.editor" class="editor-container"></div>
+    <div id="98.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="98.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="98.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="98.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="98.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="98.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="98.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Как мы видим, генератор связки полностью игнорирует объявление
+<code class="code highlight c docutils literal highlight-c"><span class="k">struct</span><span class="w"> </span><span class="nc">test</span><span class="w"></span></code>, и
+все ссылки на структуру <code class="code highlight c docutils literal highlight-c"><span class="n">test</span><span class="w"></span></code> заменяются адресами
+(<code class="code highlight ada docutils literal highlight-ada"><span class="n">System</span><span class="p">.</span><span class="kt">Address</span></code>). Тем не менее, эти
+связки достаточно хороши, чтобы позволить нам создать тестовое
+приложение на Ада:</p>
+
+<widget id="99" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_automatic_c_struct_bindings.adb">with Interfaces.C;         use Interfaces.C;
+with Interfaces.C.Strings; use Interfaces.C.Strings;
+with Ada.Text_IO;          use Ada.Text_IO;
+with test_h;               use test_h;
+
+with System;
+
+procedure Show_Automatic_C_Struct_Bindings is
+
+   Name    : constant chars_ptr :=
+     New_String (&#34;John Doe&#34;);
+   Address : constant chars_ptr :=
+     New_String (&#34;Small Town&#34;);
+
+   T : System.Address := test_create;
+
+begin
+   test_reset (T);
+   test_set_name (T, Name);
+   test_set_address (T, Address);
+
+   test_display (T);
+   test_destroy (T);
+end Show_Automatic_C_Struct_Bindings;</div>
+    
+    <div id="99.tab" class="tab">
+        
+            <button id="99.tab.show_automatic_c_struct_bindings.adb" class="tab-links">show_automatic_c_struct_bindings.adb</button>
+        
+    </div>
+    <div id="99.editor" class="editor-container"></div>
+    <div id="99.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="99.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="99.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="99.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="99.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="99.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="99.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Мы можем успешно собрать такую программу, используя автоматически
+сгенерированные связки, но они не идеальны. Вместо этого мы
+предпочли бы связки на Аде, которые соответствуют нашей (человеческой)
+интерпретации файла заголовка C. Это требует ручного анализа файла
+заголовка. Хорошая новость заключается в том, что мы можем
+использовать автоматически сгенерированные связки в качестве
+отправной точки и адаптировать их к нашим потребностям. Например, мы
+можем:</p>
+<ol class="arabic simple">
+<li><p>Определить тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test</span></code> на основе <code class="code highlight ada docutils literal highlight-ada"><span class="n">System</span><span class="p">.</span><span class="kt">Address</span></code> и
+использовать его во всех соответствующих функциях.</p></li>
+<li><p>Удалить префикс <code class="docutils literal notranslate"><span class="pre">test_</span></code> во всех операциях с типом <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test</span></code>.</p></li>
+</ol>
+<p>Вот итоговая версия спецификации:</p>
+
+<widget id="100" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="adapted_test_h.ads">with Interfaces.C; use Interfaces.C;
+with System;
+with Interfaces.C.Strings;
+
+package adapted_test_h is
+
+   type Test is new System.Address;
+
+   function Create return Test;
+   pragma Import (C, Create, &#34;test_create&#34;);
+
+   procedure Destroy (T : Test);
+   pragma Import (C, Destroy, &#34;test_destroy&#34;);
+
+   procedure Reset (T : Test);
+   pragma Import (C, Reset, &#34;test_reset&#34;);
+
+   procedure Set_Name (T    : Test;
+                       Name : Interfaces.C.Strings.chars_ptr);  -- ./test.h:11
+   pragma Import (C, Set_Name, &#34;test_set_name&#34;);
+
+   procedure Set_Address (T       : Test;
+                          Address : Interfaces.C.Strings.chars_ptr);
+   pragma Import (C, Set_Address, &#34;test_set_address&#34;);
+
+   procedure Display (T : Test);  -- ./test.h:15
+   pragma Import (C, Display, &#34;test_display&#34;);
+
+end adapted_test_h;</div>
+    
+    <div id="100.tab" class="tab">
+        
+            <button id="100.tab.adapted_test_h.ads" class="tab-links">adapted_test_h.ads</button>
+        
+    </div>
+    <div id="100.editor" class="editor-container"></div>
+    <div id="100.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="100.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="100.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="100.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="100.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="100.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="100.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>И это соответствующее тело на Аде:</p>
+
+<widget id="101" data-url="https://cloudchecker.learn.r53.adacore.com" data-name="Courses.Intro_To_Ada.Interfacing_With_C.C_Binds_3" data-lab="False" data-switches='{}' data-main="">
+    
+    
+        <div class="file" data-basename="show_adapted_c_struct_bindings.adb">with Interfaces.C;         use Interfaces.C;
+with Interfaces.C.Strings; use Interfaces.C.Strings;
+with adapted_test_h;       use  adapted_test_h;
+
+with System;
+
+procedure Show_Adapted_C_Struct_Bindings is
+
+   Name    : constant chars_ptr :=
+     New_String (&#34;John Doe&#34;);
+   Address : constant chars_ptr :=
+     New_String (&#34;Small Town&#34;);
+
+   T : Test := Create;
+
+begin
+   Reset (T);
+   Set_Name (T, Name);
+   Set_Address (T, Address);
+
+   Display (T);
+   Destroy (T);
+end Show_Adapted_C_Struct_Bindings;</div>
+    
+    <div id="101.tab" class="tab">
+        
+            <button id="101.tab.show_adapted_c_struct_bindings.adb" class="tab-links">show_adapted_c_struct_bindings.adb</button>
+        
+    </div>
+    <div id="101.editor" class="editor-container"></div>
+    <div id="101.settings-bar" class="settings-bar">
+        <div class="dropdown-container settingsbar-item">
+            <button class="dropdown-btn">
+                <i class="fas fa-cog"></i>
+            </button>
+            <div class="dropdown-content">
+                <label>
+                    <input id="101.settings-bar.tab-setting" type="checkbox" class="checkbox tab-setting" disabled>
+                    Enable tabbed editor view for this editor
+                </label>
+                <label>
+                    <input id="101.settings-bar.theme-setting" type="checkbox" class="checkbox theme-setting">
+                    Use the dark theme
+                </label>
+            </div>
+        </div>
+        <button id="101.settings-bar.reset-btn" type="button" class="settingsbar-item reset-btn" title="Reset editor to default state">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button id="101.settings-bar.download-btn" type="button" class="settingsbar-item download-btn" title="Download source files">
+            <i class="fas fa-file-download"></i>
+        </button>
+    </div>
+    <div class="row output-row">
+        <div id="101.button-group" class="col-md-3 button-group">
+            
+        </div>
+        <div class="col-md-9 output-group">
+            <div id="101.output-area" class="output-area"></div>
+            
+        </div>
+    </div>
+</widget>
+<p>Теперь мы можем использовать тип <code class="code highlight ada docutils literal highlight-ada"><span class="n">Test</span></code> и его операции в понятной и
+удобочитаемой форме.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="object_oriented_programming.html" class="btn btn-neutral float-right" title="Объектно-ориентированное программирование" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="contracts.html" class="btn btn-neutral" title="Контрактное проектирование" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Безопасная архитектура &mdash; learn.adacore.com</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/1.style.6b9ffa6b650d4d2b2239.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/main.6b9ffa6b650d4d2b2239.js"></script>
+        <script src="../../../_static/1.main.6b9ffa6b650d4d2b2239.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Безопасное объектно-ориентированное программирование" href="chapter_05.html" />
+    <link rel="prev" title="Безопасные указатели" href="chapter_03.html" />
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117428-14"></script>
+<script type="text/javascript">
+  if(!Cookies.get('AdaCore_staff')) {
+    // Global site tag (gtag.js) - Google Analytics
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117428-14');
+    // End Global site tag (gtag.js) - Google Analytics
+
+    // Google Tag Manager
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KD5HNRR');
+    // End Google Tag Manager
+
+    // Twitter universal website tag code
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','o3mlc');
+    twq('track','PageView');
+    // End Twitter universal website tag code
+
+    // LinkedIn Tracking Tags
+    _linkedin_partner_id = "482585"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+    (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})();
+    // End LinkedIn Tracking Tags
+  }
+</script>
+  <!--  Essential META Tags -->
+<meta property="og:title" content=“learn.adacore.com">
+<meta property="og:description" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+<meta property="og:image" content="https://learn.adacore.com/_static/learn_meta_img.jpeg">
+<meta property="og:url" content="https://learn.adacore.com">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--  Non-Essential, But Recommended -->
+<meta property="og:site_name" content="learn.adacore.com">
+<meta name="twitter:image:alt" content="An interactive learning platform to teach the Ada and SPARK programming languages.">
+
+<!--  Non-Essential, But Required for Analytics -->
+<meta name="twitter:site" content="@AdaCoreCompany">
+
+</head>
+
+<body class="wy-body-for-nav">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD5HNRR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- LinkedIn Tracking Tags (noscript) -->
+  <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=482585&fmt=gif" /> </noscript>
+  <!-- End LinkedIn Tracking Tags (noscript) -->
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">Подробнее</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Курсы</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intro-to-ada-ru/index.html">Введение в язык Ада</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html">Введение</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id2">История</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id3">Ада сегодня</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#id7">Философия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/introduction.html#spark">SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html">Императивы языка</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#hello-world">Hello world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id2">Условный оператор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id3">Циклы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#for">Циклы for</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id4">Простой цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#while">Циклы while</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id5">Оператор выбора</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id6">Зоны описания</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id7">Условные выражения</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id8">Условное выражение</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/imperative_language.html#id9">Выражение выбора</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html">Подпрограммы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id2">Подпрограммы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id3">Вызовы подпрограмм</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id4">Вложенные подпрограммы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id5">Вызов функций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id6">Виды параметров</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id7">Вызов процедуры</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in">Параметры in</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#in-out">Параметры in out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#out">Параметры out</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#id8">Предварительное объявление подпрограмм</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/subprograms.html#intro-ada-ru-subprogram-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html">Модульное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id2">Пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-use-clause">Использование пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id4">Тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-childpackages">Дочерние пакеты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id6">Дочерний пакет от дочернего пакета</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id7">Множественные потомки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#id8">Видимость</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/modular_programming.html#intro-ada-ru-package-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html">Сильно типизированный язык</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-whatisatype">Что такое тип?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#integers">Целочисленные типы - Integers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id3">Семантика операций</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id4">Беззнаковые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-enumtypes">Перечисления</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id7">Типы с плавающей запятой</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id8">Основные свойства</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id9">Точность типов с плавающей запятой</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id10">Диапазон значений для типов с плавающей запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id11">Строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id12">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#id13">Подтипы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/strongly_typed_language.html#intro-ada-ru-subtypealiases">Подтипы в качестве псевдонимов типов</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html">Записи</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#intro-ada-ru-record-type-declaration">Объявление типа записи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id3">Агрегаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#id4">Извлечение компонент</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/records.html#record-comp-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html">Массивы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id2">Объявление типа массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id3">Доступ по индексу</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id4">Более простые объявления массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id5">Атрибут диапазона</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-unconstrainedarraytypes">Неограниченные массивы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#string">Предопределенный тип String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id7">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id8">Возврат неограниченных массивов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id9">Объявление массивов (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#id10">Отрезки массива</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/arrays.html#intro-ada-ru-object-renaming">Переименование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html">Подробнее о типах</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id2">Агрегаты: краткая информация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#c">Cовмещение и квалифицированные выражения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_types.html#id4">Символьные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html">Ссылочные типы</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#allocation">Выделение (allocation) памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#intro-ada-ru-access-dereferencing">Извлечение по ссылке</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id4">Другие особенности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/access_types.html#id5">Взаимно рекурсивные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html">Подробнее о записях</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id2">Типы записей динамически изменяемого размера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#id3">Записи с дискриминантом</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/more_about_records.html#c">Записи c вариантами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html">Типы с фиксированной запятой</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id2">Десятичные типы с фиксированной запятой</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/fixed_point_types.html#id3">Обычные типы с фиксированной запятой</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html">Изоляция</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id3">Простейшая инкапсуляция</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id4">Абстрактные типы данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id5">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/privacy.html#id7">Дочерние пакеты и изоляция</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html">Настраиваемые модули</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id2">Введение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id3">Объявление формального типа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id4">Объявление формального объекта</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id5">Определение тела настраиваемого модуля</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id6">Конкретизация настройки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id7">Настраиваемые пакеты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id8">Формальные подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id9">Пример: конкретизация ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id10">Пример: АТД</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id11">Пример: Обмен</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id12">Пример: Обратный порядок элементов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/generics.html#id13">Пример: Тестовое приложение</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html">Исключения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id2">Объявление исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id3">Возбуждение исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id4">Обработка исключения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/exceptions.html#id5">Предопределенные исключения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html">Управление задачами</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id2">Задачи</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id5">Простая задача</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id6">Простая синхронизация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id7">Оператор задержки</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id8">Синхронизация: рандеву</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id9">Обрабатывающий цикл</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id10">Циклические задачи</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id11">Защищенные объекты</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id12">Простой объект</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id13">Входы</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id14">Задачные и защищенные типы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#intro-ada-ru-tasktypes">Задачные типы</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/tasking.html#id16">Защищенные типы</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html">Контрактное проектирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id2">Пред- и постусловия</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id3">Предикаты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/contracts.html#id4">Инварианты типа</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html">Взаимодействие с языком C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id1">Многоязычный проект</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id2">Соглашение о типах</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id3">Подпрограммы на других языках</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id4">Вызов подпрограмм C из Ады</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id5">Вызов Ада подпрограмм из C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id6">Внешние переменные</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id7">Использование глобальных переменных C в Аде</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id8">Использование переменных Ада в C</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id9">Автоматическое создание связок</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/interfacing_with_c.html#id10">Адаптация связок</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html">Объектно-ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id2">Производные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id3">Теговые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id5">Надклассовые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id6">Операции диспетчеризации</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id7">Точечная нотация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id8">Личные и лимитируемые типы с тегами</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/object_oriented_programming.html#id9">Надклассовые ссылочные типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html">Стандартная библиотека: Контейнеры</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id2">Векторы</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id3">Создание экземпляра</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id4">Инициализация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id5">Добавление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id6">Доступ к первому и последнему элементам</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id7">Итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id8">Поиск и изменение элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id9">Вставка элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id10">Удаление элементов</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id11">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id12">Множества</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id13">Инициализация и итерация</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id14">Операции с элементами</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id15">Другие операции</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id16">Отображения для неопределенных типов</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id17">Хэшированные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id18">Упорядоченные отображения</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_containers.html#id19">Сложность</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html">Стандартная библиотека: Дата и время</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#intro-ada-ru-datestimes">Обработка даты и времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id3">Задержка с использованием даты</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id4">Режим реального времени</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_dates_times.html#id5">Анализ производительности</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html">Стандартная библиотека: Строки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id2">Операции со строками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id3">Ограничение строк фиксированной длины</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#id4">Ограниченные строки</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_strings.html#intro-ada-ru-unboundedstrings">Неограниченные строки</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html">Стандартная библиотека: Файлы и потоки</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id2">Текстовый ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id3">Последовательный ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id4">Прямой ввод-вывод</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_files_streams.html#id5">Потоковый ввод-вывод</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html">Стандартная библиотека: Numerics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id1">Элементарные функции</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id2">Генерация случайных чисел</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id3">Комплексные числа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/standard_library_numerics.html#id4">Работа с векторами и матрицами</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html">Приложения</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#a">Приложение A: Формальные типы настройки</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#id2">Неопределенные версии типов</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../intro-to-ada-ru/chapters/appendices.html#b">Приложение B: Контейнеры</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Безопасное и надежное программное обеспечение</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Вступление</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foreword.html">Предисловие</a></li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_01.html">Безопасный синтаксис</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id2">Присваивание и проверка на равенство</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id3">Группы инструкций</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id4">Именованное сопоставление</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_01.html#id5">Целочисленные литералы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_02.html">Безопасные типы данных</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id2">Использование индивидуальных типов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id3">Перечисления и целые</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id4">Ограничения и подтипы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id5">Предикаты подтипов</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id6">Массивы и ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id7">Установка начальных значений по умолчанию</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_02.html#id8">«Вещественные ошибки»</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_03.html">Безопасные указатели</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id2">Ссылки, указатели и адреса</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id3">Ссылочные типы и строгая типизация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id4">Ссылочные типы и контроль доступности</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id5">Ссылки на подпрограммы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_03.html#id6">Вложенные подпрограммы в качестве параметров</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Безопасная архитектура</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Спецификация и тело пакета</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Приватные типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Контрактная модель настраиваемых модулей</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Дочерние модули</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Модульное тестирование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Взаимозависимые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Контрактное программирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_05.html">Безопасное объектно‐ориентированное программирование</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id2">ООП вместо структурного программирования</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#overriding">Индикатор overriding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id3">Запрет диспетчеризации вызова подпрограмм</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id4">Интерфейсы и множественное наследование</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_05.html#id5">Взаимозаменяемость</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_06.html">Безопасное создание объектов</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id2">Переменные и константы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id3">Функция-конструктор</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id4">Лимитируемые типы</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_06.html#id5">Контролируемые типы</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_07.html">Безопасное управление памятью</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id2">Переполнение буфера</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id3">Динамическое распределение памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id4">Пулы памяти</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_07.html#id5">Ограничения</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_08.html">Безопасный запуск</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id2">Предвыполнение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id3">Директивы компилятору, связанные с предвыполнением</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_08.html#id4">Динамическая загрузка</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_09.html">Безопасная коммуникация</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id2">Представление данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id3">Корректность данных</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id4">Взаимодействие с другими языками</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id5">Потоки ввода/вывода</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_09.html#id6">Фабрики объектов</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_10.html">Безопасный параллелизм</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id2">Операционные системы и задачи</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id3">Защищенные объекты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id4">Рандеву</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id5">Ограничения</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#ravenscar">Ravenscar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id6">Безопасное завершение</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_10.html#id7">Время и планирование</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="chapter_11.html">Сертификация с помощью SPARK</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id1">Контракты</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id2">SPARK — подмножество языка Ада</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id3">Формальные методы анализа</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id4">Гибридная верификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id5">Примеры</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id6">Сертификация</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chapter_11.html#id7">Дальнейший процесс</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html">Заключение</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biblio.html">Список литературы</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+  <i data-toggle="wy-nav-top" class="fas fa-bars"></i>
+    <a href="../../../index.html">
+    <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+  </a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>Безопасная архитектура<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>Если говорить о строительстве, то хорошей архитектурой считается та, что
+гарантирует требуемую прочность самым естественным и простейшим путем,
+предоставляя людям безопасную среду обитания. Красивым примером может
+служить Пантеон в Риме, чья сферическая форма обладает чрезвычайной
+прочностью и в тоже время предоставляет максимум свободного
+пространства. Многие кафедральные соборы не так хороши и нуждаются в
+дополнительных колоннах снаружи для поддержки стен. В 1624г. сэр Ганри
+Вутон подытожил эту тему следующими словами: «хорошее строение
+удовлетворяет трем условиям - удобство, прочность и красота».</p>
+<p>Аналогично, хорошая архитектура в программировании должна обеспечивать
+безопасность функционирования отдельных компонент простейшим образом,
+при этом сохраняя прозрачность системы в целом. Она должна обеспечивать
+взаимодействие, где это необходимо, и препятствовать взаимному влиянию
+действий, не связанных друг с другом. Хороший язык программирования
+должен позволять писать эстетически красивые программы с хорошей
+архитектурой.</p>
+<p>Возможно, здесь есть аналогия с архитектурой офисных помещений. Если
+выделить каждому отдельный кабинет, это будет препятствовать общению и
+обмену идеями. С другой стороны, полностью открытое пространство
+приведет к тому, что шум и другие отвлекающие факторы будут
+препятствовать продуктивной работе.</p>
+<p>Структура программ на Аде базируется на идее пакетов, которые позволяют
+сгруппировать взаимосвязанные понятия и предоставляют очевидный способ
+сокрытия деталей реализации.</p>
+<section id="id2">
+<h2>Спецификация и тело пакета<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Ранние языки программирования, такие как FORTRAN, имели плоскую
+структуру, где все располагалось, в основном, на одном уровне. Как
+следствие, все данные (не считая локальных данных подпрограммы) были
+видимы всюду. Это похоже на единое открытое пространство в офисе.
+Похожую плоскую модель предлагает и язык C, хотя и предлагает некоторую
+дополнительную возможность инкапсуляции, предоставляя программисту
+возможность контролировать видимость подпрограмм за границами текущего
+файла.</p>
+<p>Другие языки, например Algol и Pascal, имеют простую вложенную блочную
+структуру, напоминающую матрешку. Это немного лучше, но все равно
+напоминает единое открытое пространство, поделенное на отдельные мелкие
+офисы. Проблема взаимодействия все равно остается.</p>
+<p>Рассмотрим стек из чисел в качестве простого примера. Мы хотим иметь
+протокол, позволяющий добавить элемент в стек, используя вызов процедуры
+Push, и удалить верхний элемент, используя функцию Pop. И, допустим, еще
+одну процедуру Clear для сброса стека в пустое состояние. Мы намерены
+предотвратить все другие способы модификации стека, чтобы сделать данный
+протокол независимым от метода его реализации.</p>
+<p>Рассмотрим реализацию, написанную на Pascal-е. Для хранения данных
+используется массив, а для работы написаны три подпрограммы. Константа
+max ограничивает максимальный размер стека. Это позволяет нам избежать
+дублирования числа 100 в нескольких местах, на тот случай, если нам
+потребуется его изменить.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">const</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">var</span><span class="w">    </span><span class="n">top</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">..</span><span class="w"> </span><span class="n">max</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="nl">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">array</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">.</span><span class="n">max</span><span class="p">]</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">real</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">procedure</span><span class="w"> </span><span class="n">Clear</span><span class="p">;</span><span class="w"></span>
+<span class="n">begin</span><span class="w"></span>
+<span class="w">   </span><span class="nl">top</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="n">end</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">procedure</span><span class="w"> </span><span class="nf">Push</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">real</span><span class="p">);</span><span class="w"></span>
+<span class="n">begin</span><span class="w"></span>
+<span class="w">   </span><span class="nl">top</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">a</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">x</span><span class="w"></span>
+<span class="n">end</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">function</span><span class="w"> </span><span class="n">Pop</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">real</span><span class="p">;</span><span class="w"></span>
+<span class="n">begin</span><span class="w"></span>
+<span class="w">   </span><span class="nl">top</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">top</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="nl">Pop</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">top</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"></span>
+<span class="n">end</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Главная проблема тут в том, что max, top и a должны быть объявлены вне
+подпрограмм Push, Pop и Clear, чтобы мы могли иметь доступ к ним. Как
+следствие, в любом месте программы, где мы можем вызвать Push, Pop и
+Clear, мы также можем непосредственно поменять top и a, обойдя, таким
+образом протокол использования стека и получить несогласованное
+состояние стека.</p>
+<p>Это может служить источником проблем. Если нам захочется вести учет
+количества изменений стека, то просто добавить счетчик в процедуры Push,
+Pop и Clear может оказаться недостаточно. При анализе большой программы,
+когда нам нужно найти все места, где стек изменялся, нам нужно отследить
+не только вызовы Push, Pop и Clear, но и обращения к переменным top и a.</p>
+<p>Аналогичная проблема существует и в C и в Fortran. Эти языки пытаются ее
+преодолеть, используя механизм раздельной компиляции. Объекты, видимые
+из других единиц компиляции, помечаются специальной инструкцией extern
+либо при помощи заголовочного файла. Однако, проверка типов при
+пересечении границ модулей компиляции в этих языках работает гораздо
+хуже.</p>
+<p>Язык Ада предлагает использовать механизм пакетов, чтобы защитить
+данные, используемые в Push, Pop и Clear от доступа извне. Пакет делится
+на две части — спецификацию, где описывается интерфейс доступный из
+других модулей, и тело, где располагается реализация. Другими словами,
+спецификация задает что делать, а тело — как это делать. Спецификация
+стека могла бы быть следующей:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Stack</span> <span class="kr">is</span>
+   <span class="kd">procedure</span> <span class="nf">Clear</span><span class="p">;</span>
+   <span class="kd">procedure</span> <span class="nf">Push</span> <span class="p">(</span><span class="nv">X</span> <span class="p">: </span><span class="nv">Float</span><span class="p">);</span>
+   <span class="kd">function</span> <span class="nf">Pop</span> <span class="nf">return</span> <span class="nf">Float</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Stack</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Здесь описан интерфейс с внешним миром. Т.е. вне пакета доступны лишь
+три подпрограммы. Этой информации достаточно программисту, чтобы
+вызывать нужные подпрограммы, и достаточно компилятору, чтобы эти вызовы
+скомпилировать. Тело пакета может иметь следующий вид:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="kd">body</span> <span class="nc">Stack</span> <span class="kr">is</span>
+   <span class="no">Max</span> <span class="p">:</span> <span class="kr">constant</span> <span class="p">:=</span> <span class="mi">100</span><span class="p">;</span>
+   <span class="n">Top</span> <span class="p">:</span> <span class="kt">Integer</span> <span class="kr">range</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">Max</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">A</span> <span class="p">:</span> <span class="kr">array</span> <span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="n">Max</span><span class="p">)</span> <span class="kr">of</span> <span class="kt">Float</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Clear</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Push</span> <span class="p">(</span><span class="nv">X</span> <span class="p">: </span><span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">A</span> <span class="p">(</span><span class="n">Top</span><span class="p">)</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Push</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Pop</span> <span class="nf">return</span> <span class="nf">Float</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">Top</span> <span class="p">:=</span> <span class="n">Top</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="kr">return</span> <span class="n">A</span> <span class="p">(</span><span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+   <span class="kr">end</span> <span class="nf">Pop</span><span class="p">;</span>
+
+<span class="kr">end</span> <span class="nf">Stack</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Тело содержит полный текст подпрограмм, а также определяет скрытые
+объекты Max, Top и A. Заметьте, что начальное значение Top равняется
+нулю.</p>
+<p>Для того, чтобы использовать сущности, описанные в пакете, клиентский
+код должен указать пакет в спецификаторе контекста (с помощью
+зарезервированного слова with) следующим образом:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="n">Stack</span><span class="p">;</span>
+<span class="kd">procedure</span> <span class="nf">Some_Client</span> <span class="kr">is</span>
+   <span class="n">F</span> <span class="p">:</span> <span class="kt">Float</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="n">Stack</span><span class="p">.</span><span class="n">Clear</span><span class="p">;</span>
+   <span class="n">Stack</span><span class="p">.</span><span class="n">Push</span> <span class="p">(</span><span class="mf">37.4</span><span class="p">);</span>
+   <span class="p">...</span>
+   <span class="n">F</span> <span class="p">:=</span> <span class="n">Stack</span><span class="p">.</span><span class="n">Pop</span><span class="p">;</span>
+   <span class="p">...</span>
+   <span class="n">Stack</span><span class="p">.</span><span class="n">Top</span> <span class="p">:=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">-- Ошибка!</span>
+<span class="kr">end</span> <span class="nf">Some_Client</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Теперь мы уверены, что требуемый протокол будет соблюден. Клиент
+(программный код, использующий пакет) не может ни случайно, ни намеренно
+взаимодействовать с деталями реализации стека. В частности, прямое
+присваивание значения Stack.Top запрещено, поскольку переменная Top не
+видима для клиента (т. к. о ней нет упоминания в спецификации пакета).</p>
+<p>Обратите внимание на три составляющие этого примера: спецификацию
+пакета, тело пакета и клиента.</p>
+<p>Существуют важные правила, касающиеся их компиляции. Клиент не может
+быть скомпилирован пока не будет предоставлена спецификация. Тело также
+не может быть скомпилировано без спецификации. Но подобных ограничений
+нет между телом и клиентом. Если мы решим изменить детали реализации и
+это не затрагивает спецификацию, то в перекомпиляции клиента нет нужды.</p>
+<p>Пакеты и подпрограммы верхнего уровня (т. е. не вложенные в другие
+подпрограммы) могут быть скомпилированы раздельно. Их обычно называют
+библиотечными модулями и говорят, что они находятся на уровне
+библиотеки.</p>
+<p>Заметим, что пакет Stack упоминается каждый раз при обращении к его
+сущностям. В результате в коде клиента наглядно видно, что происходит.
+Но если постоянное повторение имени пакета напрягает, можно использовать
+спецификатор использования (с помощью служебного слова use):</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="n">Stack</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Stack</span><span class="p">;</span>
+<span class="kd">procedure</span> <span class="nf">Client</span> <span class="kr">is</span>
+<span class="kr">begin</span>
+   <span class="n">Clear</span><span class="p">;</span>
+   <span class="n">Push</span> <span class="p">(</span><span class="mf">37.4</span><span class="p">);</span>
+   <span class="p">...</span>
+<span class="kr">end</span> <span class="nf">Client</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Однако, если используются два пакета, например Stack1 и Stack2, каждый
+из которых определяют подпрограмму Clear, и мы используем with и use для
+обоих, то код будет неоднозначным и компилятор не примет его. В этом
+случае достаточно указать необходимый пакет явно, например Stack2.Clear.</p>
+<p>Подытожим вышесказанное. Спецификация определяет контракт между клиентом
+и пакетом. Тело пакета обязано реализовать спецификацию, а клиент обязан
+использовать пакет только указанным в спецификации образом. Компилятор
+проверяет, что эти обязательства выполняются. Мы вернемся к этому
+принципу позже в данной главе, а также в последней главе, когда
+рассмотрим поддержку контрактного программирования в Аде 2012 и идеи,
+лежащие в основе инструментария SPARK соответственно.</p>
+<p>Дотошный читатель отметит, что мы полностью игнорировали ситуации
+переполнения (вызов Push при Top = Max) и исчерпания (вызов Pop при Top
+= 0) стека. Если одна из подобных неприятностей случиться, сработает
+проверка диапазона значения Top и будет возбужденно исключение
+Constraint_Error. Было бы хорошо включить предусловия для вызова
+подпрограмм Push и Pop в их спецификацию в явном виде. Тогда при
+использовании пакета программист бы знал, чего ожидать от вызова
+подпрограмм. Такая возможность появилась в Ада 2012, как часть поддержки
+технологии контрактного программирования, мы далее обсудим это.</p>
+<p>Исключительно важным моментом здесь является то, что в Аде контроль
+строгой типизации не ограничен границами модулей компиляции. Написана ли
+программа как один компилируемый модуль или состоит из нескольких
+модулей, поделенных на разные файлы, производимые проверки будут
+совпадать в точности.</p>
+</section>
+<section id="id3">
+<h2>Приватные типы<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Еще одна возможность пакета позволяет спрятать часть спецификации от
+клиента. Это делается при помощи так называемой приватной части. В
+примере выше пакет Stack реализует лишь один стек. Возможно, будет
+полезнее написать такой пакет, чтобы он позволял определить множество
+стеков. Чтобы достичь этого, нам нужно ввести понятие стекового типа. Мы
+могли бы написать</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Stacks</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">out</span> <span class="nv">Stack</span><span class="p">);</span>
+   <span class="kd">procedure</span> <span class="nf">Push</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">);</span>
+   <span class="kd">procedure</span> <span class="nf">Pop</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span> <span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">);</span>
+<span class="kd">private</span>
+   <span class="no">Max</span> <span class="p">:</span> <span class="kr">constant</span> <span class="p">:=</span> <span class="mi">100</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Vector</span> <span class="kr">is</span> <span class="kr">array</span> <span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="mi">100</span><span class="p">)</span> <span class="kr">of</span> <span class="kt">Float</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">A</span> <span class="p">:</span> <span class="n">Vector</span><span class="p">;</span>
+      <span class="n">Top</span> <span class="p">:</span> <span class="kt">Integer</span> <span class="kr">range</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">Max</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Stacks</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Это очевидное обобщение одно-стековой версии. Но стоит отметить, что в
+Аде 2012 появляется выбор, описать Pop либо как функцию, возвращающую
+Float, либо как процедуру с out параметром типа Float. Это возможно
+т. к., начиная с версии Ада 2012, функции могут иметь out и in out
+параметры. Несмотря на это, мы последовали традиционным путем и записали
+Pop как процедуру. По стилю вызовы Pop и Push будут единообразны, и тот
+факт, что вызов Pop имеет побочный эффект, будет более очевиден.</p>
+<p>Тело пакета может выглядеть следующим образом:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="kd">body</span> <span class="nc">Stacks</span> <span class="kr">is</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">out</span> <span class="nv">Stack</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">S</span><span class="p">.</span><span class="n">Top</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Clear</span><span class="p">;</span>
+
+   <span class="kd">procedure</span> <span class="nf">Push</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">)</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="n">S</span><span class="p">.</span><span class="n">Top</span> <span class="p">:=</span> <span class="n">S</span><span class="p">.</span><span class="n">Top</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">S</span><span class="p">.</span><span class="n">A</span> <span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">Top</span><span class="p">)</span> <span class="p">:=</span> <span class="n">X</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Push</span><span class="p">;</span>
+
+   <span class="c1">--  процедура Pop аналогично</span>
+
+<span class="kr">end</span> <span class="nf">Stacks</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Теперь клиент может определить, сколько угодно стеков и работать с ними
+независимо:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="n">Stacks</span><span class="p">;</span> <span class="kn">use</span> <span class="n">Stacks</span><span class="p">;</span>
+<span class="kd">procedure</span> <span class="nf">Main</span> <span class="kr">is</span>
+   <span class="n">This_Stack</span> <span class="p">:</span> <span class="n">Stack</span><span class="p">;</span>
+   <span class="n">That_Stack</span> <span class="p">:</span> <span class="n">Stack</span><span class="p">;</span>
+<span class="kr">begin</span>
+   <span class="n">Clear</span> <span class="p">(</span><span class="n">This_Stack</span><span class="p">);</span> <span class="n">Clear</span> <span class="p">(</span><span class="n">That_Stack</span><span class="p">);</span>
+   <span class="n">Push</span> <span class="p">(</span><span class="n">This_Stack</span><span class="p">,</span> <span class="mf">37.4</span><span class="p">);</span>
+   <span class="p">...</span>
+<span class="kr">end</span> <span class="nf">Main</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Подробная информация о типе Stack дается в приватной части пакета и,
+хотя она видима читателю, прямой доступ к ней из кода клиента
+отсутствует. Таким образом, спецификация логически разделяется на две
+части — видимую (все что перед private) и приватную.</p>
+<p>Изменения приватной части не приводят к необходимости исправлять
+исходный код клиента, однако модуль клиента должен быть
+перекомпилирован, поскольку его объектный код может измениться, хотя
+исходный текст и останется тем же.</p>
+<p>Все необходимые перекомпиляции контролируются системой сборки и по
+желанию выполняются автоматически. Следует подчеркнуть, что это
+требования спецификации языка Ада, а не просто особенности конкретной
+реализации. Пользователю никогда не придется решать, нужно ли
+перекомпилировать модуль, таким образом, нет риска построить программу
+из несогласованных версий компилируемых модулей. Это большая проблема
+для языков, у которых нет точного механизма взаимодействия компилятора,
+системы сборки и редактора связей.</p>
+<p>Также отметьте синтаксис указания режима параметров in, out и in out. Мы
+остановимся на них подробнее в главе «Безопасное создание объектов», где
+будет описана концепция потоков информации (information/data flow).</p>
+</section>
+<section id="id4">
+<h2>Контрактная модель настраиваемых модулей<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Шаблоны — одна из важных возможностей таких языков программирования как
+C++ (а также недавно Java и C#). Им в Аде соответствуют настраиваемые
+модули (настраиваемые/обобщенные пакеты, generic packages). На самом
+деле, при создании шаблонов C++ были использованы идеи настраиваемых
+модулей Ады. Чтобы обеспечить безопасность типов данных, настраиваемые
+модули используют так называемую контрактную модель.</p>
+<p>Мы можем расширить пример со стеком так, чтобы стало возможно определить
+стеки для произвольных типов и размеров (позже мы рассмотрим еще один
+способ сделать это). Рассмотрим следующий код</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">generic</span>
+   <span class="n">Max</span> <span class="p">:</span> <span class="kt">Integer</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Item</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+<span class="kd">package</span> <span class="nc">Generic_Stacks</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">out</span> <span class="nv">Stack</span><span class="p">);</span>
+   <span class="kd">procedure</span> <span class="nf">Push</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">Item</span><span class="p">);</span>
+   <span class="kd">procedure</span> <span class="nf">Pop</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span> <span class="p">: </span><span class="nv">out</span> <span class="nv">Item</span><span class="p">);</span>
+<span class="kd">private</span>
+   <span class="kd">type</span> <span class="kt">Vector</span> <span class="kr">is</span> <span class="kr">array</span> <span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="mi">100</span><span class="p">)</span> <span class="kr">of</span> <span class="n">Item</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">A</span> <span class="p">:</span> <span class="n">Vector</span><span class="p">;</span>
+      <span class="n">Top</span> <span class="p">:</span> <span class="kt">Integer</span> <span class="kr">range</span> <span class="mi">0</span> <span class="p">..</span> <span class="n">Max</span> <span class="p">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Generic_Stacks</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Тело к этому пакету можно получить из предыдущего примера, заменив Float
+на Item.</p>
+<p>Настраиваемый пакет - это просто шаблон. Чтобы использовать его в
+программе, нужно сначала выполнить его настройку, предоставив два
+параметра — Max и Item. В результате настройки получается реальный
+пакет. К примеру, если мы хотим работать со стеками целых чисел с
+максимальным размером 50 элементов, мы напишем:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Integer_Stacks</span> <span class="kr">is new</span> <span class="nc">Generic_Stacks</span>
+   <span class="p">(</span><span class="nv">Max</span> <span class="p">=&gt;</span> 50<span class="p">,</span> <span class="nv">Item</span> <span class="p">=&gt;</span> Integer<span class="p">);</span>
+</pre></div>
+</div>
+<p>Эта запись определяет пакет Integer_Stacks, который далее можно
+использовать как обычный. Суть контрактной модели в том, что если мы
+предоставляем параметры, отвечающие требованиям описания настраиваемого
+пакета, то при настройке мы гарантированно получим рабочий пакет,
+компилируемый без ошибок.</p>
+<p>Другие языки не предоставляют этой привлекательной возможности. В C++, к
+примеру, некоторые несоответствия можно выявить только в момент сборки
+программы, а некоторые и вовсе могут остаться не обнаруженными, пока мы
+не запустим программу и не получим исключение.</p>
+<p>Существуют разнообразные варианты настраиваемых параметров в языке Ада.
+Использованная ранее форма:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Item</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>позволяет использовать практически любой тип для настройки. Другая
+форма:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="kt">Item</span> <span class="kr">is</span> <span class="p">(&lt;&gt;);</span>
+</pre></div>
+</div>
+<p>обозначает любой скалярный тип. Сюда относятся целочисленные типы (такие
+как Integer и Long_Integer) и перечислимые типы (такие как Signal).
+Внутри настраиваемого модуля мы можем пользоваться всеми свойствами,
+общими для этих типов, и, несомненно, любой актуальный тип будет иметь
+эти свойства.</p>
+<p>Контрактная модель настраиваемых модулей очень важна. Она позволяет
+вести разработку библиотек общего назначения легко и безопасно. Это
+достигается во многом благодаря тому, что пользователю нет необходимости
+разбираться с деталями реализации пакета, чтобы определить, что может
+пойти не так.</p>
+</section>
+<section id="id5">
+<h2>Дочерние модули<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Общая архитектура системы (программы) на языке Ада может иметь
+иерархическую (древовидную) структуру, что облегчает сокрытие информации
+и упрощает модификацию. Дочерние модули могут быть общедоступными или
+приватными. Имея пакет с именем Parent мы можем определить общедоступный
+дочерний пакет следующим образом:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Parent.Child</span> <span class="kr">is</span> <span class="p">...</span>
+</pre></div>
+</div>
+<p>а приватный как:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kd">package</span> <span class="nc">Parent.Child</span> <span class="kr">is</span> <span class="p">...</span>
+</pre></div>
+</div>
+<p>Оба варианта могут иметь тело и приватную часть, как обычно. Ключевая
+разница в том, что общедоступный дочерний модуль, по сути, расширяет
+спецификацию родителя (и таким образом видим всем клиентам), тогда как
+приватный модуль расширяет приватную часть и тело родителя (и таким
+образом не видим клиентам). У дочерних пакетов, в свою очередь, могут
+быть дочерние пакеты и так далее.</p>
+<p>Среди правил, определяющих видимость имен, можно отметить следующее.
+Дочерний модуль не нуждается в спецификаторе контекста (with Parent),
+чтобы видеть объекты родителя. В тоже время, тело родителя может иметь
+спецификатор контекста для дочернего модуля, если нуждается в
+функциональности, предоставляемой им. Однако, поскольку спецификация
+родителя должна быть доступна к моменту компиляции дочернего модуля,
+спецификация родителя не может содержать «обычный» спецификатор
+контекста (with Child) для дочернего модуля. Мы обсудим это позже.</p>
+<p>Согласно другому правилу, из видимой части приватного модуля видна
+приватная часть его родителя (в точности, как это происходит в теле
+пакета-родителя). Эта «дополнительная» видимость не нарушает
+родительскую инкапсуляцию, поскольку использовать приватные модули могут
+только те модули, которые и так видят приватную часть родителя. С другой
+стороны, в общедоступном модуле приватную часть родителя видно только из
+его приватной части и тела. Это обеспечивает инкапсуляцию данных
+родителя.</p>
+<p>Особая форма спецификации контекста private with, которая была добавлена
+в Аде 2005, обеспечивает видимость перечисленных модулей в приватной
+части пакета. Это полезно, когда приватная часть общедоступного
+дочернего пакета нуждается в информации, предоставляемой приватным
+дочерним модулем. Допустим, у нас есть прикладной пакет App и два
+дочерних App.User_View и App.Secret_Details:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kd">package</span> <span class="nc">App.Secret_Details</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Inner</span> <span class="kr">is</span> <span class="p">...</span>
+   <span class="p">...</span>  <span class="c1">-- различные операции для типа Inner</span>
+<span class="kr">end</span> <span class="nf">App.Secret_Details</span><span class="p">;</span>
+
+<span class="kd">private</span> <span class="kr">with</span> <span class="n">App</span><span class="p">.</span><span class="n">Secret_Details</span><span class="p">;</span>
+<span class="kd">package</span> <span class="nc">App.User_View</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Outer</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="p">...</span>     <span class="c1">-- различные операции для типа Outer</span>
+      <span class="c1">-- тип Inner не видим здесь</span>
+<span class="kd">private</span>
+   <span class="kd">type</span> <span class="kt">Outer</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">X</span> <span class="p">:</span> <span class="n">App</span><span class="p">.</span><span class="n">Secret_Details</span><span class="p">.</span><span class="n">Inner</span><span class="p">;</span>
+      <span class="p">...</span>
+   <span class="kr">end record</span><span class="p">;</span>
+   <span class="p">...</span>
+<span class="kr">end</span> <span class="nf">App.User_View</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Обычный спецификатор контекста (with App.Secret_Details;) не допустим в
+User_View, поскольку это бы позволило клиенту увидеть информацию из
+пакета Secret_Details через видимую часть пакета User_View. Все попытки
+обойти правила видимости в Аде тщательно заблокированы.</p>
+</section>
+<section id="id6">
+<h2>Модульное тестирование<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Одна из проблем, встречающаяся при тестировании кода, заключается в том,
+чтобы предотвратить влияние тестов на поведение тестируемого кода. Это
+напоминает известный феномен квантовой механики, когда сама попытка
+наблюдения за такими частицами, как электрон, влияет на состояние этой
+частицы.</p>
+<p>Тщательно разрабатывая архитектуру программного обеспечения, мы
+стараемся скрыть детали реализации, сохранив стройную абстракцию,
+например, используя приватные типы. Но при тестировании системы мы хотим
+иметь возможность тщательно проанализировать поведение скрытых деталей
+реализаций.</p>
+<p>В качестве простейшего примера, мы хотим знать значение Top одного из
+стеков, объявленных с помощью пакета Stacks (в котором находится
+приватный тип Stack). У нас нет готовых средств сделать это. Мы могли бы
+добавить функцию Size в пакет Stacks, но это потребует модификации
+пакета и перекомпиляции пакета и всего клиентского кода. Возникает
+опасность внести ошибку в пакет при добавлении этой функции, либо позже,
+при удалении тестирующего кода (и это будет гораздо хуже).</p>
+<p>Дочерние модули позволяют решить эту задачу легко и безопасно. Мы можем
+написать следующее</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Stacks.Monitor</span> <span class="kr">is</span>
+   <span class="kd">function</span> <span class="nf">Size</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">Size</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Integer</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Stacks.Monitor</span><span class="p">;</span>
+
+<span class="kd">package</span> <span class="kd">body</span> <span class="nc">Stacks.Monitor</span> <span class="kr">is</span>
+   <span class="kd">function</span> <span class="nf">Size</span> <span class="p">(</span><span class="nv">S</span> <span class="p">: </span><span class="nv">Size</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Integer</span> <span class="kr">is</span>
+   <span class="kr">begin</span>
+      <span class="kr">return</span> <span class="n">S</span><span class="p">.</span><span class="n">Top</span><span class="p">;</span>
+   <span class="kr">end</span> <span class="nf">Size</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Stacks.Monitor</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Это возможно, так как тело дочернего модуля видит приватную часть
+родительского пакета. Теперь в тестах мы можем вызвать функцию Size как
+только нам понадобится. Когда мы убедимся, что наша программа корректна,
+мы удалим дочерний пакет целиком. Родительский пакет при этом не будет
+затронут.</p>
+</section>
+<section id="id7">
+<h2>Взаимозависимые типы<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Эквивалент приватных типов есть во многих языках программирования,
+особенно в области ООП. По сути, операции, принадлежащие типу, это те,
+что объявлены рядом с типом в одном пакете. Для типа Stack такими
+операциями являются Clear, Push и Pop. Аналогичная конструкция в C++
+выглядит так:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">class</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="p">...</span><span class="w">   </span><span class="cm">/* детали реализации стека */</span><span class="w"></span>
+<span class="n">public</span><span class="o">:</span><span class="w"></span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">Clear</span><span class="p">();</span><span class="w"></span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">Push</span><span class="p">(</span><span class="kt">float</span><span class="p">);</span><span class="w"></span>
+<span class="w">   </span><span class="kt">float</span><span class="w"> </span><span class="nf">Pop</span><span class="p">();</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Подход C++ удобен тем, что использует один уровень при именовании —
+Stack, в то время, как в Аде мы используем два - имя пакета и имя типа,
+т.е. Stacks.Stack. Однако, этого, при желании, легко избежать, используя
+спецификатор использования — use Stacks. И, более того, появляется
+возможность выбора предпочитаемого стиля. Можно, например, назвать тип
+нейтрально — Object или Data, а затем ссылаться на него написав
+Stacks.Object или Stacks.Data.</p>
+<p>С другой стороны, если в двух типах мы желаем для реализации
+использовать общую информацию, на языке Ада это может быть легко
+достигнуто:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Twins</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Dum</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Dee</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="p">...</span>
+<span class="kd">private</span>
+   <span class="p">...</span>   <span class="c1">--  Общая информация для реализации</span>
+<span class="kr">end</span> <span class="nf">Twins</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>где в приватной части мы определим Dum и Dee так, что они будут иметь
+свободный взаимный доступ к данным друг друга.</p>
+<p>В других языках это может быть не так просто. Например, в C++ нужно
+использовать довольно спорный механизм friend. Подход, используемый в
+Аде, предотвращает некорректное использование данных и раскрытие данных
+реализации и является при этом симметричным.</p>
+<p>Следующий пример демонстрирует взаимную рекурсию. Допустим, мы исследуем
+схемы из линий и точек, при этом каждая точка лежит на пересечении трех
+линий, а каждая линия проходит через три точки. (Это пример на самом
+деле не случаен, две из фундаментальных теорем проективной геометрии
+оперируют такими структурами). Это легко реализовать в одном пакете,
+используя ссылочные типы:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Points_And_Lines</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Point</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Line</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="p">...</span>
+<span class="kd">private</span>
+   <span class="kd">type</span> <span class="kt">Point</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="p">:</span> <span class="kr">access</span> <span class="n">Line</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+   <span class="kd">type</span> <span class="kt">Line</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="p">:</span> <span class="kr">access</span> <span class="n">Point</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Points_And_Lines</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Если мы решим расположить каждый тип в своем пакете, это тоже возможно,
+но необходимо использовать специальную форму спецификатора контекста
+limited with, введенную в стандарте Ada 2005. (Два пакета не могут
+ссылаться друг на друга, используя обычный with, потому, что это вызовет
+циклическую зависимость между ними при инициализации). Мы напишем:</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">limited</span> <span class="kn">with</span> <span class="n">Lines</span><span class="p">;</span>
+<span class="kd">package</span> <span class="nc">Points</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Point</span> <span class="kr">is</span> <span class="kd">private</span><span class="p">;</span>
+   <span class="p">...</span>
+<span class="kd">private</span>
+   <span class="kd">type</span> <span class="kt">Point</span> <span class="kr">is</span> <span class="kr">record</span>
+      <span class="n">L</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span> <span class="p">:</span> <span class="kr">access</span> <span class="n">Lines</span><span class="p">.</span><span class="n">Line</span><span class="p">;</span>
+   <span class="kr">end record</span><span class="p">;</span>
+<span class="kr">end</span> <span class="nf">Points</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>и аналогичный пакет для Lines. Данная форма спецификатора контекста
+обеспечивает видимость неполным описаниям типов из данного пакета. Грубо
+говоря, такая видимость пригодна лишь для использования в ссылочных
+типах.</p>
+</section>
+<section id="id8">
+<h2>Контрактное программирование<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<p>В примере со стеком, рассмотренном нами ранее, есть некоторые недочеты.
+Хотя он прекрасно иллюстрирует использование приватных типов для
+сокрытия деталей реализации, ничто в спецификации пакета не отражает
+того, что мы реализуем стек. Несмотря на то, что мы тщательно выбрали
+имена для операций со стеком, такие как Push, Pop и Clear, некто (по
+ошибке или злонамеренно) может использовать Push для извлечения
+элементов, а Pop — для их добавления. В целях повышения надежности и
+безопасности было бы полезно иметь механизм, который учитывает намерения
+автора в контексте семантики типа и подпрограмм, объявленных в пакете.</p>
+<p>Такие средства были добавлены в стандарт Ада 2012. Они аналогичны
+предлагаемым в Eiffel средствам конрактного программирования.
+Воспользовавшись ими, программист указывает пред- и пост-условия для
+подпрограмм и инварианты приватных типов. Эти конструкции имеют форму
+логических условий. Специальные директивы компилятору включают проверку
+этих условий в момент исполнения. Чтобы привязать эти конструкции к
+соответствующему имени (пред/пост-условия к подпрограммам и инварианты к
+типам), используется новый синтаксис спецификации аспекта. Вкратце:</p>
+<ul class="simple">
+<li><p>Пред-условие проверяется в точке вызова подпрограммы и отражает
+обязательства вызывающего;</p></li>
+<li><p>Пост-условие проверяется при возврате из подпрограммы и отражает
+обязательства вызываемой подпрограммы;</p></li>
+<li><p>Инвариант типа эквивалентен пост-условию для каждой подпрограммы
+типа, видимой вне пакета, поэтому проверяется при выходе из каждой
+такой подпрограммы. Инвариант отражает «глобальное» состояние
+программы после выхода из любой такой подпрограммы.</p></li>
+</ul>
+<p>Представленная ниже версия пакета Stacks иллюстрирует все три концепции.
+Чтобы получить нетривиальный инвариант типа, мы ввели новое условие —
+стек не должен иметь повторяющиеся элементы.</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kd">package</span> <span class="nc">Stacks</span> <span class="kr">is</span>
+   <span class="kd">type</span> <span class="kt">Stack</span> <span class="kr">is</span> <span class="kd">private</span>
+      <span class="kr">with</span> <span class="n">Type_Invariant</span> <span class="p">=&gt;</span> <span class="n">Is_Unduplicated</span> <span class="p">(</span><span class="nv">Stack</span><span class="p">);</span>
+
+   <span class="kd">function</span> <span class="nf">Is_Empty</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Stack</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Boolean</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Is_Full</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Stack</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Boolean</span><span class="p">;</span>
+   <span class="kd">function</span> <span class="nf">Is_Unduplicated</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Stack</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Boolean</span><span class="p">;</span>
+
+   <span class="kd">function</span> <span class="nf">Contains</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span><span class="p">: </span><span class="nv">Float</span><span class="p">)</span> <span class="kr">return</span> <span class="kt">Boolean</span><span class="p">;</span>
+   <span class="c1">--  Внимание! Из Contains(S,X) следует Is_Empty(S)=False</span>
+
+   <span class="kd">procedure</span> <span class="nf">Push</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span><span class="p">: </span><span class="nv">in</span> <span class="nv">Float</span><span class="p">)</span>
+      <span class="kn">with</span>
+         <span class="n">Pre</span> <span class="p">=&gt;</span> <span class="ow">not</span> <span class="n">Contains</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">X</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Is_Full</span><span class="p">(</span><span class="n">S</span><span class="p">),</span>
+         <span class="n">Post</span> <span class="p">=&gt;</span> <span class="n">Contains</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">X</span><span class="p">);</span>
+
+   <span class="kd">procedure</span> <span class="nf">Pop</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">;</span> <span class="nv">X</span><span class="p">: </span><span class="nv">out</span> <span class="nv">Float</span><span class="p">)</span>
+      <span class="kn">with</span>
+         <span class="n">Pre</span> <span class="p">=&gt;</span> <span class="ow">not</span> <span class="n">Is_Empty</span><span class="p">(</span><span class="n">S</span><span class="p">),</span>
+         <span class="n">Post</span> <span class="p">=&gt;</span> <span class="ow">not</span> <span class="n">Contains</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">X</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Is_Full</span> <span class="p">(</span><span class="n">S</span><span class="p">);</span>
+
+   <span class="kd">procedure</span> <span class="nf">Clear</span> <span class="p">(</span><span class="nv">S</span><span class="p">: </span><span class="nv">in</span> <span class="nv">out</span> <span class="nv">Stack</span><span class="p">)</span>
+      <span class="kn">with</span>
+         <span class="n">Post</span> <span class="p">=&gt;</span> <span class="n">Is_Empty</span><span class="p">(</span><span class="n">S</span><span class="p">);</span>
+
+<span class="kd">private</span>
+   <span class="p">...</span>
+<span class="kr">end</span> <span class="nf">Stacks</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Синтаксис спецификаций аспектов выглядит очевидным. Отсутствие
+пред-условия (как в Clear) эквивалентно пред-условию True.</p>
+<p>Контракты (т. е. пред/пост-условия и инварианты) можно использовать по
+разному. В простейшем случае они уточняют намерения автора и выступают в
+роли формальной документации. Они также могут служить для генерации
+проверок соответствующих условий в момент исполнения. Директива
+Assertion_Policy управляет этим поведением. Она имеет форму</p>
+<div class="highlight-ada notranslate"><div class="highlight"><pre><span></span><span class="kr">pragma</span> <span class="cp">Assertion_Policy</span><span class="p">(</span><span class="n">policy_identifier</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Когда policy_identifier равен Check, проверки генерируются, а если
+Ignore, то игнорируются. (Поведение по умолчанию, в отсутствии этой
+директивы, зависит от реализации компилятора.)</p>
+<p>Третий способ использования контрактов способствует использованию
+формальных методов доказательства свойств программы, например,
+доказательство того, что код подпрограммы согласован с пред- и
+пост-условиями. Этот подход на примере языка SPARK мы обсудим в другой
+главе.</p>
+<p>Стандарт Ada 2012 включает разнообразные конструкции, связанные с
+контрактным программированием, которые не попали в наш пример.
+Кванторные выражения (for all и for some) напоминают инструкции циклов.
+Функции-выражения позволяют поместить простейшую реализацию функций
+прямо в спецификацию пакета. Это выглядит логичным при задании
+пред/пост-условий, поскольку они являются частью интерфейса пакета. В
+Ada 2012 добавлены новые атрибуты: 'Old — позволяет в пост-условии
+сослаться на исходное значение формального параметра подпрограммы, а
+'Result в пост-условии ссылается на результат, возвращаемый функцией. За
+более детальной информацией можно обратиться к стандарту языка или к
+разъяснениям стандарта (Rationale Ada 2012).</p>
+<p>Следует отметить, что степень детализации условий контракта может
+значительно варьироваться. В нашем примере единственное требование к
+подпрограмме Push состоит в том, что элемент должен быть добавлен в
+стек. В то же время, семантика стека «последний вошел, первый вышел»
+более конкретна: элемент должен быть добавлен так, чтобы следующий вызов
+Pop его удалил. Аналогично, от Pop требуется, чтобы он вернул какой-то
+элемент. Если мы хотим быть более точными, необходимо указать, что этот
+элемент был добавлен последним. Подобные условия также можно написать,
+используя средства языка Ada 2012. Мы оставляем это читателю в качестве
+упражнения.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          
+
+
+<footer>
+      
+      
+
+      
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+          
+            <a href="chapter_05.html" class="btn btn-neutral float-right" title="Безопасное объектно-ориентированное программирование" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+          
+          
+            <a href="chapter_03.html" class="btn btn-neutral" title="Безопасные указатели" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+          
+        </div>
+  
+
+
+  <hr/>
+
+  <div class="legal">
+              Copyright &copy; 2022 AdaCore. All rights reserved.
+              &nbsp;&nbsp;
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              <br>
+              <a href="https://www.adacore.com/company/legal">Legal</a>
+              &nbsp; |  &nbsp;
+              <a href="https://www.adacore.com/company/privacy">Privacy Policy</a>
+              &nbsp; |  &nbsp;
+              <a href="https://github.com/AdaCore/learn/issues">Report an Issue</a>
+            </div> 
+
+</footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+  <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-caret-square-up"></i></button>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+</script>
+
+
+</body>
+</html>
