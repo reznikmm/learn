@@ -108,6 +108,7 @@ What's New in Ada 2022
     chapters/image_attribute
     chapters/image_redefine
     chapters/user_defined_literals
+    chapters/static_expression_functions
     chapters/array_aggregates
     chapters/container_aggregates
     chapters/delta_aggregates
